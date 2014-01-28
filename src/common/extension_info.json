@@ -1,0 +1,23 @@
+{
+    "name": "TraceMe",
+    "version": "1.0.0",
+    "description": "This extension allow to collect traces and send them to a server",
+    "creator": "COAT",
+    "homepage_url": "http://kangoextensions.com/",
+    "background_scripts": ["tService/js/jquery.js","tService/lib/tService.js",
+"background.js"],
+"content_scripts": ["tService/js/jquery.js", 
+"Collecteur.js"], 
+    "browser_button": {
+        "tooltipText": "Trace Me",
+        "caption": "Trace Me",
+        "icon": "icons/traceMe.png",
+        "popup": {
+            "url": "popup.html",
+            "width": 400,
+            "height": 160
+        }
+    },
+     "options_page": "options.html"
+
+}
