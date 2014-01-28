@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trace Me Extension Options</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap-theme.min.css">
+    </head>
+
+    <body>
+        <form id="Config" class="form-horizontal" role="form">
+           <h1>Configure Tracing</h1>
+                <div class="input-group">
+                <label for="URL" class="control-label input-group-addon" >URL</label>
+                <input name="URL" type="text" class="form-control"  placeholder="http://site.com/">
+                </div>
+                <input type="button" class="btn btn-primary" id ="ADDEvent" value="ADD Event" style="margin-left: 50px"></input>
+                
+                <div id="EventList"> </div>
+                
+                
+            <button type="button" class="btn btn-primary" id="Save">Save</button>
+        </form>
+    </body>
+
+    <script src="/tService/js/jquery.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Config/Config.js"></script>
+
+</html>
