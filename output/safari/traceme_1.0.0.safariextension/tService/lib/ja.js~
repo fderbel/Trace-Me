@@ -1,0 +1,111 @@
+
+function addition (a,b) {
+
+return a+b;
+}
+
+
+
+
+
+
+function createObsel (sub,app) {
+
+
+function generateObselId(){
+var id = sub +(Math.floor(Math.random()*1000));
+				return id;
+			}
+			
+function obsel2Turtle(obsel, trace_uri, model_uri){
+				
+var id = trace_uri + generateObselId();
+obsel["id_ktbs"] = id;
+var prefixes = [];
+prefixes.push("@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .");
+prefixes.push("@prefix ktbs: <http://liris.cnrs.fr/silex/2009/ktbs#> .");
+prefixes.push("@prefix : <"+model_uri+"> .");
+					
+var statements = [];
+statements.push("<"+id+"> ktbs:hasTrace <>.");
+statements.push("<"+id+"> a :"+obsel["type"]+".");
+statements.push("<"+id+"> ktbs:hasSubject \""+obsel["subject"]+"\" .");
+statements.push("<"+id+"> ktbs:hasBegin "+obsel["begin"]+" .");	
+statements.push("<"+id+"> ktbs:hasEnd "+obsel["end"]+" .");
+jQuery.each(obsel, function(name,value){
+if(name!="type" && name!="begin" && name!= "end" && name!= "subject"){
+statements.push("<"+id+"> :"+name+" \""+value+"\" .");
+					}
+				});
+				
+				
+				// TODO
+				
+				return prefixes.join("\n")+"\n"+statements.join("\n");
+			}
+			
+
+var ctype = "text/turtle";
+var begin = end = (new Date()).getTime();
+var obsel = {
+			type: "click",
+			begin: begin,
+			end: end,
+			subject: sub,
+			application: app
+		};
+var trace_uri= "http://localhost:8001/base1/t01/";
+var model_uri = "http://liris.cnrs.fr/silex/2011/simple-trace-model";
+var obsel_in_turtle = obsel2Turtle(obsel, trace_uri, model_uri);
+
+// post to ktbs
+			jQuery.ajax({
+				url: trace_uri,
+				type: 'POST',
+				data: obsel_in_turtle,
+				contentType: ctype,
+				crossDomain: true,
+				success: function(ret){
+				console.log("The obsel ["+obsel["id_ktbs"]+"] is sent successfully!");
+						
+					},
+				error: function(jqXHR, textStatus, errorThrown){
+						
+				console.log("E: The obsel ["+obsel["id_ktbs"]+"] cannot be sent.");
+						
+					},
+				
+			});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+     
+   // var worker=new Worker("worker.js");
+  	      			//worker.onmessage=function(event){
+        			//elem.value = event.data;
+ 		  			// };
+ 			     
+  // var _inputForWorker = document.getElementById("AAA"); 
+  // var monWorker = new Worker('ktbsworker.js');
+        // On se prépare à traiter le message de retour qui sera
+    // renvoyé par le worker
+    
+    //monWorker.addEventListener("message", function (event) {
+    //    elem.textContent = event.data;
+   // }, false);
+     //   console.log (+_inputForWorker.value);
+      //  monWorker.postMessage(new WorkerMessage('hello', _inputForWorker.value));
+      //  monWorker.onmessage=function(event){
+      //  			elem.value = event.data;
+ 		//  			 };*/
+        
