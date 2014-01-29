@@ -4,7 +4,7 @@ TracMe-ChromeExtension
 Trace-Me is an extention that allow to collecte trace and them to a server.
 
 Installation Chrome
-======================
+====================== 
 
 1- download the archive
 
