@@ -30,7 +30,7 @@ After you should select the name of trace in the popup of extention.
 
 Configuration : 
 ======================
-
+ 
 You can specify the events and the element that you want to collect for a site.
 By default this extension  collect only URL of a site visited.
 
