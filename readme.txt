@@ -28,7 +28,7 @@ Installation Firefox
 4-Click Load unpacked extension… to pop up a file-selection dialog.
 
 5-Select TraceMe/output/traceme_1.0.0.xpi
-
+ 
 
 Option:
 ======================
