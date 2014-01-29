@@ -1,7 +1,7 @@
 Trace_Me
 ========
 
-Trace-Me is an extention that allow to collecte trace and them to a server.
+Trace-Me is an extension that allow to collecte trace and them to a server.
 
 Installation Chrome
 ====================== 
