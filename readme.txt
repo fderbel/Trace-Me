@@ -1,8 +1,10 @@
 Trac_Me
+======================
 
 Trace-Me is an extention that allow to collecte trace and them to a server.
 
 Installation Chrome
+======================
 
 1- download the archive
 
@@ -15,6 +17,7 @@ Installation Chrome
 5-Navigate to the directory TraceMe/output/Chrome, and select it.
 
 Installation Firefox
+======================
 
 1- download the archive
 
@@ -28,6 +31,7 @@ Installation Firefox
 
 
 Option:
+======================
 
 you must complete the information in the form option :
 
@@ -39,9 +43,11 @@ you must complete the information in the form option :
 After you should select the name of trace in the popup of extention.
 
 Configuration :
+======================
 
 You can specify the events and the element that you want to collect for a site (). 
 
 By default this extension collect , URL of a site visited, change input in google and all click in youTube.
 
 Show Trace :
+======================
