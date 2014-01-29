@@ -1,4 +1,4 @@
-Trac_Me
+TracMe-ChromeExtension
 ======================
 
 Trace-Me is an extention that allow to collecte trace and them to a server.
