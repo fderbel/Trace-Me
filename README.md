@@ -9,7 +9,7 @@ Installation Chrome
 1- Download the archive
 
 2-Visit chrome://extensions in your browser 
-(or open up the Chrome menu by clicking the icon to the far right of the Omnibox: The menu's icon is three horizontal bars.. and select  Tools then Extensions  to reach to the same place).
+(or open up the Chrome menu by clicking the icon to the far right of the Omnibox: The menu's icon is three horizontal bars.. and select  Tools then Extensions  to reach the same place).
 
 3-Ensure that the Developer mode checkbox in the top right-hand corner is checked.
 
