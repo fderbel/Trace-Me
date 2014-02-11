@@ -4,10 +4,8 @@
     "description": "This extension allow to collect traces and send them to a server",
     "creator": "COAT",
     "homepage_url": "http://kangoextensions.com/",
-    "background_scripts": ["tService/js/jquery.js","tService/lib/tService.js",
-"background.js"],
-"content_scripts": ["tService/js/jquery.js", 
-"Collecteur.js"], 
+    "background_scripts": ["tService/js/jquery.js","tService/lib/tService.js","background.js"],
+    "content_scripts": ["tService/js/jquery.js","Collecteur.js","kango-ui/content_notifications.js"], 
     "browser_button": {
         "tooltipText": "Trace Me",
         "caption": "Trace Me",
@@ -18,6 +16,7 @@
             "height": 160
         }
     },
-     "options_page": "options.html"
+   "permissions": {"notifications":"true"},
+   "options_page": "options.html"
 
 }

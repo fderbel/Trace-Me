@@ -70,7 +70,7 @@ $('document').ready(function()
     var option = document.getElementById('Option');
     option.addEventListener ("click",function () 
     {
-     //window.open ("/Option/options.html","option");
+     
 	 kango.ui.optionsPage.open();
     });
     

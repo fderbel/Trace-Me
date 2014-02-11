@@ -161,7 +161,7 @@ this.put_obsels = function(s_options){
 			//statements.push("<"+id+"> ktbs:hasEnd "+obsel["end"]+" .");
 			
 			jQuery.each(obsel, function(name,value){
-				if(name!="type" && name!="begin" && name!= "end" && name!= "subject"){
+				if(name!="hasType" && name!="begin" && name!= "end" && name!= "hasSubject"){
 					statements.push("<"+id+"> :"+name+" \""+value+"\" .");
 				}
 			});			

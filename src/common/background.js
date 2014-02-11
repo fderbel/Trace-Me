@@ -2,6 +2,22 @@
 
 var trc;
 
+
+kango.addMessageListener('Pret', function(event) 
+{
+  if (kango.storage.getItem("DATA")=="True") 
+    {
+	kango.browser.tabs.getCurrent(function(tab) 
+	{
+	kango.console.log ("get data back");
+	tab.dispatchMessage('GetDataD');
+	
+	}); 
+	kango.storage.setItem ("DATA","false");
+
+    }  			
+				
+});
 kango.addMessageListener('GetEtat', function(event) {
 
 	kango.browser.tabs.getCurrent(function(tab) {
@@ -15,15 +31,30 @@ kango.addMessageListener('GetConfg', function(event) {
 	kango.browser.tabs.getCurrent(function(tab) {
 	if  (kango.storage.getItem("Config") == undefined)
 				{
-				kango.storage.setItem("Config",JSON.stringify ( {"Page":[{"URL":"www.youtube.com","event":[{"type":"click","element":[{"tag":"BUTTON","attribut":[]},{"tag":"A","attribut":[]}]}]},{"URL":"www.google.fr","event":[{"type":"click","element":[{"tag":"SPAN","attribut":[]},{"tag":"A","attribut":[]},{"tag":"IMG","attribut":[]}]},{"type":"change","element":[{"tag":"INPUT","attribut":[]}]}]}]}));
+				//kango.storage.setItem("Config",JSON.stringify ( {"Page":[{"URL":"www.youtube.com","event":[{"type":"click","element":[{"tag":"BUTTON","attribut":[]},{"tag":"A","attribut":[]}]}]},{"URL":"www.google.fr","event":[{"type":"click","element":[{"tag":"SPAN","attribut":[]},{"tag":"A","attribut":[]},{"tag":"IMG","attribut":[]}]},{"type":"change","element":[{"tag":"INPUT","attribut":[]}]}]}]}));
 				}  
-			var data = JSON.parse(kango.storage.getItem("Config")) ; 
+    kango.console.log('send config');
+	var data = kango.storage.getItem("Config") ; 
     tab.dispatchMessage('confg', data );
 });
 });
-
-
-
+				                   
+kango.addMessageListener('notification', function(event) {
+    kango.browser.tabs.getCurrent(function(tab) {
+	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
+	var notification = kango.ui.notifications.createNotification('Trace Me', ' Ce site est tracé au cadre de votre Activité '+kango.storage.getItem("Trace_Active"),urlImg);
+    notification.show();
+     
+});
+});
+kango.addMessageListener('notificationD', function(event) {
+    kango.browser.tabs.getCurrent(function(tab) {
+	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
+	var notification = kango.ui.notifications.createNotification('Trace Me', 'Début de tracage de votre activité  '+kango.storage.getItem("Trace_Active"),urlImg);
+    notification.show();
+     
+});
+});
 
 kango.addMessageListener('obsel', function(event) {
 init_trc ();
@@ -81,75 +112,3 @@ function existe (array, element)
 
 }
 
-
-
-/*function onRequest(request, sender, sendResponse) 
-{
-// recive mess
-
-    if (request.mess=="Etat")
-	{
-	if (localStorage["Etat"] == undefined) 
-	{localStorage["Etat"] = "Activer";}
-	sendResponse({status: localStorage["Etat"]});
-	}
-	else
-		if (request.mess=="confg")
-			{   
-				if  (localStorage["Config"] == undefined)
-				{
-				localStorage["Config"] = JSON.stringify ( {"Page":[{"URL":"www.youtube.com","event":[{"type":"click","element":[{"tag":"BUTTON","attribut":[]},{"tag":"A","attribut":[]}]}]},{"URL":"www.google.fr","event":[{"type":"click","element":[{"tag":"SPAN","attribut":[]},{"tag":"A","attribut":[]},{"tag":"IMG","attribut":[]}]},{"type":"change","element":[{"tag":"INPUT","attribut":[]}]}]}]});
-				}  
-			var data = JSON.parse(localStorage["Config"]) ; 
-			sendResponse({status: data});
-            }
-		else 
-
-        if (request.mess=="TraceInfo")
-         {
-            localStorage["Trace_Active"] = request.TraceInfo.TraceName;
-            localStorage["trace_options_Base_URI"] = request.TraceInfo.BaseURI;
-            localStorage["trace_options_Model_URI"] = request.TraceInfo.ModelURI;
-            var Activities = JSON.parse(localStorage["trace_options_Trace_Name"]);
-            if (! existe( Activities,request.TraceInfo.TraceName) )
-            {
-                Activities.push (request.TraceInfo.TraceName);
-                localStorage["trace_options_Trace_Name"]=JSON.stringify(Activities);
-            }
-            init_trc ();
-        }
-        else
-            if (request.mess=="popup") 
-            {      
-            init_trc ();
-           
-            
-            }
-            else 
-            if (request.mess=="Assis")
-            {
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello"}, function(response) {
-            console.log(response.farewell);
-                       });
-                                      });
-            }
-            else
-            {
-            init_trc ();
-            var OBSEL = request.OBSEL;
-            // send obsel to ktbs
-            trc.put_obsels({
-		                    obsel: OBSEL,
-		                    success: function(){console.log("success is callbacked");},
-		                    error: function(jqXHR,textStatus, errorThrown){console.log("error is callbacked.");}
-	                       });	
-  
-            }
-  // Return nothing to let the connection be cleaned up.
-  //sendResponse({});
-};
-
-// Listen for the content script to send a message to the background page.
-chrome.extension.onRequest.addListener(onRequest);
-*/

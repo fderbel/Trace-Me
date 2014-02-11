@@ -2,94 +2,102 @@
 // @name collecteur
 // @include http://*
 // @include https://*
-//@require jquery-1.9.1.min.js
+// @require jquery-1.9.1.min.js
+// @all-frames true 
+
+
 // ==/UserScript==
-
-
-
-
-
-
 $(document).ready(function () 
 { 
-
-		
- // get localStorage etat from background.js
-	//chrome.extension.sendRequest({mess: "Etat"}, function(response) {Etat= response.status;ReceiveEtat(Etat);});
-	kango.console.log("collecteur");
+    var notif = false;
+    kango.console.log("collecteur");
+	// get data 
+	kango.dispatchMessage('Pret');
+	kango.addMessageListener('GetDataD', function(event) {
+	    var Base = "<base href = \""+document.location.protocol+"//"+document.location.host+"/\" target=\"_blank\">" ;
+	    var head = Base + document.head.innerHTML;
+	    kango.console.log (head);
+		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
+		return false;
+    });
+	// get Etat
 	kango.dispatchMessage('GetEtat');
 	kango.addMessageListener('Etat', function(event) 
 	{
-     kango.console.log('Background script says: ' + event.data);
 	 var Etat= event.data ;
 	 ReceiveEtat(Etat) ;
     });
-	
-	function ReceiveEtat(Etat) 
-	{
-	
-	if (Etat == "Activer")
-	{
-		
-		kango.console.log ("Trace Me Started")
-    // listen to serveur collector 
-         var req = new XMLHttpRequest();
-         req.open('GET', document.location, false);
-         req.send(null);
-         //kango.console.log ("oui"+req.getAllResponseHeaders()) ;
-         var Trace_Information = req.getResponseHeader('Trace_Information');
-         if  (Trace_Information != null) 
-            {  
-                // send the trace information to baground.js
-               // chrome.extension.sendRequest({mess: "TraceInfo",TraceInfo : JSON.parse (Trace_Information) }, function(response) { });
-			   kango.dispatchMessage('TraceInfo',JSON.parse (Trace_Information));
-            }
-    // colect the URL document
-       if (document.location.hostname != "localhost") {Send_URL(document.URL) ;}
-
-    // get configurate  information from background.js
-    //    chrome.extension.sendRequest({mess: "confg"}, function(response) {donnees= response.status;onListReceived(donnees);});
-	kango.dispatchMessage('GetConfg');
-	kango.addMessageListener('confg', function(event) 
-	{
-	 var donnees= event.data ;
-	 onListReceived(donnees) ;
-    });
-                
-	function onListReceived(donnees)
-                
-{ 
-							kango.console.log (document.location.hostname)   ;                       
+		function ReceiveEtat(Etat) {
+				if (Etat == "Activer")
+					{ kango.console.log ("Trace Me Started")
+					// listen to serveur collector 
+						var req = new XMLHttpRequest();
+						req.open('GET', document.location, false);
+						req.send(null);
+						var Trace_Information = req.getResponseHeader('Trace_Information');
+						if  ((Trace_Information != null) && (Trace_Information != undefined))
+							{  // send the trace information to baground.js
+									kango.dispatchMessage('TraceInfo',JSON.parse(Trace_Information));
+								// notification 
+								 if (!notif){kango.dispatchMessage ('notificationD'),notif= true;};
+								// open popup visu trace
+									var encoded_trace_uri = encodeURIComponent(JSON.parse (Trace_Information).BaseURI+JSON.parse (Trace_Information).TraceName+"/");
+									var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
+									window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");
+							}
+						
+						
+					// colect the URL document
+						Send_URL(document.URL) ;
+					// get configurate  information from background.js
+					    kango.console.log (document.location.hostname);
+						kango.dispatchMessage('GetConfg');
+						kango.addMessageListener('confg', function(event){
+							var donnees= event.data ;
+							onListReceived(donnees) ;
+						});
+									function onListReceived(donnees)
+							{ 
+							
 							var host=0;
-                            while ((host < donnees.Page.length) && (document.location.hostname!=donnees.Page[host].URL))  {host++;}
-                            if (host == donnees.Page.length) {}
-                            else 
-                                    {    // browse event
-									     kango.console.log ("site collected") ;
-                                         var event = donnees.Page[host].event;
+                            while ((host < donnees.Page.length) )  
+							{
+							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
+									{ collectData(donnees.Page[host]);}
+							host++;
+							}
+                            function collectData (Data)
+								{    // browse event
+								      if (!notif){kango.dispatchMessage ('notification');notif= true;}
+									  var event = Data.event;
                                          for (var i=0; i < event.length; i++ )
-                                              {  // exist of element
-                                                    if (event[i].element=="")  {$(document).on(event[i].type,fonction);}
-                                                    else{   // browse element of each event
-                                                            for (var j=0; j < event[i].element.length; j++ ) 
-                                                                { var listAttribut = event[i].element[j].attribut;
-                                                                  if (listAttribut=="") {$(event[i].element[j].tag).on (event[i].type,fonction);}
-                                                                  else 
-                                                                  {for (var k=0; k < listAttribut.length; k++ )
-                                                                       {var att = "";
-                                                                        for (var prop in listAttribut[k] )
-                                                                             {att= att + "["+prop+"="+listAttribut[k][prop]+"]";}
-																			 a = event[i].element[j].tag+""+att+"."+event[i].type+"("+fonction+")"
-																			 a ;
-                                                                            // $(a).event[i].type(fonction);
-																			 //kango.console.log(a);
-                                                                       }
-                                                                  }
+                                              {  
+                                                   
+                                                      // browse selector of each event
+                                                            for (var j=0; j < event[i].selectors.length; j++ ) 
+                                                                {  
+																    if ((event[i].selectors[j].Selector==undefined) || (event[i].selectors[j].Selector==""))
+																	{
+																	
+																	$(document).on(event[i].type,fonction);
+																	
+																	}
+																	else
+																      if ((event[i].typeObsel==undefined) || (event[i].typeObsel=="") )
+																	      {$(event[i].selectors[j].Selector).on (event[i].type,fonction);}
+																	  else 
+																	    {
+																		kango.console.log (event[i].selectors[j].Selector);
+																		$(event[i].selectors[j].Selector).on (event[i].type,{typeO:event[i].typeObsel},fonctionT);
+																		
+																		}
+																   
+                                                                  
                                                                  }  
-       	                                                  }
+       	                                                  
                                               }
                                      }
- }    
+							}    
 
 	}
 }
@@ -101,12 +109,11 @@ function Send_URL(URL)
 		attribute.hasdate =new Date().toString();
         //attribute.begin = (new Date()).getTime();
         //attribute.end =   (new Date()).getTime();
-        attribute.hasType="Website_visited";
+        attribute.hasType="Ouverture_Page";
         attribute.hasSubject="obsel of action Website_visited ";
-        attribute.hasDocument_Url = URL;
-        
-      //  chrome.extension.sendRequest({mess:'obsel',OBSEL:attribute}, function(response) {});
-	  kango.dispatchMessage('obsel',attribute);
+        attribute.hasDocument_URI = URL;
+		//attribute.hasDocument_Title = document.title;
+	    kango.dispatchMessage('obsel',attribute);
  }
 
   // function to collect attribute and send then to baground.js
@@ -118,8 +125,16 @@ var fonction =  function (e)
             'y': e.clientY,
         };
         fillCommonAttributes(e, attributes);
-   // send mess obsel
-        //chrome.extension.sendRequest({mess:'obsel',OBSEL:attributes}, function(response) {}); 
+		kango.dispatchMessage('obsel',attributes);
+}
+var fonctionT =  function (e) 
+{
+        var attributes = {
+            'x': e.clientX,
+            'y': e.clientY,
+        };
+        fillCommonAttributes(e, attributes);
+		attributes.hasType= e.data.typeO ;
 		kango.dispatchMessage('obsel',attributes);
 }
    
@@ -186,7 +201,7 @@ function fillCommonAttributes(e, attributes)
 		attributes.hasdate =new Date().toString();
         attributes.hasSubject= "obsel of action "+ e.type;
         attributes.hasType = e.type;
-        attributes.hasDocument_Url = document.URL;
+        attributes.hasDocument_UrI = document.URL;
 		attributes.hasDocument_Title = document.title;
         attributes.ctrlKey = e.ctrlKey;
         attributes.shiftKey = e.shiftKey;
@@ -195,9 +210,11 @@ function fillCommonAttributes(e, attributes)
         if (e.target.id) { attributes.hastarget_targetId = e.target.id; }
 		if (e.target.alt) { attributes.hastarget_ALT = e.target.alt; }
 		if (e.target.value) {attributes.hastarget_Value = e.target.value;}
-		if ( e.target.childNodes[0] ) {if ((e.target.childNodes[0].nodeValue) && (e.target.childNodes[0].nodeValue !="")) {attributes.hastarget_TextNode = e.target.childNodes[0].nodeValue;}}
+		//if ( e.target.childNodes[0] ) {if ((e.target.childNodes[0].nodeValue) && (e.target.childNodes[0].nodeValue !="")) {attributes.hastarget_TextNode = e.target.childNodes[0].nodeValue;}}
 		if (e.keyCode) {attributes.keyCode = e.keyCode;}
 		if (e.target.text) { attributes.hastarget_targetText = e.target.text; }
+		kango.console.log (e.currentTarget.title);
+		if (e.target.title) {attributes.hastarget_Title = e.target.title};
         if (e.currentTarget) {
             attributes.currentTarget = getXPath(e.currentTarget);
             attributes.hascurrentTarget_currentTargetName = getElementName(e.currentTarget);
@@ -205,7 +222,7 @@ function fillCommonAttributes(e, attributes)
                 attributes.hascurrentTarget_currentTargetId = getElementId(e.currentTarget);
             }
             if (e.currentTarget.text) {
-                attributes.hascurrentTarget_currentTargetText = e.currentTarget.text;
+                //attributes.hascurrentTarget_currentTargetText = e.currentTarget.text;
             }
         }
         if (e.explicitOriginalTarget) {

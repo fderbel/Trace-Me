@@ -12,55 +12,73 @@
 
     <body>
         <form id="options" class="form-horizontal" role="form">
-            <h1>Identity</h1>
+		 <h1>Option </h1>
+            <h3>Identity</h3>
             <div class="input-group">
                 <label for="first_name" class="control-label input-group-addon">FirstName</label>
                 <input name="first_name" type="text" class="form-control" placeholder="first_name">
-            </div>
-            <div class="input-group">
+
                 <label for="last_name" class="control-label input-group-addon">LastName</label>
                 <input name="last_name" type="text" class="form-control" placeholder="last_name">
-                </div>
-            </div>
-            <div class="input-group">
+
                 <label for="email" class="control-label input-group-addon">Email</label>
                 <input name="email" type="email" class="form-control" placeholder="email">
             </div>
 
-            <h1>Server Information</h1>
+            <h3>Server Information</h3>
             <div class="input-group">
                 <label for="Base_URI" class="control-label input-group-addon">BaseURI</label>
-                <input name="Base_URI" type="text" class="form-control" placeholder="host">
-            </div>
-           
-            <div class="input-group">
+                <input name="Base_URI" type="text" class="form-control" placeholder="localhost:8001/baseName/">
+            
                 <label for="Model_URI" class="control-label input-group-addon">ModelURI</label>
-                <input name="Model_URI" type="text" class="form-control" placeholder="host">
+                <input name="Model_URI" type="text" class="form-control" placeholder="localhost:8001/baseName/ModelName">
             </div>
-             <h1>Activities Information</h1>
-              <input type="button" class="btn btn-primary" id ="ADD" value="ADD"></input>
-            <div class="input-group" id ="Activities">
+             <h3>Activities Information</h3>
+              <input type="button" class="btn btn-primary btn-sm" id ="ADD" value="ADD"></input>
+               <div class="input-group" id ="Activities">
                 <label for="Trace_Name" class="control-label input-group-addon">TraceName</label>
-                <input name="Trace_Name" type="text" class="form-control" placeholder="host">
+                <input name="Trace_Name" type="text" class="form-control" placeholder="TraceNAme">
              
             </div>
             
              <br>
-            <button type="submit" class="btn btn-primary" id="SaveO">Save</button>
+            <button type="submit" class="btn btn-primary" id="SaveO"style="margin-left: 50%">Save   Option</button>
         </form>
+		<br>
 		<form id="Config" class="form-horizontal" role="form">
            <h1>Configure Tracing</h1>
-                <div class="input-group">
+                <div class="input-group" >
+
                 <label for="URL" class="control-label input-group-addon" >URL</label>
                 <input Id="URL" type="text" class="form-control"  placeholder="http://site.com/">
+				<label for="Trace_Name" class="control-label input-group-addon"></label>
+				<input type="button" class="btn btn-primary btn-sm" id="Load" value="Load Site" style="margin-left: 50px">
+				<label for="Trace_Name" class="control-label input-group-addon"></label>
+				<input type="button" class="btn btn-primary btn-sm" id ="ADDEvent" value="ADD Event" style="margin-left: 50px"></input>
                 </div>
-                <input type="button" class="btn btn-primary" id ="ADDEvent" value="ADD Event" style="margin-left: 50px"></input>
-
+                <div class="container"> 
+                <label class="checkbox-inline"> 
+                   <input type="checkbox" id="URLCK"> URL
+                </label>
                 
+                <label class="checkbox-inline"> 
+                   <input type="checkbox" id="Hostname"> Hostname
+                </label>
+                
+                
+                </div>
+				<div id="fr"  class="row" style="height: 300px;" > 
+				<iframe class="col-md-8" style="height: 100%;" > </iframe>
+				 <div class="col-md-4">  
+				 <textarea class="form-control" Id="SelectorT" rows="7"></textarea>
+				 </div>
+				
+				
+				</div>
                 <div id="EventList"> </div>
-                
-                
-            <button type="button" class="btn btn-primary" id="Save">Save</button>
+				
+				<br>
+               <button type="button" class="btn btn-primary" id="Save" style="margin-left: 50%">Save Configuration </button>
         </form>
     </body>
  
