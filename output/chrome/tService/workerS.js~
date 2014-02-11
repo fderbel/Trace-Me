@@ -1,0 +1,28 @@
+var num = 0;
+ 
+//nouvelle connexion
+  onconnect=function(e){
+  var port = e.ports[0];
+  port.postMessage("pret #" + num);
+  num++;
+ 
+  //réception des messages
+port.onmessage = function(event){
+var messageSent = event.data;
+var attr = messageSent.att;
+var tr = messageSent.traceSend;
+port.postMessage("réponse à " + attr.type);
+//importScripts("ja.js");
+//var resultat = addition (3,5);
+//port.postMessage("resultat " + resultat);
+
+//importScripts("ktbs4js/src/tracemanager.js","ktbs4js/src/jquery.js");
+//tr.trace('MouseEvent', attr);
+//port.postMessage("resultat ");
+  };
+};
+
+
+//
+
+//
