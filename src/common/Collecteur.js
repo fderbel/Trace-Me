@@ -16,7 +16,6 @@ $(document).ready(function ()
 	kango.addMessageListener('GetDataD', function(event) {
 	    var Base = "<base href = \""+document.location.protocol+"//"+document.location.host+"/\" target=\"_blank\">" ;
 	    var head = Base + document.head.innerHTML;
-	    kango.console.log (head);
 		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
 		return false;
     });
