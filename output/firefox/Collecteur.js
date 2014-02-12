@@ -2,7 +2,7 @@
 // @name collecteur
 // @include http://*
 // @include https://*
-// @require jquery-1.9.1.min.js
+// @require tService/js/jquery.js
 // @all-frames true 
 
 
@@ -16,7 +16,6 @@ $(document).ready(function ()
 	kango.addMessageListener('GetDataD', function(event) {
 	    var Base = "<base href = \""+document.location.protocol+"//"+document.location.host+"/\" target=\"_blank\">" ;
 	    var head = Base + document.head.innerHTML;
-	    kango.console.log (head);
 		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
 		return false;
     });
@@ -50,7 +49,6 @@ $(document).ready(function ()
 					// colect the URL document
 						Send_URL(document.URL) ;
 					// get configurate  information from background.js
-					    kango.console.log (document.location.hostname);
 						kango.dispatchMessage('GetConfg');
 						kango.addMessageListener('confg', function(event){
 							var donnees= event.data ;
