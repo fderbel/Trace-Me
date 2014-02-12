@@ -49,6 +49,7 @@ $(document).ready(function ()
 					// colect the URL document
 						Send_URL(document.URL) ;
 					// get configurate  information from background.js
+					    kango.console.log (document.location.hostname);
 						kango.dispatchMessage('GetConfg');
 						kango.addMessageListener('confg', function(event){
 							var donnees= event.data ;
