@@ -34,19 +34,29 @@ KangoAPI.onReady(function()
 		kango.storage.setItem("DATA", "True");  
 		window.open(URL,"nom_popup","menubar=no, status=no, scrollbars=no, menubar=no, width=400, height=400");
 	});
+	
+	$ ("#URL").on('keypress', function(e) {
+	     if (e.keyCode==13){
+		var iframe = document.getElementsByTagName("iframe");
+		URL = document.getElementById("URL").value;
+		kango.storage.setItem("DATA", "True");  
+		window.open(URL,"nom_popup","menubar=no, status=no, scrollbars=no, menubar=no, width=400, height=400");
+		e.preventDefault();
+		}
+	});
+	
 	kango.addMessageListener('Data', function(event) { 
         $('iframe').contents().find('head').html(event.data.header);
 		$('iframe').contents().find('body').html(event.data.body);
 	});
-	$("iframe").on("load",function() {
+	/*$("iframe").on("load",function() {
 	
 	$("iframe").contents().find("a").click(function(e){
-	console.log("stop");
 	e.preventDefault();
 	});
 	
 	
-	})
+	})*/
 	
 	$("iframe").contents().find("body").on ('click', function(e) {
 	

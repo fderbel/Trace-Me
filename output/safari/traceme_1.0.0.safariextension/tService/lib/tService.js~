@@ -137,7 +137,7 @@ this.put_obsels = function(s_options){
 			async = this.async;
 	
 		function generateObselId(){
-			var id = "C_"+obsel["type"]+(new Date()).getTime() + Math.floor(Math.random()*1000);
+			var id = "C_"+obsel["hasType"]+"_"+(new Date()).getTime() + Math.floor(Math.random()*1000);
 			return id;
 		}
 
@@ -155,13 +155,13 @@ this.put_obsels = function(s_options){
 				
 			var statements = [];
 			statements.push("<"+id+"> ktbs:hasTrace <>.");
-			statements.push("<"+id+"> a :"+obsel["type"]+".");
-			statements.push("<"+id+"> ktbs:hasSubject \""+obsel["subject"]+"\" .");
-			statements.push("<"+id+"> ktbs:hasBegin "+obsel["begin"]+" .");	
-			statements.push("<"+id+"> ktbs:hasEnd "+obsel["end"]+" .");
+			statements.push("<"+id+"> a :"+obsel["hasType"]+".");
+			statements.push("<"+id+"> ktbs:hasSubject \""+obsel["hasSubject"]+"\" .");
+			//statements.push("<"+id+"> ktbs:hasBegin "+obsel["begin"]+" .");	
+			//statements.push("<"+id+"> ktbs:hasEnd "+obsel["end"]+" .");
 			
 			jQuery.each(obsel, function(name,value){
-				if(name!="type" && name!="begin" && name!= "end" && name!= "subject"){
+				if(name!="hasType" && name!="begin" && name!= "end" && name!= "hasSubject"){
 					statements.push("<"+id+"> :"+name+" \""+value+"\" .");
 				}
 			});			
@@ -192,7 +192,7 @@ this.put_obsels = function(s_options){
 				},
 			error: function(jqXHR, textStatus, errorThrown){
 					
-					console.log("E: The obsel ["+obsel["id_ktbs"]+"] cannot be sent.");
+					console.log("E: The obsel ["+id+"] cannot be sent.");
 					errorCallback(jqXHR, textStatus, errorThrown);
 				},
 			

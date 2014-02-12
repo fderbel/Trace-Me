@@ -140,6 +140,7 @@ this.put_obsels = function(s_options){
 			var id = "C_"+obsel["hasType"]+"_"+(new Date()).getTime() + Math.floor(Math.random()*1000);
 			return id;
 		}
+		var id = trace_uri + generateObselId();
 
 		function obsel2Turtle(obsel, trace_uri, model_uri){
 			
@@ -192,7 +193,7 @@ this.put_obsels = function(s_options){
 				},
 			error: function(jqXHR, textStatus, errorThrown){
 					
-					console.log("E: The obsel ["+obsel["id_ktbs"]+"] cannot be sent.");
+					console.log("E: The obsel ["+id+"] cannot be sent.");
 					errorCallback(jqXHR, textStatus, errorThrown);
 				},
 			

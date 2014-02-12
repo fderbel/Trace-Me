@@ -14,8 +14,15 @@ $(document).ready(function ()
 	// get data 
 	kango.dispatchMessage('Pret');
 	kango.addMessageListener('GetDataD', function(event) {
-	    var Base = "<base href = \""+document.location.protocol+"//"+document.location.host+"/\" target=\"_blank\">" ;
+	    if (document.getElementsByTagName("base").length != 0)
+	    {
+	    var head = document.head.innerHTML;
+	    }
+	    else 
+	    {
+	    var Base = "<base href = \""+document.location.href+"\" target=\"_blank\">" ;
 	    var head = Base + document.head.innerHTML;
+	    }
 		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
 		return false;
     });
@@ -58,6 +65,7 @@ $(document).ready(function ()
 							{ 
 							
 							var host=0;
+						    if ( donnees == null ) {return false ; }
                             while ((host < donnees.Page.length) )  
 							{
 							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
