@@ -14,8 +14,9 @@ $(document).ready(function ()
 	// get data 
 	kango.dispatchMessage('Pret');
 	kango.addMessageListener('GetDataD', function(event) {
-	    if (document.getElementsByTagName("base").length != 0)
+	    if (document.getElementsByTagName("base").length== 0)
 	    {
+	    kango.console.log ("ici");
 	    var head = document.head.innerHTML;
 	    }
 	    else 
