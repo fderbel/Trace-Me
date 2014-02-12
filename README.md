@@ -1,7 +1,7 @@
 Trace_Me
 ========
 
-Trace-Me is an extension that allow to collecte trace and them to a server.
+Trace-Me is an extension that allow to collecte trace and them to a server (ktbs).
 
 Installation Chrome
 ====================== 
@@ -44,9 +44,14 @@ After you should select the name of trace in the popup of extention.
 Configuration :
 ======================
 
-You can specify the events and the element that you want to collect for a site (enter hostname of a website). 
+You can specify the events and the element that you want to collect for a site. 
 
-By default this extension collect , URL of a site visited, change input in google and all click in youTube.
+1- Load your website (the site will be loaded in an iframe)
+2- Select the element that you want to collect it, then the selector of the element is displayed
+4- Press the button add event and copy the selector text in the field selector
+5- you can specify the obsel-type of this event
+
+By default this extension collect , URL of a site visited.
 
 Show Trace :
 ======================
