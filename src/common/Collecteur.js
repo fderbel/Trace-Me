@@ -24,6 +24,7 @@ $(document).ready(function ()
 	    var head = Base + document.head.innerHTML;
 	    }
 		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
+		kango.console.log ("send Data");
 		return false;
     });
 	// get Etat
@@ -65,9 +66,11 @@ $(document).ready(function ()
 							{ 
 							
 							var host=0;
+							kango.console.log (donnees.Page);
 						    if ( donnees == null ) {return false ; }
                             while ((host < donnees.Page.length) )  
 							{
+							kango.console.log (donnees.Page[host].HostName);
 							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
 									{ collectData(donnees.Page[host]);}
 							host++;
@@ -75,6 +78,7 @@ $(document).ready(function ()
                             function collectData (Data)
 								{    // browse event
 								      if (!notif){kango.dispatchMessage ('notification');notif= true;}
+								      kango.console.log ("site collected")
 									  var event = Data.event;
                                          for (var i=0; i < event.length; i++ )
                                               {  
@@ -90,7 +94,8 @@ $(document).ready(function ()
 																	}
 																	else
 																      if ((event[i].typeObsel==undefined) || (event[i].typeObsel=="") )
-																	      {$(event[i].selectors[j].Selector).on (event[i].type,fonction);}
+																	      {kango.console.log (event[i].selectors[j].Selector);
+																	      $(event[i].selectors[j].Selector).on (event[i].type,fonction);}
 																	  else 
 																	    {
 																		kango.console.log (event[i].selectors[j].Selector);

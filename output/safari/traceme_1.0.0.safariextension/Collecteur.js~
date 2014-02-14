@@ -14,9 +14,8 @@ $(document).ready(function ()
 	// get data 
 	kango.dispatchMessage('Pret');
 	kango.addMessageListener('GetDataD', function(event) {
-	    if (document.getElementsByTagName("base").length== 0)
+	    if (document.getElementsByTagName("base").length != 0)
 	    {
-	    kango.console.log ("ici");
 	    var head = document.head.innerHTML;
 	    }
 	    else 
@@ -25,6 +24,7 @@ $(document).ready(function ()
 	    var head = Base + document.head.innerHTML;
 	    }
 		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
+		kango.console.log ("send Data");
 		return false;
     });
 	// get Etat
@@ -66,9 +66,11 @@ $(document).ready(function ()
 							{ 
 							
 							var host=0;
+							kango.console.log (donnees.Page);
 						    if ( donnees == null ) {return false ; }
                             while ((host < donnees.Page.length) )  
 							{
+							kango.console.log (donnees.Page[host].HostName);
 							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
 									{ collectData(donnees.Page[host]);}
 							host++;

@@ -1,7 +1,7 @@
 
 KangoAPI.onReady(function() 
 {
-	$('document').ready(function() {
+	$('#options').ready(function() {
 		init_form ()  
 		});
     //event ADD
@@ -46,8 +46,10 @@ KangoAPI.onReady(function()
 	});
 	
 	kango.addMessageListener('Data', function(event) { 
+	    
         $('iframe').contents().find('head').html(event.data.header);
 		$('iframe').contents().find('body').html(event.data.body);
+		kango.console.log ("data for iframe recived ");
 	});
 	/*$("iframe").on("load",function() {
 	
