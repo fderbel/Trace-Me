@@ -49,7 +49,7 @@ KangoAPI.onReady(function()
 	    
         $('iframe').contents().find('head').html(event.data.header);
 		$('iframe').contents().find('body').html(event.data.body);
-		kango.console.log ("data recived ");
+		kango.console.log ("data for iframe recived ");
 	});
 	/*$("iframe").on("load",function() {
 	
