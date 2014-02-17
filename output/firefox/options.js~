@@ -149,7 +149,7 @@ var Page = {URL: URL , HostName: "", event:eventArray };
 if ($('#Hostname').prop('checked')) 
 {
 hostname = getHostname (URL)
-var Page = {URL:URL , HostName: hostname, event:eventArray };
+var Page = {URL:"" , HostName: hostname, event:eventArray };
 }
 
       
