@@ -141,6 +141,7 @@ KangoAPI.onReady(function()
        }
        
 // host or URL
+var Page = {URL: URL , HostName: "", event:eventArray };
 if ($('#URLCK').prop('checked')) 
 {
 var Page = {URL: URL , HostName: "", event:eventArray };
@@ -152,7 +153,7 @@ hostname = getHostname (URL)
 var Page = {URL:"" , HostName: hostname, event:eventArray };
 }
 
-var Page = {URL: URL , HostName: "", event:eventArray };      
+      
 	  if (kango.storage.getItem("Config") != undefined  ) 
       {
        var PageArray = kango.storage.getItem("Config").Page;
