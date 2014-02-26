@@ -3,7 +3,7 @@
 // @include http://*
 // @include https://*
 // @require tService/js/jquery.js
-// @all-frames true 
+
 
 
 // ==/UserScript==
@@ -41,6 +41,7 @@ $(document).ready(function ()
 						var req = new XMLHttpRequest();
 						req.open('GET', document.location, false);
 						req.send(null);
+						kango.console.log(req.getAllResponseHeaders());
 						var Trace_Information = req.getResponseHeader('Trace_Information');
 						if  ((Trace_Information != null) && (Trace_Information != undefined))
 							{  // send the trace information to baground.js
@@ -66,11 +67,11 @@ $(document).ready(function ()
 							{ 
 							
 							var host=0;
-							kango.console.log (donnees.Page);
+							
 						    if ( donnees == null ) {return false ; }
                             while ((host < donnees.Page.length) )  
 							{
-							kango.console.log (donnees.Page[host].HostName);
+						
 							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
 									{ collectData(donnees.Page[host]);}
 							host++;
@@ -98,7 +99,7 @@ $(document).ready(function ()
 																	      $(event[i].selectors[j].Selector).on (event[i].type,fonction);}
 																	  else 
 																	    {
-																		kango.console.log (event[i].selectors[j].Selector);
+																		
 																		$(event[i].selectors[j].Selector).on (event[i].type,{typeO:event[i].typeObsel},fonctionT);
 																		
 																		}

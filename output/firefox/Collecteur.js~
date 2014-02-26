@@ -41,6 +41,7 @@ $(document).ready(function ()
 						var req = new XMLHttpRequest();
 						req.open('GET', document.location, false);
 						req.send(null);
+						kango.console.log(req.getAllResponseHeaders());
 						var Trace_Information = req.getResponseHeader('Trace_Information');
 						if  ((Trace_Information != null) && (Trace_Information != undefined))
 							{  // send the trace information to baground.js
@@ -78,6 +79,7 @@ $(document).ready(function ()
                             function collectData (Data)
 								{    // browse event
 								      if (!notif){kango.dispatchMessage ('notification');notif= true;}
+								      kango.console.log ("site collected")
 									  var event = Data.event;
                                          for (var i=0; i < event.length; i++ )
                                               {  
@@ -93,7 +95,8 @@ $(document).ready(function ()
 																	}
 																	else
 																      if ((event[i].typeObsel==undefined) || (event[i].typeObsel=="") )
-																	      {$(event[i].selectors[j].Selector).on (event[i].type,fonction);}
+																	      {kango.console.log (event[i].selectors[j].Selector);
+																	      $(event[i].selectors[j].Selector).on (event[i].type,fonction);}
 																	  else 
 																	    {
 																		kango.console.log (event[i].selectors[j].Selector);
