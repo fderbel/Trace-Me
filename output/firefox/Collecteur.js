@@ -37,23 +37,22 @@ $(document).ready(function ()
 		function ReceiveEtat(Etat) {
 				if (Etat == "Activer")
 					{ kango.console.log ("Trace Me Started")
-					// listen to serveur collector 
-						var req = new XMLHttpRequest();
-						req.open('GET', document.location, false);
-						req.send(null);
-						kango.console.log(req.getAllResponseHeaders());
-						var Trace_Information = req.getResponseHeader('Trace_Information');
-						if  ((Trace_Information != null) && (Trace_Information != undefined))
-							{  // send the trace information to baground.js
-									kango.dispatchMessage('TraceInfo',JSON.parse(Trace_Information));
-								// notification 
-								 if (!notif){kango.dispatchMessage ('notificationD'),notif= true;};
-								// open popup visu trace
-									var encoded_trace_uri = encodeURIComponent(JSON.parse (Trace_Information).BaseURI+JSON.parse (Trace_Information).TraceName+"/");
-									var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
-									window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");
-							}
-						
+					//cookie
+						var allcookie = document.cookie.split(";");
+						for (i=0;allcookie.length-1;i++)
+						{ if (allcookie[i].split('=')[0] == "TraceName")
+						    {
+						Trace_Information ={TraceName:allcookie[i].split('=')[1],BaseURI:decodeURIComponent(allcookie[i+1].split('=')[1]),ModelURI:decodeURIComponent(allcookie[i+2].split('=')[1])};
+                        kango.dispatchMessage('TraceInfo',Trace_Information);              
+		//if (!notif){kango.dispatchMessage ('notificationD'),notif= true;};
+			// open popup visu trace
+		var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
+		var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
+        window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");		            
+				break;		            
+						            
+						            }
+						}
 						
 					// colect the URL document
 						Send_URL(document.URL) ;
