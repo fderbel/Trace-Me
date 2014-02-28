@@ -35,6 +35,7 @@ kango.addMessageListener('GetConfg', function(event) {
 				}  
 	var data = kango.storage.getItem("Config") ; 
     tab.dispatchMessage('confg', data );
+    kango.console.log ("send Data");
 });
 });
 				                   

@@ -65,8 +65,9 @@ if ( init_trc () )
 		 success: function(){console.log("success is callbacked");},
 		 error: function(jqXHR,textStatus, errorThrown){console.log("error is callbacked.");}
 	                       });	
-	                       
 	                       }
+	  else 
+	  {kango.console.log ("error");}
 	
 });
 kango.addMessageListener('TraceInfo', function(event) {
