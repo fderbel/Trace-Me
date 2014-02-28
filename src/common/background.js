@@ -28,6 +28,7 @@ kango.addMessageListener('GetEtat', function(event) {
 });
 
 kango.addMessageListener('GetConfg', function(event) {
+kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
 	if  (kango.storage.getItem("Config") == undefined)
 				{
@@ -35,6 +36,7 @@ kango.addMessageListener('GetConfg', function(event) {
 				}  
 	var data = kango.storage.getItem("Config") ; 
     tab.dispatchMessage('confg', data );
+    kango.console.log ("send Data");
 });
 });
 				                   

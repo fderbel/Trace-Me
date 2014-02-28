@@ -39,7 +39,7 @@ $(document).ready(function ()
 					{ kango.console.log ("Trace Me Started")
 					//cookie
 						var allcookie = document.cookie.split(";");
-						for (i=0;allcookie.length-1;i++)
+						for (i=0;i < allcookie.length-1;i++)
 						{ if (allcookie[i].split('=')[0] == "TraceName")
 						    {
 						Trace_Information ={TraceName:allcookie[i].split('=')[1],BaseURI:decodeURIComponent(allcookie[i+1].split('=')[1]),ModelURI:decodeURIComponent(allcookie[i+2].split('=')[1])};
@@ -49,7 +49,7 @@ $(document).ready(function ()
 		var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
 		var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
         window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");		            
-				break;		            
+				//break;		            
 						            
 						            }
 						}
@@ -60,6 +60,7 @@ $(document).ready(function ()
 						kango.dispatchMessage('GetConfg');
 						kango.addMessageListener('confg', function(event){
 							var donnees= event.data ;
+							kango.console.log (donnees);
 							onListReceived(donnees) ;
 						});
 									function onListReceived(donnees)
