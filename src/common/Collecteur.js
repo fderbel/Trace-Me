@@ -47,7 +47,7 @@ $(document).ready(function ()
 		//if (!notif){kango.dispatchMessage ('notificationD'),notif= true;};
 			// open popup visu trace
 		var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
-		var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
+		var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
         window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");		            
 				break;		            
 						            
