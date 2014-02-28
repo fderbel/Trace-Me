@@ -70,9 +70,10 @@ $(document).ready(function ()
 						    if ( donnees == null ) {return false ; }
                             while ((host < donnees.Page.length) )  
 							{
-						
+						    console.log (donnees.Page[host].HostName);
 							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
-									{ collectData(donnees.Page[host]);}
+									{ console.log (donnees.Page[host].HostName);
+									collectData(donnees.Page[host]);}
 							host++;
 							}
                             function collectData (Data)
