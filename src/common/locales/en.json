@@ -3,10 +3,137 @@
     "__info_description__": "This extension allow to collect traces and send them to a server",
     "Logo": "Logo",
     "Hello": "Hello {name}",
-    "CalcoConfig" : {"Page":[{"URL":"","HostName":"clacodev.univ-lyon1.fr","event":[{"type":"click","typeObsel":"Click-Onglet","selectors":[{"frame":"","Selector":"li.hometab-element. > a.hometab-link"}]},{"type":"mouseover","typeObsel":"Survol-Session","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > ul > li > a"}]},{"type":"click","typeObsel":"Click-Session","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > ul > li > a"}]},{"type":"click","typeObsel":"Click-Menu","selectors":[{"frame":"","Selector":".dropdown-menu > li > a"}]},{"type":"click","typeObsel":"déconnexion","selectors":[{"frame":"","Selector":".dropdown-menu > li#btn-logout > a"}]},{"type":"click","typeObsel":"Click-Lien-session2","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > div#session_2 > ol > li > a"}]},{"type":"click","typeObsel":"Click-Lien-session3","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > div#session_3 > ol > li > a"}]},{"type":"click","typeObsel":"Click-Lien-session4","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > div#session_4 > ol > li > a"}]},{"type":"click","typeObsel":"Click-Lien-session5","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > div#session_5 > ol > li > a"}]},{"type":"click","typeObsel":"Click-Lien-session6","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > div#session_6 > ol > li > a"}]},{"type":"click","typeObsel":"Click-Lien-session1","selectors":[{"frame":"","Selector":"div.panel-body.widget-instance-view > div#session_1 > ol > li > a"}]},{"type":"click","typeObsel":"Click-Bouton-Modifier","selectors":[{"frame":"","Selector":"a.btn.btn-primary"}]},{"type":"click","typeObsel":"Click-Bouton-OK","selectors":[{"frame":"","Selector":"i#switch-config-mode.icon-ok"}]}]}]}
-
-
-
+    "CalcoConfig" : {
+    "Page": [
+        {
+            "URL": "",
+            "HostName": "clacodev.univ-lyon1.fr",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Onglet",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a.hometab-link"
+                        }
+                    ]
+                },
+                {
+                    "type": "mouseover",
+                    "typeObsel": "Survol-Session",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > ul > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Session",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > ul > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Menu",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": ".dropdown-menu > li > a"
+                        }
+                    ]
+                },
+                
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session2",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > div#session_2 > ol > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session3",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > div#session_3 > ol > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session4",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > div#session_4 > ol > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session5",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > div#session_5 > ol > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session6",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > div#session_6 > ol > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > div#session_1 > ol > li > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Bouton-Modifier",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a.btn.btn-primary"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Bouton-OK",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "i#switch-config-mode.icon-ok"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
 
 
 
