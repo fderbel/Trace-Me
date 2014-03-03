@@ -2,7 +2,8 @@
 
 var trc;
 
-
+kango.console.log ("CLaco= "+kango.i18n.getMessage('CalcoConfig'));
+//kango.console.log ("Message= "+kango.i18n.getCurrentLocale());
 kango.addMessageListener('Pret', function(event) 
 {
   if (kango.storage.getItem("DATA")=="True") 
@@ -32,7 +33,7 @@ kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
 	if  (kango.storage.getItem("Config") == undefined)
 				{
-				//kango.storage.setItem("Config",JSON.stringify ( {"Page":[{"URL":"www.youtube.com","event":[{"type":"click","element":[{"tag":"BUTTON","attribut":[]},{"tag":"A","attribut":[]}]}]},{"URL":"www.google.fr","event":[{"type":"click","element":[{"tag":"SPAN","attribut":[]},{"tag":"A","attribut":[]},{"tag":"IMG","attribut":[]}]},{"type":"change","element":[{"tag":"INPUT","attribut":[]}]}]}]}));
+	kango.storage.setItem("Config",kango.i18n.getMessage('CalcoConfig'));
 				}  
 	var data = kango.storage.getItem("Config") ; 
     tab.dispatchMessage('confg', data );

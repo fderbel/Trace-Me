@@ -18,5 +18,11 @@
         <em:optionsURL>chrome://kango-546ba9ec-352c-4ac7-8abc-d73403309947/content/options.html</em:optionsURL>
         <em:optionsType>3</em:optionsType>
         
-    </Description>
+    <em:localized>
+                            <Description>
+                                <em:locale>en</em:locale>
+                                <em:name>Trace Me</em:name>
+                                <em:description>This extension allow to collect traces and send them to a server</em:description>
+                            </Description>
+                        </em:localized></Description>
 </RDF>

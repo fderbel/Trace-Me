@@ -141,6 +141,7 @@ KangoAPI.onReady(function()
        }
        
 // host or URL
+var Page = {URL: URL , HostName: "", event:eventArray };
 if ($('#URLCK').prop('checked')) 
 {
 var Page = {URL: URL , HostName: "", event:eventArray };
@@ -152,15 +153,15 @@ hostname = getHostname (URL)
 var Page = {URL:"" , HostName: hostname, event:eventArray };
 }
 
-var Page = {URL: URL , HostName: "", event:eventArray };      
+      
 	  if (kango.storage.getItem("Config") != undefined  ) 
       {
        var PageArray = kango.storage.getItem("Config").Page;
       }
     else
      {      
-   // kango.storage.setItem("Config",JSON.stringify ( {"Page":[{"URL":"www.youtube.com","event":[{"type":"click","element":[{"tag":"BUTTON","attribut":[]},{"tag":"A","attribut":[]}]}]},{"URL":"www.google.fr","event":[{"type":"click","element":[{"tag":"SPAN","attribut":[]},{"tag":"A","attribut":[]},{"tag":"IMG","attribut":[]}]},{"type":"change","element":[{"tag":"INPUT","attribut":[]}]}]}]}));
-   //var PageArray = JSON.parse(kango.storage.getItem("Config")).Page;
+ // kango.storage.setItem("Config",JSON.stringify (kango.i18n.getMessage('CalcoConfig')));
+ //  var PageArray = JSON.parse(kango.storage.getItem("Config")).Page;
 	PageArray=[];
      }
     PageArray.push(Page);

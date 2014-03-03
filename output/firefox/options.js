@@ -160,9 +160,9 @@ var Page = {URL:"" , HostName: hostname, event:eventArray };
       }
     else
      {      
-   // kango.storage.setItem("Config",JSON.stringify ( {"Page":[{"URL":"www.youtube.com","event":[{"type":"click","element":[{"tag":"BUTTON","attribut":[]},{"tag":"A","attribut":[]}]}]},{"URL":"www.google.fr","event":[{"type":"click","element":[{"tag":"SPAN","attribut":[]},{"tag":"A","attribut":[]},{"tag":"IMG","attribut":[]}]},{"type":"change","element":[{"tag":"INPUT","attribut":[]}]}]}]}));
-   //var PageArray = JSON.parse(kango.storage.getItem("Config")).Page;
-	PageArray=[];
+ kango.storage.setItem("Config",kango.i18n.getMessage('CalcoConfig'));
+  var PageArray = JSON.parse(kango.storage.getItem("Config")).Page;
+	//PageArray=[];
      }
     PageArray.push(Page);
 	

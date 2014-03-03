@@ -6,6 +6,7 @@
         "kango-ui/content_notifications.js"
     ], 
     "name": "TraceMe", 
+    "default_locale": "en", 
     "creator": "COAT", 
     "description": "This extension allow to collect traces and send them to a server", 
     "kango_package_id": "dev", 
@@ -19,6 +20,9 @@
     "version": "1.0.0", 
     "options_page": "options.html", 
     "id": "com.kangoextensions.traceme", 
+    "locales": [
+        "en"
+    ], 
     "browser_button": {
         "caption": "Trace Me", 
         "icon": "icons/traceMe.png", 
