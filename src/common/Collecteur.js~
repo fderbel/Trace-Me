@@ -11,6 +11,7 @@
 $(document).ready(function () 
 { 
     var notif = false;
+    var notifV = false;
     
     kango.console.log("collecteur");
 	// get data 
@@ -63,7 +64,7 @@ $(document).ready(function ()
 							}
                             function collectData (Data)
 								{    // browse event
-								      //if (!notif){kango.dispatchMessage ('notification');notif= true;}
+								      if (!notifV){kango.dispatchMessage ('notification');notifV= true;}
 								      kango.dispatchMessage ('notification');
 								      kango.console.log ("site collected")
 									  var event = Data.event;

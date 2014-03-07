@@ -65,7 +65,7 @@ $(document).ready(function ()
                             function collectData (Data)
 								{    // browse event
 								      if (!notifV){kango.dispatchMessage ('notification');notifV= true;}
-								      kango.dispatchMessage ('notification');
+								    //  kango.dispatchMessage ('notification');
 								      kango.console.log ("site collected")
 									  var event = Data.event;
                                          for (var i=0; i < event.length; i++ )
