@@ -80,12 +80,19 @@ var TraceInfo = event.data;
 kango.storage.setItem("Trace_Active",TraceInfo.TraceName);
 kango.storage.setItem("trace_options_Base_URI",TraceInfo.BaseURI);
 kango.storage.setItem("trace_options_Model_URI",TraceInfo.ModelURI);
-var Activities = JSON.parse(kango.storage.getItem("trace_options_Trace_Name"));
+
+if (kango.storage.getItem("trace_options_Trace_Name") == undefined )
+{var Activities = [];Activities.push (TraceInfo.TraceName);}
+else
+{var Activities = JSON.parse(kango.storage.getItem("trace_options_Trace_Name"));
             if (! existe( Activities,TraceInfo.TraceName) )
             {
                 Activities.push (TraceInfo.TraceName);
-                kango.storage.setItem("trace_options_Trace_Name",JSON.stringify(Activities));
+               
             }
+        }
+    kango.storage.setItem("trace_options_Trace_Name",JSON.stringify(Activities));
+    kango.console.log ("Ac"+JSON.stringify(Activities));
   var init = init_trc ();
 			});
 

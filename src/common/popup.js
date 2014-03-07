@@ -28,6 +28,7 @@ $('document').ready(function()
 			Button.childNodes[0].nodeValue="Activer";
 			}
 	var Activities = JSON.parse(kango.storage.getItem("trace_options_Trace_Name"));
+	kango.console.log (Activities);
     var  OPTION = document.createElement ('OPTION');
     OPTION.setAttribute('value',"");
     OPTION.appendChild(document.createTextNode(""));
