@@ -51,7 +51,7 @@ tService.Trace = function(options){
 	//this.error = options.error,
 	this.async = options.async ? options.async : true;
 	this.model_name = "model1";
-	this.model_uri = this.base_uri+this.model_name+"/";
+	this.model_uri = this.base_uri+this.model_name;
 	this.trace_uri = this.base_uri+this.name+"/";
 
 /** 
@@ -147,17 +147,19 @@ this.put_obsels = function(s_options){
 			var id = trace_uri + generateObselId();
 
 			//obsel["id_ktbs"] = id;
-
+            obsel["hasSubject"] = "obsel of trace : "+trace_uri ;
+			var type = model_uri+"#"+obsel["hasType"];
 			
 			var prefixes = [];
 			prefixes.push("@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .");
 			prefixes.push("@prefix ktbs: <http://liris.cnrs.fr/silex/2009/ktbs#> .");
-			prefixes.push("@prefix : <"+model_uri+"> .");
+			prefixes.push("@prefix : <"+type+"/> .");
 				
 			var statements = [];
 			statements.push("<"+id+"> ktbs:hasTrace <>.");
-			statements.push("<"+id+"> a :"+obsel["hasType"]+".");
+			statements.push("<"+id+"> a <"+type+">.");
 			statements.push("<"+id+"> ktbs:hasSubject \""+obsel["hasSubject"]+"\" .");
+			
 			//statements.push("<"+id+"> ktbs:hasBegin "+obsel["begin"]+" .");	
 			//statements.push("<"+id+"> ktbs:hasEnd "+obsel["end"]+" .");
 			

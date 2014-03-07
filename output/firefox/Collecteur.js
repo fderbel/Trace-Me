@@ -7,9 +7,12 @@
 
 
 // ==/UserScript==
+	
 $(document).ready(function () 
 { 
     var notif = false;
+    var notifV = false;
+    
     kango.console.log("collecteur");
 	// get data 
 	kango.dispatchMessage('Pret');
@@ -25,34 +28,20 @@ $(document).ready(function ()
 	    }
 		kango.dispatchMessage('Data',{body:document.body.innerHTML,header:head});
 		kango.console.log ("send Data");
-		return false;
+		
     });
 	// get Etat
 	kango.dispatchMessage('GetEtat');
 	kango.addMessageListener('Etat', function(event) 
 	{
 	 var Etat= event.data ;
+	 kango.console.log ("receive etat");
 	 ReceiveEtat(Etat) ;
     });
 		function ReceiveEtat(Etat) {
-				if (Etat == "Activer")
-					{ kango.console.log ("Trace Me Started")
-					//cookie
-						var allcookie = document.cookie.split(";");
-						for (i=0;i < allcookie.length-1;i++)
-						{ if (allcookie[i].split('=')[0] == "TraceName")
-						    {
-						Trace_Information ={TraceName:allcookie[i].split('=')[1],BaseURI:decodeURIComponent(allcookie[i+1].split('=')[1]),ModelURI:decodeURIComponent(allcookie[i+2].split('=')[1])};
-                        kango.dispatchMessage('TraceInfo',Trace_Information);              
-		//if (!notif){kango.dispatchMessage ('notificationD'),notif= true;};
-			// open popup visu trace
-		var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
-		var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
-        window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");		            
-				//break;		            
-						            
-						            }
-						}
+				if ((Etat == "Activer")&&(!notif))
+					{ kango.console.log ("Trace Me Started");
+					
 						
 					// colect the URL document
 						Send_URL(document.URL) ;
@@ -60,31 +49,28 @@ $(document).ready(function ()
 						kango.dispatchMessage('GetConfg');
 						kango.addMessageListener('confg', function(event){
 							var donnees= event.data ;
-							kango.console.log (donnees);
+							
 							onListReceived(donnees) ;
 						});
-									function onListReceived(donnees)
+									
+						 function onListReceived(donnees)
 							{ 
-							
-							var host=0;
-							
-						    if ( donnees == null ) {return false ; }
-                            while ((host < donnees.Page.length) )  
+							if ( donnees == null ) {return false ; }
+                            for  (var host=0;host < donnees.Page.length;host++) 
 							{
-						    console.log (donnees.Page[host].HostName);
+						  
 							if ((document.URL==donnees.Page[host].URL)||( document.location.host==donnees.Page[host].HostName))
-									{ console.log (donnees.Page[host].HostName);
-									collectData(donnees.Page[host]);}
-							host++;
+									{ collectData(donnees.Page[host]);}
 							}
                             function collectData (Data)
 								{    // browse event
-								      if (!notif){kango.dispatchMessage ('notification');notif= true;}
+								      if (!notifV){kango.dispatchMessage ('notification');notifV= true;}
+								      kango.dispatchMessage ('notification');
 								      kango.console.log ("site collected")
 									  var event = Data.event;
                                          for (var i=0; i < event.length; i++ )
                                               {  
-                                                   
+                                                  
                                                       // browse selector of each event
                                                             for (var j=0; j < event[i].selectors.length; j++ ) 
                                                                 {  
@@ -96,11 +82,11 @@ $(document).ready(function ()
 																	}
 																	else
 																      if ((event[i].typeObsel==undefined) || (event[i].typeObsel=="") )
-																	      {kango.console.log (event[i].selectors[j].Selector);
+																	      {//kango.console.log (event[i].selectors[j].Selector);
 																	      $(event[i].selectors[j].Selector).on (event[i].type,fonction);}
 																	  else 
 																	    {
-																		
+																		//kango.console.log (event[i].selectors[j].Selector);
 																		$(event[i].selectors[j].Selector).on (event[i].type,{typeO:event[i].typeObsel},fonctionT);
 																		
 																		}
@@ -110,21 +96,44 @@ $(document).ready(function ()
        	                                                  
                                               }
                                      }
-							}    
+							}  
+							//cookie
+					ListenServer();
+					notif= true;
 
 	}
+	
 }
 });
+function ListenServer ()
+{
+var allcookie = document.cookie.split(";");
+for (i=0;i < allcookie.length-1;i++)
+{ 
+   
+   if (allcookie[i].split('=')[0] == "TraceName")
+   { 
+     
+     Trace_Information ={TraceName:allcookie[i].split('=')[1],BaseURI:decodeURIComponent(allcookie[i+1].split('=')[1]),ModelURI:decodeURIComponent(allcookie[i+2].split('=')[1])};
+     kango.dispatchMessage('TraceInfo',Trace_Information);              
+	 var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
+	 var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+     window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");	
+     kango.console.log ("terminer ouvrir")	;            
+   }
+}	  
+
+}
 // function to send URL Information to baground.js
 function Send_URL(URL)
  {
         var attribute={};
-		attribute.hasdate =new Date().toString();
+		attribute.hasDate =new Date().toString();
         //attribute.begin = (new Date()).getTime();
         //attribute.end =   (new Date()).getTime();
         attribute.hasType="Ouverture_Page";
         attribute.hasSubject="obsel of action Website_visited ";
-        attribute.hasDocument_URI = URL;
+        attribute.hasDocument_URL = URL;
 		//attribute.hasDocument_Title = document.title;
 	    kango.dispatchMessage('obsel',attribute);
  }
@@ -211,10 +220,10 @@ function fillCommonAttributes(e, attributes)
         
         //attributes.begin = (new Date()).getTime();
         //attributes.end = (new Date()).getTime();
-		attributes.hasdate =new Date().toString();
-        attributes.hasSubject= "obsel of action "+ e.type;
+		attributes.hasDate =new Date().toString();
+       
         attributes.hasType = e.type;
-        attributes.hasDocument_UrI = document.URL;
+        attributes.hasDocument_URL = document.URL;
 		attributes.hasDocument_Title = document.title;
         attributes.ctrlKey = e.ctrlKey;
         attributes.shiftKey = e.shiftKey;

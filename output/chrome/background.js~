@@ -25,6 +25,7 @@ kango.addMessageListener('GetEtat', function(event) {
 	if (kango.storage.getItem("Etat") == undefined) 
 	{kango.storage.setItem("Etat","Activer");}
     tab.dispatchMessage('Etat', kango.storage.getItem("Etat") );
+    kango.console.log ("send Etat");
 });
 });
 
@@ -33,7 +34,7 @@ kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
 	if  (kango.storage.getItem("Config") == undefined)
 				{
-	kango.storage.setItem("Config",JSON.stringify (kango.i18n.getMessage('CalcoConfig')));
+	kango.storage.setItem("Config",kango.i18n.getMessage('CalcoConfig'));
 				}  
 	var data = kango.storage.getItem("Config") ; 
     tab.dispatchMessage('confg', data );

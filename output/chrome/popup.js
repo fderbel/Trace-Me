@@ -63,7 +63,7 @@ $('document').ready(function()
    var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
   // var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
    var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
-   window.open (URL,"Configuration");
+   window.open (URL,"Assistant");
    
    
 		                           });
