@@ -147,7 +147,7 @@ this.put_obsels = function(s_options){
 			var id = trace_uri + generateObselId();
 
 			//obsel["id_ktbs"] = id;
-            obsel["hasSubject"] = "obsel of trace : "+id ;
+            obsel["hasSubject"] = "obsel of trace : "+trace_uri ;
 			var type = model_uri+"#"+obsel["hasType"];
 			
 			var prefixes = [];
