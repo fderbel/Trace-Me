@@ -234,7 +234,11 @@ function fillCommonAttributes(e, attributes)
 		if (e.target.value) {attributes.hastarget_Value = e.target.value;}
 		//if ( e.target.childNodes[0] ) {if ((e.target.childNodes[0].nodeValue) && (e.target.childNodes[0].nodeValue !="")) {attributes.hastarget_TextNode = e.target.childNodes[0].nodeValue;}}
 		if (e.keyCode) {attributes.keyCode = e.keyCode;}
-		if (e.target.text) { attributes.hastarget_targetText = e.target.text; }
+		if (e.target.text) { 
+		var text = e.target.text.replace(/[\n]/gi,"");
+		attributes.hastarget_targetText = text; 
+		
+		}
 		kango.console.log (e.currentTarget.title);
 		if (e.target.title) {attributes.hastarget_Title = e.target.title};
         if (e.currentTarget) {
@@ -244,7 +248,8 @@ function fillCommonAttributes(e, attributes)
                 attributes.hascurrentTarget_currentTargetId = getElementId(e.currentTarget);
             }
             if (e.currentTarget.text) {
-                //attributes.hascurrentTarget_currentTargetText = e.currentTarget.text;
+            var texte = e.currentTarget.text.replace(/[\n]/gi,"");
+                attributes.hascurrentTarget_currentTargetText = texte;
             }
         }
         if (e.explicitOriginalTarget) {
