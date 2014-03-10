@@ -7,7 +7,7 @@
 "Page":[
 {
 "URL":"",
-"HostName":"localhost",
+"HostName":"clacodev.univ-lyon1.fr",
 "event":[
 {
 "type":"click",
@@ -49,7 +49,6 @@
 }
 ]
 },
-
 {
 "type":"click",
 "typeObsel":"Click-Lien-session2",
@@ -112,7 +111,7 @@
 },
 {
 "type":"click",
-"typeObsel":"Click-Bouton-Modifier",
+"typeObsel":"Click-Bouton",
 "selectors":[
 {
 "frame":"",
@@ -382,7 +381,7 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"span.yt-uix-button-content"
+"Selector":"button#watch-like"
 }
 ]
 },
@@ -412,42 +411,144 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"span.yt-uix-button-icon-wrapper"
+"Selector":"button#watch-dislike"
 }
 ]
 }
 ]
 },
 {
-            "URL": "",
-            "HostName": "www.google.fr",
-            "event": [
-                {
-                    "type": "change",
-                    "typeObsel": "Recherche-Google",
-                    "selectors": [
-                        {
-                            "frame": "",
-                            "Selector": "input"
-                        }
-                    ]
-                },
-                {
-                    "type": "click",
-                    "typeObsel": "Click-lien-google",
-                    "selectors": [
-                        {
-                            "frame": "",
-                            "Selector": "a"
-                        }
-                    ]
-                }
-            ]
-        }
-
+"URL":"",
+"HostName":"www.google.fr",
+"event":[
+{
+"type":"change",
+"typeObsel":"Recherche-Google",
+"selectors":[
+{
+"frame":"",
+"Selector":"input"
+}
+]
+},
+{
+"type":"click",
+"typeObsel":"Click-lien-google",
+"selectors":[
+{
+"frame":"",
+"Selector":"a"
+}
 ]
 }
-
+]
+},
+{
+"URL":"",
+"HostName":"clacodev.univ-lyon1.fr",
+"event":[
+{
+"type":"click",
+"typeObsel":"div.list-group.menu>a.list-group-item.active>i.icon-folder-open",
+"selectors":[
+{
+"frame":"",
+"Selector":"Click-Ressource"
+}
+]
+}
+]
+},
+{
+"URL":"",
+"HostName":"clacodev.univ-lyon1.fr",
+"event":[
+{
+"type":"click",
+"typeObsel":"Click-Creer",
+"selectors":[
+{
+"frame":"",
+"Selector":"a.dropdown-toggle"
+}
+]
+},
+{
+"type":"click",
+"typeObsel":"click-blog",
+"selectors":[
+{
+"frame":"",
+"Selector":"a#icap_blog"
+}
+]
+},
+{
+"type":"click",
+"typeObsel":"Click-ressource",
+"selectors":[
+{
+"frame":"",
+"Selector":"a.list-group-item.active>i.icon-folder-open"
+}
+]
+}
+]
+},
+{
+"URL":"",
+"HostName":"clacodev.univ-lyon1.fr",
+"event":[
+{
+"type":"click",
+"typeObsel":"Click-Bouton-Blog",
+"selectors":[
+{
+"frame":"",
+"Selector":"a.btn.btn-default"
+}
+]
+},
+{
+"type":"click",
+"typeObsel":"Cocher-Commentaires-autorises",
+"selectors":[
+{
+"frame":"",
+"Selector":"input#icap_blog_options_form_authorize_comment.control-standalone.control-standalone"
+}
+]
+},
+{
+"type":"click",
+"typeObsel":"Cocher-Publication-automatique-des-commentaires",
+"selectors":[
+{
+"frame":"",
+"Selector":"input#icap_blog_options_form_auto_publish_comment.control-standalone.control-standalone"
+}
+]
+}
+]
+},
+{
+"URL":"",
+"HostName":"clacodev.univ-lyon1.fr",
+"event":[
+{
+"type":"click",
+"typeObsel":"Click-Configurer-options",
+"selectors":[
+{
+"frame":"",
+"Selector":"div.form-actions>button.btn.btn-primary"
+}
+]
+}
+]
+}
+]
+}
 
 
 

@@ -381,7 +381,7 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"span.yt-uix-button-content"
+"Selector":"button#watch-like"
 }
 ]
 },
@@ -391,7 +391,7 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"span.subscribe-label"
+"Selector":".subscribe-label"
 }
 ]
 },
@@ -401,7 +401,7 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"span.unsubscribe-label"
+"Selector":".unsubscribe-label"
 }
 ]
 },
@@ -411,7 +411,7 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"span.yt-uix-button-icon-wrapper"
+"Selector":"button#watch-dislike"
 }
 ]
 }
