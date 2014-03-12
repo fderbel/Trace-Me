@@ -45,7 +45,8 @@
 "selectors":[
 {
 "frame":"",
-"Selector":".dropdown-menu>li>a"
+"Selector":"li.dropdown:nth-child(1) > ul:nth-child(2) > li:nth-child(2) > a:nth-child(1)"
+
 }
 ]
 },
@@ -111,7 +112,7 @@
 },
 {
 "type":"click",
-"typeObsel":"Click-Bouton",
+"typeObsel":"Click-Button",
 "selectors":[
 {
 "frame":"",
@@ -285,16 +286,7 @@
 }
 ]
 },
-{
-"type":"click",
-"typeObsel":"Click-Terminer-Quiz",
-"selectors":[
-{
-"frame":"",
-"Selector":"ul.pagination>li>input.btn.btn-primary"
-}
-]
-},
+
 {
 "type":"click",
 "typeObsel":"Click-Button-Recherche-Cat",
@@ -317,7 +309,7 @@
 },
 {
 "type":"click",
-"typeObsel":"Click-Bouton-OK",
+"typeObsel":"Click-Button-OK",
 "selectors":[
 {
 "frame":"",
@@ -465,16 +457,7 @@
 "URL":"",
 "HostName":"clacodev.univ-lyon1.fr",
 "event":[
-{
-"type":"click",
-"typeObsel":"Click-Bouton-Blog",
-"selectors":[
-{
-"frame":"",
-"Selector":"a.btn.btn-default"
-}
-]
-},
+
 {
 "type":"click",
 "typeObsel":"Cocher-Commentaires-autorises",

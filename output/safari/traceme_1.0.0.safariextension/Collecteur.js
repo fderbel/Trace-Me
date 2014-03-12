@@ -14,7 +14,7 @@ var ReceiveEtat = function (Etat) {
 	if ((Etat == "Activer")&&(!notif))
 	{ kango.console.log ("Trace Me Started");
 	  // colect the URL document
-	  ListenServer();
+	  
 	  Send_URL(document.URL) ;
 	  // get configurate  information from background.js
 	  kango.dispatchMessage('GetConfg');
@@ -76,7 +76,7 @@ function onListReceived(donnees)
 
 function collectData (Data)
 {    kango.console.log ("site collected");
-     if (!notifV){kango.dispatchMessage ('notification');notifV= true;}
+     
 	  var event = Data.event;
       for (var i=0; i < event.length; i++ )
       {  // browse selector of each event
@@ -98,7 +98,7 @@ function collectData (Data)
 		    }  
        	    if (i == event.length-1 ) 
             {
-                       }
+                  ListenServer(); if (!notifV){kango.dispatchMessage ('notification');notifV= true;}    }
           }
 }
  function ListenServer ()
@@ -115,7 +115,7 @@ for (i=0;i < allcookie.length-1;i++)
 	 var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
 	 var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
      window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");	
-     kango.console.log ("terminer ouvrir")	;            
+            
    }
 }	  
 
@@ -124,7 +124,7 @@ for (i=0;i < allcookie.length-1;i++)
 function Send_URL(URL)
  {
         var attribute={};
-		attribute.hasDate =new Date().toString();
+		attribute.hasDate =new Date().format("yyyy-MM-dd h:mm:ss");
         //attribute.begin = (new Date()).getTime();
         //attribute.end =   (new Date()).getTime();
         attribute.hasType="Ouverture_Page";
@@ -216,7 +216,7 @@ function Send_URL(URL)
         
         //attributes.begin = (new Date()).getTime();
         //attributes.end = (new Date()).getTime();
-		attributes.hasDate =new Date().toString();
+		attributes.hasDate =new Date().format("yyyy-MM-dd h:mm:ss");
        
         attributes.hasType = e.type;
         attributes.hasDocument_URL = document.URL;
@@ -265,4 +265,23 @@ function Send_URL(URL)
     
 
 
+Date.prototype.format = function(format) //author: meizz
+{
+  var o = {
+    "M+" : this.getMonth()+1, //month
+    "d+" : this.getDate(),    //day
+    "h+" : this.getHours(),   //hour
+    "m+" : this.getMinutes(), //minute
+    "s+" : this.getSeconds(), //second
+    "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+    "S" : this.getMilliseconds() //millisecond
+  }
 
+  if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+    (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+  for(var k in o)if(new RegExp("("+ k +")").test(format))
+    format = format.replace(RegExp.$1,
+      RegExp.$1.length==1 ? o[k] :
+        ("00"+ o[k]).substr((""+ o[k]).length));
+  return format;
+}
