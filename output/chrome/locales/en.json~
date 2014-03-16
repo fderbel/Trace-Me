@@ -1194,7 +1194,33 @@
                     ]
                 }
             ]
-        }
+        },
+        {
+"URL":"",
+"HostName":"dsi-liris-silex.univ-lyon1.fr",
+"event":[
+{
+"type":"click",
+"typeObsel":"Click-Button-Assistant",
+"selectors":[
+{
+"frame":"",
+"Selector":"div#VisuU>input,div.input-group>input,"
+}
+]
+},
+{
+"type":"click",
+"typeObsel":"Click-Lien-Assistant",
+"selectors":[
+{
+"frame":"",
+"Selector":"lien>a"
+}
+]
+}
+]
+}
        
         
        
