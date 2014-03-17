@@ -397,20 +397,7 @@
                         }
                     ]
                 },
-				{
-                    "type": "click",
-                    "typeObsel": "Click-Button-Assistant",
-                    "selectors": [
-                        {
-                            "frame": "",
-                            "Selector": "div#VisuU>input"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div.input-group>input"
-                        }
-                    ]
-                },
+				
                 {
                     "type": "click",
                     "typeObsel": "Click-Lien-Assistant",
@@ -955,16 +942,7 @@
                         }
                     ]
                 },
-				{
-                    "type": "click",
-                    "typeObsel": "Click-Button-Assistant",
-                    "selectors": [
-                        {
-                            "frame": "",
-                            "Selector": "div#VisuU>input,div.input-group>input,"
-                        }
-                    ]
-                },
+				
                 {
                     "type": "click",
                     "typeObsel": "Click-Lien-Assistant",
