@@ -1205,7 +1205,11 @@
 "selectors":[
 {
 "frame":"",
-"Selector":"div#VisuU>input,div.input-group>input,"
+"Selector":"div#VisuU>input"
+},
+{
+"frame":"",
+"Selector":"div.input-group>input"
 }
 ]
 },
