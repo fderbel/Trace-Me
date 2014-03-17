@@ -179,7 +179,15 @@ this.put_obsels = function(s_options){
 		//var id = item["id"];
 		//var sync = this;
 		var obsel_in_turtle = obsel2Turtle(obsel, trace_uri, model_uri);
-	
+	  // console.log (obsel_in_turtle);
+		// post to server file 
+		/*$.ajax({
+                          type: 'POST',
+                          url: 'ModelKtbs.php',
+                   data: {data : GenerateListeTypeData (JSON.parse(obsels)),BaseUrl : $("#URLTRACE").val()},
+                   success: function(){Alert ("Model Creer")}
+		                  });*/
+		
 		// post to ktbs
 
 		jQuery.ajax({
