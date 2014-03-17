@@ -1097,7 +1097,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#session_0 > h3 > span > a > span"
+                            "Selector": "div#session_0 > h3 > span > a"
                         }
                     ]
                 },
@@ -1117,7 +1117,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > ol > li > span > a > span"
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > ol > li > span > a"
                         }
                     ]
                 },
@@ -1127,7 +1127,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > span > span > span > a "
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > span > span > span > a"
                         }
                     ]
                 },
@@ -1147,7 +1147,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > span > strong > span > a > span"
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > span > strong > span > a"
                         }
                     ]
                 },
@@ -1157,7 +1157,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > strong > a > strong > span"
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > strong > a"
                         }
                     ]
                 },
@@ -1177,7 +1177,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > strong > a > span"
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > strong > a "
                         }
                     ]
                 },
@@ -1187,7 +1187,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > strong > strong > span > a > span"
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > strong > strong > span > a"
                         }
                     ]
                 },
@@ -1197,7 +1197,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": "div.panel-body.widget-instance-view > ol > ol > ol > ol > ol > li > span > a > span"
+                            "Selector": "div.panel-body.widget-instance-view > ol > ol > ol > ol > ol > li > span > a"
                         }
                     ]
                 },
@@ -1217,7 +1217,7 @@
                     "selectors": [
                         {
                             "frame": "",
-                            "Selector": " div#session_0 > ol > li > span > strong > span > a > span"
+                            "Selector": " div#session_0 > ol > li > span > strong > span > a"
                         }
                     ]
                 },
@@ -1354,7 +1354,72 @@
                     ]
                 }
             ]
+        },
+        {
+            "URL": "http://claco.univ-lyon1.fr/icap_lesson/view/9",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-Tutoriel",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "URL": "http://claco.univ-lyon1.fr/icap_wiki/228",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-Tutoriel",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
+        },
+         {
+            "URL": "http://claco.univ-lyon1.fr/icap_wiki/229",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-Tutoriel",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "URL": "http://claco.univ-lyon1.fr/icap_wiki/227",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "click-Lien-Tutoriel",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
         }
+
     ]
 }
 

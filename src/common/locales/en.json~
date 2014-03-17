@@ -337,7 +337,7 @@
                         }
                     ]
                 },
-				 {
+                {
                     "type": "click",
                     "typeObsel": "div.list-group.menu>a.list-group-item.active>i.icon-folder-open",
                     "selectors": [
@@ -347,7 +347,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Creer-ressource",
                     "selectors": [
@@ -377,7 +377,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Cocher-Commentaires-autorises",
                     "selectors": [
@@ -397,7 +397,6 @@
                         }
                     ]
                 },
-				
                 {
                     "type": "click",
                     "typeObsel": "Click-Lien-Assistant",
@@ -408,7 +407,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-zoom-ressource",
                     "selectors": [
@@ -498,7 +497,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Video",
                     "selectors": [
@@ -508,7 +507,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Lien-Presentation",
                     "selectors": [
@@ -538,7 +537,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Configurer-options",
                     "selectors": [
@@ -550,7 +549,7 @@
                 }
             ]
         },
-		  {
+        {
             "URL": "",
             "HostName": "claco.univ-lyon1.fr",
             "event": [
@@ -882,7 +881,7 @@
                         }
                     ]
                 },
-				 {
+                {
                     "type": "click",
                     "typeObsel": "div.list-group.menu>a.list-group-item.active>i.icon-folder-open",
                     "selectors": [
@@ -892,7 +891,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Creer-ressource",
                     "selectors": [
@@ -922,7 +921,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Cocher-Commentaires-autorises",
                     "selectors": [
@@ -942,7 +941,6 @@
                         }
                     ]
                 },
-				
                 {
                     "type": "click",
                     "typeObsel": "Click-Lien-Assistant",
@@ -953,7 +951,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-zoom-ressource",
                     "selectors": [
@@ -1043,7 +1041,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Video",
                     "selectors": [
@@ -1053,7 +1051,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Lien-Presentation",
                     "selectors": [
@@ -1083,13 +1081,163 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Configurer-options",
                     "selectors": [
                         {
                             "frame": "",
                             "Selector": "div.form-actions>button.btn.btn-primary"
+                        }
+                    ]
+                },
+				{
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-0",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#session_0 > h3 > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > a "
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > ol > li > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > span > span > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > span > strong > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > span > strong > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > strong > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > span > strong > strong > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > strong > a "
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > strong > strong > strong > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div.panel-body.widget-instance-view > ol > ol > ol > ol > ol > li > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-1",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#collapse1034.collapse-widget.collapse.in > div.panel-body.widget-instance-view > ol > ol > ol > ol > li > h4 > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-0",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": " div#session_0 > ol > li > span > strong > span > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-0",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": " div#session_0 > ol > li > ol > li > a,div#session_0 > ol > li > ol > li > strong > a"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-session-0",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#session_0 > ol > li > strong > a,div#session_0 > ol > li > a.link-category"
                         }
                     ]
                 }
@@ -1178,41 +1326,36 @@
             ]
         },
         {
-"URL":"",
-"HostName":"dsi-liris-silex.univ-lyon1.fr",
-"event":[
-{
-"type":"click",
-"typeObsel":"Click-Button-Assistant",
-"selectors":[
-{
-"frame":"",
-"Selector":"div#VisuU>input"
-},
-{
-"frame":"",
-"Selector":"div.input-group>input"
+            "URL": "",
+            "HostName": "dsi-liris-silex.univ-lyon1.fr",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Button-Assistant",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "div#VisuU>input"
+                        },
+                        {
+                            "frame": "",
+                            "Selector": "div.input-group>input"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-Assistant",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "lien>a"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }
-]
-},
-{
-"type":"click",
-"typeObsel":"Click-Lien-Assistant",
-"selectors":[
-{
-"frame":"",
-"Selector":"lien>a"
-}
-]
-}
-]
-}
-       
-        
-       
-  ]
-}
-
-
 
 }
