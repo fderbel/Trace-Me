@@ -1091,7 +1091,7 @@
                         }
                     ]
                 },
-				{
+                {
                     "type": "click",
                     "typeObsel": "Click-Lien-session-0",
                     "selectors": [
@@ -1387,7 +1387,7 @@
                 }
             ]
         },
-         {
+        {
             "URL": "http://claco.univ-lyon1.fr/icap_wiki/229",
             "HostName": "",
             "event": [
@@ -1418,9 +1418,25 @@
                     ]
                 }
             ]
+        },
+        {
+            "URL": "http://claco.univ-lyon1.fr/workspaces/802/open/tool/no_config/home/tab/971",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien-Presentation",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
         }
-
     ]
 }
+
 
 }

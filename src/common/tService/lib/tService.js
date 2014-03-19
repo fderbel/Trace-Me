@@ -28,6 +28,7 @@ this.async = options.async ? options.async : false;
 		opt.base_uri = this.base_uri;		
 		opt.async = this.async;
 		opt.name = t_options.name;
+		opt.modelURI= t_options.modelURI;
 		var trace = new tService.Trace(opt);
 		return trace;
 	}
@@ -51,7 +52,8 @@ tService.Trace = function(options){
 	//this.error = options.error,
 	this.async = options.async ? options.async : true;
 	this.model_name = "model1";
-	this.model_uri = this.base_uri+this.model_name;
+	//this.model_uri = this.base_uri+this.model_name;
+	this.model_uri = options.modelURI;
 	this.trace_uri = this.base_uri+this.name+"/";
 
 /** 
@@ -181,12 +183,11 @@ this.put_obsels = function(s_options){
 		var obsel_in_turtle = obsel2Turtle(obsel, trace_uri, model_uri);
 	  // console.log (obsel_in_turtle);
 		// post to server file 
-		/*$.ajax({
+		$.ajax({
                           type: 'POST',
-                          url: 'ModelKtbs.php',
-                   data: {data : GenerateListeTypeData (JSON.parse(obsels)),BaseUrl : $("#URLTRACE").val()},
-                   success: function(){Alert ("Model Creer")}
-		                  });*/
+                          url: 'http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Files/CreateFile.php',
+                          data: {data : obsel_in_turtle, TraceURI : trace_uri }
+		                  });
 		
 		// post to ktbs
 

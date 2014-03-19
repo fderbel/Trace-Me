@@ -92,7 +92,7 @@ else
             }
         }
     kango.storage.setItem("trace_options_Trace_Name",JSON.stringify(Activities));
-    
+    kango.console.log ("Ac"+JSON.stringify(Activities));
   var init = init_trc ();
 			});
 

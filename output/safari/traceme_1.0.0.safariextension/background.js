@@ -111,7 +111,7 @@ function init_trc ()
     { return false}
     else
    { var mgr = new tService.TraceManager({base_uri: BASE_URI , async: true}); 
-    trc = mgr.init_trace({name: Trace_Name	}); 
+    trc = mgr.init_trace({name: Trace_Name, modelURI:Model }); 
     return true;
     }
     
