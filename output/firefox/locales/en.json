@@ -564,6 +564,26 @@
                     ]
                 },
                 {
+                    "type": "click",
+                    "typeObsel": "Deconnection",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "li#btn-logout"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Lien",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                },
+                {
                     "type": "mouseover",
                     "typeObsel": "Survol-Session",
                     "selectors": [

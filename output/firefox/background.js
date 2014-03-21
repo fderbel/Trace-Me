@@ -45,8 +45,18 @@ kango.console.log ("get message config")
 kango.addMessageListener('notification', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
+	var TraceActive = kango.storage.getItem("Trace_Active")
+	if (TraceActive != " ")
+	{
 	var notification = kango.ui.notifications.createNotification('Trace Me', ' Ce site est tracé au cadre de votre Activité '+kango.storage.getItem("Trace_Active"),urlImg);
     notification.show();
+    }
+    else 
+    {
+    var notification = kango.ui.notifications.createNotification('Trace Me', 'Aucune Activité Détectée pour tracé ce site '+kango.storage.getItem("Trace_Active"),urlImg);
+    notification.show();
+    }
+    
      
 });
 });
@@ -68,7 +78,9 @@ if ( init_trc () )
 		 obsel: OBSEL,
 		 success: function(){console.log("success is callbacked");},
 		 error: function(jqXHR,textStatus, errorThrown){console.log("error is callbacked.");}
-	                       });	
+	                       });
+	    if 	(event.data.hasType=="Deconnection")
+	    {kango.storage.setItem("Trace_Active"," ");}
 	                       }
 	  else 
 	  {kango.console.log ("error");}

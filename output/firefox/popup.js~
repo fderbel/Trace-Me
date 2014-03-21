@@ -28,6 +28,7 @@ $('document').ready(function()
 			Button.childNodes[0].nodeValue="Activer";
 			}
 	var Activities = JSON.parse(kango.storage.getItem("trace_options_Trace_Name"));
+	kango.console.log (Activities);
     var  OPTION = document.createElement ('OPTION');
     OPTION.setAttribute('value',"");
     OPTION.appendChild(document.createTextNode(""));
@@ -98,12 +99,14 @@ $('document').ready(function()
 		if (kango.storage.getItem("Etat") == "Activer")
 		{
 			kango.storage.setItem("Etat","Desactiver");
+			kango.ui.browserButton.setIcon('icons/traceMe1.png');
 			Etat.setAttribute('class','btn btn-success btn-xs');
 			Etat.childNodes[0].nodeValue="Activer";
 		}
 		else 
 		{
 		kango.storage.setItem("Etat","Activer");
+		kango.ui.browserButton.setIcon('icons/traceMe1.png');
 		Etat.setAttribute('class','btn btn-danger btn-xs');
 		Etat.childNodes[0].nodeValue="Desactiver";
 		}
