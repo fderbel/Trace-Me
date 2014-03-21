@@ -46,7 +46,7 @@ kango.addMessageListener('notification', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
 	var TraceActive = kango.storage.getItem("Trace_Active")
-	if (TraceActive != " ")
+	if ((TraceActive != " ")&& (TraceActive != null))
 	{
 	var notification = kango.ui.notifications.createNotification('Trace Me', ' Ce site est tracé au cadre de votre Activité '+kango.storage.getItem("Trace_Active"),urlImg);
     notification.show();
