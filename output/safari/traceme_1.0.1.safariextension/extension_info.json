@@ -10,7 +10,7 @@
     "creator": "COAT", 
     "description": "This extension allows to collect interection traces and sends them to a server", 
     "kango_package_id": "dev", 
-    "package_id": "kango-546ba9ec-352c-4ac7-8abc-d73403309947", 
+    "developer_id": "YOUR_SAFARI_DEVELOPER_ID", 
     "background_scripts": [
         "tService/js/jquery.js", 
         "tService/lib/tService.js", 
@@ -19,7 +19,7 @@
     "homepage_url": "http://kangoextensions.com/", 
     "version": "1.0.1", 
     "options_page": "options.html", 
-    "id": "{546BA9EC-352C-4AC7-8ABC-D73403309947}", 
+    "id": "com.kangoextensions.traceme", 
     "locales": [
         "en"
     ], 

@@ -1,7 +1,7 @@
 {
     "name": "TraceMe",
     "version": "1.0.0",
-    "description": "This extension allows to collect traces and send them to a server",
+    "description": "This extension allows to collect interection traces and sends them to a server",
     "creator": "COAT",
     "homepage_url": "http://kangoextensions.com/",
     "background_scripts": ["tService/js/jquery.js","tService/lib/tService.js","background.js"],
