@@ -8,7 +8,7 @@
     "name": "TraceMe", 
     "default_locale": "en", 
     "creator": "COAT", 
-    "description": "This extension allow to collect traces and send them to a server", 
+    "description": "This extension allows to collect interection traces and sends them to a server", 
     "kango_package_id": "dev", 
     "package_id": "kango-546ba9ec-352c-4ac7-8abc-d73403309947", 
     "background_scripts": [

@@ -1,6 +1,9 @@
 
 
 var trc;
+if ((kango.storage.getItem("Etat") == "Desactiver")
+
+{kango.ui.browserButton.setIcon('icons/traceMe1.png');}
 
 //.console.log ("CLaco= "+kango.i18n.getMessage('CalcoConfig'));
 //kango.console.log ("Message= "+kango.i18n.getCurrentLocale());
@@ -54,7 +57,7 @@ kango.addMessageListener('notification', function(event) {
     }
     else 
     {
-    var notification = kango.ui.notifications.createNotification('Trace Me', ' Ce site est tracé au cadre de votre Activité '+kango.storage.getItem("Trace_Active"),urlImg);
+    var notification = kango.ui.notifications.createNotification('Trace Me', ' Ce site est tracé au titre de votre Activité '+kango.storage.getItem("Trace_Active"),urlImg);
     notification.show();
     }
     

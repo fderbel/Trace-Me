@@ -11,7 +11,7 @@
             </Description>
         </em:targetApplication>
         <em:bootstrap>true</em:bootstrap>
-        <em:description>This extension allow to collect traces and send them to a server</em:description>
+        <em:description>This extension allows to collect interection traces and sends them to a server</em:description>
         <em:creator>COAT</em:creator>
         <em:homepageURL>http://kangoextensions.com/</em:homepageURL>
         <em:iconURL>chrome://kango-546ba9ec-352c-4ac7-8abc-d73403309947/content/icons/icon32.png</em:iconURL>
