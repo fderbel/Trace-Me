@@ -1,7 +1,7 @@
 
 
 var trc;
-if ((kango.storage.getItem("Etat") == "Desactiver")
+if ((kango.storage.getItem("Etat") == "Desactiver"))
 
 {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
 
