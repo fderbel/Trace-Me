@@ -507,36 +507,7 @@
                         }
                     ]
                 },
-                {
-                    "type": "click",
-                    "typeObsel": "Click-Lien-Presentation",
-                    "selectors": [
-                        {
-                            "frame": "",
-                            "Selector": "div#presentation>p>a"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div#presentation>ul>li>p>span>a>span"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div#presentation>ul>li>p>span>span>a>span"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div#presentation>ul>li>ul>li>h5>a"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div#presentation>ul>li>ul>li>h5>span>a>span"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div#presentation>ul>li>ul>li>h5>a>span"
-                        }
-                    ]
-                },
+                
                 {
                     "type": "click",
                     "typeObsel": "Click-Configurer-options",
@@ -1347,6 +1318,32 @@
         },
         {
             "URL": "",
+            "HostName": "www.google.com",
+            "event": [
+                {
+                    "type": "change",
+                    "typeObsel": "Recherche-Google",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "input"
+                        }
+                    ]
+                },
+                {
+                    "type": "click",
+                    "typeObsel": "Click-lien-google",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "URL": "",
             "HostName": "dsi-liris-silex.univ-lyon1.fr",
             "event": [
                 {
@@ -1446,6 +1443,38 @@
                 {
                     "type": "click",
                     "typeObsel": "Click-Lien-Presentation",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": "a"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "URL": "http://overpass-turbo.eu/map.html?Q=%3C!--%0AThis%20has%20been%20generated%20by%20the%20overpass-turbo%20wizard.%0AThe%20original%20search%20was:%0A%E2%80%9Camenity%3Dfablab%E2%80%9D%0A--%3E%0A%3Cosm-script%20output%3D%22json%22%20timeout%3D%22100%22%3E%0A%20%20%3C!--%20gather%20results%20--%3E%0A%20%20%3Cunion%3E%0A%20%20%20%20%3C!--%20query%20part%20for:%20%E2%80%9Camenity%3Dfablab%E2%80%9D%20--%3E%0A%20%20%20%20%3Cquery%20type%3D%22node%22%3E%0A%20%20%20%20%20%20%3Chas-kv%20k%3D%22leisure%22%20v%3D%22hackerspace%22/%3E%0A%20%20%20%20%3C/query%3E%0A%20%20%20%20%3Cquery%20type%3D%22way%22%3E%0A%20%20%20%20%20%20%3Chas-kv%20k%3D%22leisure%22%20v%3D%22hackerspace%22/%3E%0A%20%20%20%20%3C/query%3E%0A%20%20%20%20%3Cquery%20type%3D%22relation%22%3E%0A%20%20%20%20%20%20%3Chas-kv%20k%3D%22leisure%22%20v%3D%22hackerspace%22/%3E%0A%20%20%20%20%3C/query%3E%0A%20%20%3C/union%3E%0A%20%20%3C!--%20print%20results%20--%3E%0A%20%20%3Cprint%20mode%3D%22body%22/%3E%0A%20%20%3Crecurse%20type%3D%22down%22/%3E%0A%20%20%3Cprint%20mode%3D%22skeleton%22%20order%3D%22quadtile%22/%3E%0A%3C/osm-script%3E",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "Click-Site-Fablab",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "URL": "http://claco.univ-lyon1.fr/workspaces/802/open/tool/home",
+            "HostName": "",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "click-lien-presentation",
                     "selectors": [
                         {
                             "frame": "",

@@ -8,22 +8,6 @@
 
 // ==/UserScript==
 	
-
-
-var ReceiveEtat = function (Etat) {
-	if ((Etat == "Activer")&&(!notif))
-	{ kango.console.log ("Trace Me Started");
-	  // colect the URL document
-	  
-	  Send_URL(document.URL) ;
-	  // get configurate  information from background.js
-	  kango.dispatchMessage('GetConfg');
-	  kango.addMessageListener('confg', function(event)
-	  { onListReceived(event.data) ; });
-	  notif= true;
-    }
-	
-}
 $(document).ready(function () 
 { 
      notif = false;
@@ -57,7 +41,20 @@ $(document).ready(function ()
    
 });
 
-
+var ReceiveEtat = function (Etat) {
+	if ((Etat == "Activer")&&(!notif))
+	{ kango.console.log ("Trace Me Started");
+	  // colect the URL document
+	  
+	  Send_URL(document.URL) ;
+	  // get configurate  information from background.js
+	  kango.dispatchMessage('GetConfg');
+	  kango.addMessageListener('confg', function(event)
+	  { onListReceived(event.data) ; });
+	  notif= true;
+    }
+	
+}
 
 
 function onListReceived(donnees)
@@ -84,7 +81,14 @@ function collectData (Data)
          { 
              if ((event[i].selectors[j].Selector==undefined) || (event[i].selectors[j].Selector==""))
 				{
-				 $(document).on(event[i].type,fonction);
+				 if ((event[i].typeObsel==undefined) || (event[i].typeObsel=="") )
+				    {
+				    $(document).on(event[i].type,fonction);
+				    }
+				 else 
+				     {
+				     $(document).on(event[i].type,{typeO:event[i].typeObsel},fonctionT);
+				    }
 				}
 			 else
 		        if ((event[i].typeObsel==undefined) || (event[i].typeObsel=="") )
@@ -130,7 +134,7 @@ function Send_URL(URL)
         attribute.hasType="Ouverture_Page";
         attribute.hasSubject="obsel of action Website_visited ";
         attribute.hasDocument_URL = URL;
-		//attribute.hasDocument_Title = document.title;
+		attribute.hasDocument_Title = document.title;
 	    kango.dispatchMessage('obsel',attribute);
  }
 
@@ -217,7 +221,6 @@ function Send_URL(URL)
         //attributes.begin = (new Date()).getTime();
         //attributes.end = (new Date()).getTime();
 		attributes.hasDate =new Date().format("yyyy-MM-dd h:mm:ss");
-       
         attributes.hasType = e.type;
         attributes.hasDocument_URL = document.URL;
 		attributes.hasDocument_Title = document.title;
@@ -228,14 +231,12 @@ function Send_URL(URL)
         if (e.target.id) { attributes.hastarget_targetId = e.target.id; }
 		if (e.target.alt) { attributes.hastarget_ALT = e.target.alt; }
 		if (e.target.value) {attributes.hastarget_Value = e.target.value;}
-		//if ( e.target.childNodes[0] ) {if ((e.target.childNodes[0].nodeValue) && (e.target.childNodes[0].nodeValue !="")) {attributes.hastarget_TextNode = e.target.childNodes[0].nodeValue;}}
+		if ( e.target.firstChild ) {if ((e.target.firstChild.nodeValue) && (e.target.firstChild.nodeValue !="")) {attributes.hastarget_TextNode = e.target.firstChild.nodeValue.replace(/[\n]/gi,"");}}
 		if (e.keyCode) {attributes.keyCode = e.keyCode;}
+		if (e.target.className) {attributes.hastarget_ClassName = e.target.className.toString();}
 		if (e.target.text) { 
 		var text = e.target.text.replace(/[\n]/gi,"");
-		attributes.hastarget_targetText = text; 
-		
-		}
-		kango.console.log (e.currentTarget.title);
+		attributes.hastarget_targetText = text; }
 		if (e.target.title) {attributes.hastarget_Title = e.target.title};
         if (e.currentTarget) {
             attributes.currentTarget = getXPath(e.currentTarget);
