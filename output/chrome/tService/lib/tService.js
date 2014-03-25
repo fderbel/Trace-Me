@@ -152,7 +152,7 @@ this.put_obsels = function(s_options){
 			//obsel["id_ktbs"] = id;
             obsel["hasSubject"] = "obsel of trace : "+trace_uri ;
 			var type = model_uri+"#"+obsel["hasType"];
-			if obsel["hasSuperType"] == undefined
+			if (obsel["hasSuperType"] == undefined)
 			{
 			SuperType = model_uri+"#"+obsel["hasType"];
 			}
