@@ -152,10 +152,11 @@ this.put_obsels = function(s_options){
 			//obsel["id_ktbs"] = id;
             obsel["hasSubject"] = "obsel of trace : "+trace_uri ;
 			var type = model_uri+"#"+obsel["hasType"];
+			var SuperType = model_uri+"#"+obsel["hasSuperType"];
 			var prefixes = [];
 			prefixes.push("@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .");
 			prefixes.push("@prefix ktbs: <http://liris.cnrs.fr/silex/2009/ktbs#> .");
-			prefixes.push("@prefix : <"+type+"/> .");
+			prefixes.push("@prefix : <"+SuperType+"/> .");
 				
 			var statements = [];
 			statements.push("<"+id+"> ktbs:hasTrace <>.");
