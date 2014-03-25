@@ -157,6 +157,7 @@ function Send_URL(URL)
         };
         fillCommonAttributes(e, attributes);
 		attributes.hasType= e.data.typeO ;
+		attributes.hasSuperType= e.type ;
 		kango.dispatchMessage('obsel',attributes);
 }
    
@@ -226,41 +227,41 @@ function Send_URL(URL)
 		attributes.hasDocument_Title = document.title;
         attributes.ctrlKey = e.ctrlKey;
         attributes.shiftKey = e.shiftKey;
-        attributes.hastarget = getXPath(e.target);
-        attributes.hastarget_targetName = getElementName(e.target);
-        if (e.target.id) { attributes.hastarget_targetId = e.target.id; }
-		if (e.target.alt) { attributes.hastarget_ALT = e.target.alt; }
-		if (e.target.value) {attributes.hastarget_Value = e.target.value;}
-		if ( e.target.firstChild ) {if ((e.target.firstChild.nodeValue) && (e.target.firstChild.nodeValue !="")) {attributes.hastarget_TextNode = e.target.firstChild.nodeValue.replace(/[\n]/gi,"");}}
+        attributes.hasTarget = getXPath(e.target);
+        attributes.hasTarget_targetName = getElementName(e.target);
+        if (e.target.id) { attributes.hasTarget_targetId = e.target.id; }
+		if (e.target.alt) { attributes.hasTarget_ALT = e.target.alt; }
+		if (e.target.value) {attributes.hasTarget_Value = e.target.value;}
+		if ( e.target.firstChild ) {if ((e.target.firstChild.nodeValue) && (e.target.firstChild.nodeValue !="")) {attributes.hasTarget_TextNode = e.target.firstChild.nodeValue.replace(/[\n]/gi,"");}}
 		if (e.keyCode) {attributes.keyCode = e.keyCode;}
-		if (e.target.className) {attributes.hastarget_ClassName = e.target.className.toString();}
+		if (e.target.className) {attributes.hasTarget_ClassName = e.target.className.toString();}
 		if (e.target.text) { 
 		var text = e.target.text.replace(/[\n]/gi,"");
-		attributes.hastarget_targetText = text; }
-		if (e.target.title) {attributes.hastarget_Title = e.target.title};
+		attributes.hasTarget_targetText = text; }
+		if (e.target.title) {attributes.hasTarget_Title = e.target.title};
         if (e.currentTarget) {
             attributes.currentTarget = getXPath(e.currentTarget);
             attributes.hascurrentTarget_currentTargetName = getElementName(e.currentTarget);
             if (e.currentTarget.id) {
-                attributes.hascurrentTarget_currentTargetId = getElementId(e.currentTarget);
+                attributes.hasCurrentTarget_currentTargetId = getElementId(e.currentTarget);
             }
             if (e.currentTarget.text) {
             var texte = e.currentTarget.text.replace(/[\n]/gi,"");
-                attributes.hascurrentTarget_currentTargetText = texte;
+                attributes.hasCurrentTarget_currentTargetText = texte;
             }
         }
         if (e.explicitOriginalTarget) {
-            attributes.originalTarget = getXPath(e.explicitOriginalTarget);
-            attributes.hasoriginalTarget_originalTargetName = getElementName(e.explicitOriginalTarget);
+            attributes.hasOriginalTarget = getXPath(e.explicitOriginalTarget);
+            attributes.hasOriginalTarget_originalTargetName = getElementName(e.explicitOriginalTarget);
             if (e.explicitOriginalTarget.id) {
-                attributes.hasoriginalTarget_originalTargetId = getElementId(e.explicitOriginalTarget);
+                attributes.hasOriginalTarget_originalTargetId = getElementId(e.explicitOriginalTarget);
             }
             if (e.explicitOriginalTarget.text) {
-                attributes.hasoriginalTarget_originalTargetText = e.explicitOriginalTarget.text;
+                attributes.hasOriginalTarget_originalTargetText = e.explicitOriginalTarget.text;
             }
         }
         if (e.target.tagName === "IMG") {
-            attributes.hasimgSrc = e.target.src;
+            attributes.hasImgSrc = e.target.src;
         }
 }
     

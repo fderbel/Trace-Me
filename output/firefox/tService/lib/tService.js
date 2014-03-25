@@ -139,6 +139,7 @@ this.put_obsels = function(s_options){
 			async = this.async;
 	
 		function generateObselId(){
+			
 			var id = "C_"+obsel["hasType"]+"_"+(new Date()).getTime() + Math.floor(Math.random()*1000);
 			return id;
 		}
@@ -151,7 +152,6 @@ this.put_obsels = function(s_options){
 			//obsel["id_ktbs"] = id;
             obsel["hasSubject"] = "obsel of trace : "+trace_uri ;
 			var type = model_uri+"#"+obsel["hasType"];
-			
 			var prefixes = [];
 			prefixes.push("@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .");
 			prefixes.push("@prefix ktbs: <http://liris.cnrs.fr/silex/2009/ktbs#> .");
@@ -161,12 +161,11 @@ this.put_obsels = function(s_options){
 			statements.push("<"+id+"> ktbs:hasTrace <>.");
 			statements.push("<"+id+"> a <"+type+">.");
 			statements.push("<"+id+"> ktbs:hasSubject \""+obsel["hasSubject"]+"\" .");
-			
 			//statements.push("<"+id+"> ktbs:hasBegin "+obsel["begin"]+" .");	
 			//statements.push("<"+id+"> ktbs:hasEnd "+obsel["end"]+" .");
 			
 			jQuery.each(obsel, function(name,value){
-				if(name!="hasType" && name!="begin" && name!= "end" && name!= "hasSubject"){
+				if(name!="hasType"  && name!="begin" && name!= "end" && name!= "hasSubject"){
 					statements.push("<"+id+"> :"+name+" \""+value+"\" .");
 				}
 			});			
