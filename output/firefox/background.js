@@ -51,7 +51,7 @@ kango.addMessageListener('notification', function(event) {
 	var TraceActive = kango.storage.getItem("Trace_Active")
 	if ((TraceActive == " ")|| (TraceActive == undefined))
 	{
-	var notification = kango.ui.notifications.createNotification('Trace Me', 'Aucune Activité détectée pour tracer ce site '+kango.storage.getItem("Trace_Active"),urlImg);
+	var notification = kango.ui.notifications.createNotification('Trace Me', 'Aucune Activité détectée pour tracer ce site ',urlImg);
     notification.show();
 	
     }
