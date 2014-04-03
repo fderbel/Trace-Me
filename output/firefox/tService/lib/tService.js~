@@ -1,0 +1,38 @@
+/*
+	require jQuery
+*/
+
+/** @namespace */
+tService = {};
+
+/** 
+ * @namespace tService
+ * @name TraceManager
+ * @constructor 
+ * @param options.base_uri 	URI of the base de traces
+ * @param options.async 	The synchonized mode
+ * @desc a tool to manage traces in a base de traces */
+tService.TraceManager = function(options){
+
+this.base_uri = options.base_uri;
+this.async = options.async ? options.async : false;
+	/** 
+	 * @function
+	 * @memberof TraceManager#
+	 * @name init_trace
+	 * @param t_options.name the name of the trace
+	 * @desc initialize an remote trace */
+	this.init_trace = function(t_options){
+				
+		var opt = {};
+		opt.base_uri = this.base_uri;		
+		opt.async = this.async;
+		opt.name = t_options.name;
+		opt.modelURI= t_options.modelURI;
+		var trace = new tService.Trace(opt);
+		return trace;
+	}
+
+}
+
+
