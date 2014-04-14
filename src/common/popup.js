@@ -58,14 +58,14 @@ $('document').ready(function()
    window.open (URL,"Assistant");
    });
    // show SamoTrace
-    var SamoTrace = document.getElementById('SamoTrace');
+   /* var SamoTrace = document.getElementById('SamoTrace');
 	var open = false;
     SamoTrace.addEventListener("click", function(){
     var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
   // var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
    var URL = "http://dsi-liris-silex.univ-lyon1.fr/bmathern/display-trace-fatma/?url_trace="+encoded_trace_uri+"&refresh_period=30";
    window.open (URL,"Assistant");
-   });
+   });*/
     // option
     var option = document.getElementById('Option');
     option.addEventListener ("click",function () 
