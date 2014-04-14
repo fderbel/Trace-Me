@@ -107,10 +107,13 @@ function collectData (Data)
 }
  function ListenServer ()
 {
+kango.console.log ("Listen");
 var allcookie = document.cookie.split(";");
+kango.console.log ("Lenght",allcookie.length-1);
 for (i=0;i < allcookie.length-1;i++)
 { 
-   
+  
+   //kango.console.log (allcookie[i]);
    if (allcookie[i].split('=')[0] == "TraceName")
    { 
      
