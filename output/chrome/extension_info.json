@@ -16,10 +16,12 @@
         "background.js"
     ], 
     "homepage_url": "http://kangoextensions.com/", 
-    "version": "1.0.3", 
+    "version": "1.0.4", 
     "options_page": "options.html", 
     "id": "gkmdjemippfjfkaolihnjkmlpjalkoip", 
     "locales": [
+        "fr", 
+        "de", 
         "en"
     ], 
     "browser_button": {

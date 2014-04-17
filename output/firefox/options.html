@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Trace Me Extension Options</title>
         <!-- Latest compiled and minified CSS -->
@@ -11,50 +12,57 @@
     </head>
 
     <body>
+	<!-- language options -->
+	<ul id="lang">
+	<li><img src="icons\fr.gif" title="Français" alt="french flag" id="FR" /></li>
+	<li><img src="icons\gb.gif" title="English" alt="GB flag" id="EN" /></li>
+	<li><img src="icons\de.gif" title="Deutsch" alt="german flag" id="DE" /></li>
+	</ul>
+	
         <form id="options" class="form-horizontal" role="form">
-		 <h1>Option </h1>
-            <h3>Identity</h3>
+		 <h1 id="option"></h1>
+            <h3 id="identity"></h3>
             <div class="input-group">
-                <label for="first_name" class="control-label input-group-addon">FirstName</label>
-                <input name="first_name" type="text" class="form-control" placeholder="first_name">
+                <label for="firstname" class="control-label input-group-addon" id="fname"></label>
+                <input name="firstname" type="text" class="form-control" placeholder="first_name">
 
-                <label for="last_name" class="control-label input-group-addon">LastName</label>
+                <label for="last_name" class="control-label input-group-addon" id="lname"></label>
                 <input name="last_name" type="text" class="form-control" placeholder="last_name">
 
                 <label for="email" class="control-label input-group-addon">Email</label>
                 <input name="email" type="email" class="form-control" placeholder="email">
             </div>
 
-            <h3>Server Information</h3>
+            <h3 id="sinfo"></h3>
             <div class="input-group">
-                <label for="Base_URI" class="control-label input-group-addon">BaseURI</label>
+                <label for="Base_URI" class="control-label input-group-addon" id="baseURI"></label>
                 <input name="Base_URI" type="text" class="form-control" placeholder="localhost:8001/baseName/">
             
-                <label for="Model_URI" class="control-label input-group-addon">ModelURI</label>
+                <label for="Model_URI" class="control-label input-group-addon" id="modURI"></label>
                 <input name="Model_URI" type="text" class="form-control" placeholder="localhost:8001/baseName/ModelName">
             </div>
-             <h3>Activities Information</h3>
-              <input type="button" class="btn btn-primary btn-sm" id ="ADD" value="ADD"></input>
+             <h3 id="acinfo"></h3>
+              <input type="button" class="btn btn-primary btn-sm" id="ADD" value=""></input>
                <div class="input-group" id ="Activities">
-                <label for="Trace_Name" class="control-label input-group-addon">TraceName</label>
+                <label for="Trace_Name" class="control-label input-group-addon" id="tname"></label>
                 <input name="Trace_Name" type="text" class="form-control" placeholder="TraceNAme">
              
             </div>
             
              <br>
-            <button type="submit" class="btn btn-primary" id="SaveO"style="margin-left: 50%">Save   Option</button>
+            <button type="submit" class="btn btn-primary" id="SaveO" style="margin-left: 50%"></button>
         </form>
 		<br>
 		<form id="Config" class="form-horizontal" role="form">
-           <h1>Configure Tracing</h1>
+           <h1 id="conftrace"></h1>
                 <div class="input-group" >
 
                 <label for="URL" class="control-label input-group-addon" >URL</label>
                 <input Id="URL" type="text" class="form-control"  placeholder="http://site.com/">
 				<label for="Trace_Name" class="control-label input-group-addon"></label>
-				<input type="button" class="btn btn-primary btn-sm" id="Load" value="Load Site" style="margin-left: 50px">
+				<input type="button" class="btn btn-primary btn-sm" id="Load" value="" style="margin-left: 50px">
 				<label for="Trace_Name" class="control-label input-group-addon"></label>
-				<input type="button" class="btn btn-primary btn-sm" id ="ADDEvent" value="ADD Event" style="margin-left: 50px"></input>
+				<input type="button" class="btn btn-primary btn-sm" id ="ADDEvent"  value="" style="margin-left: 50px"></input>
                 </div>
                 <div class="container"> 
                 <label class="checkbox-inline"> 
@@ -78,13 +86,12 @@
                 <div id="EventList"> </div>
 				
 				<br>
-               <button type="button" class="btn btn-primary" id="Save" style="margin-left: 50%">Save Configuration </button>
+               <button type="button" class="btn btn-primary" id="Save" style="margin-left: 50%"></button>
         </form>
     </body>
  
 <script type="text/javascript" src="options.js"></script>
 <script type="text/javascript" src="tService/js/jquery.js"></script>
-
     
 
 </html>

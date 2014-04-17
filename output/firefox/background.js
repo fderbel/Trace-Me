@@ -1,4 +1,4 @@
-
+﻿
 
 var trc;
 if ((kango.storage.getItem("Etat") == "Desactiver"))
@@ -26,7 +26,7 @@ kango.addMessageListener('GetEtat', function(event) {
 
 	kango.browser.tabs.getCurrent(function(tab) {
 	if (kango.storage.getItem("Etat") == undefined) 
-	{kango.storage.setItem("Etat","Activer");}
+	{kango.storage.setItem("Etat","Activer");	  }
     tab.dispatchMessage('Etat', kango.storage.getItem("Etat") );
     kango.console.log ("send Etat");
 });
@@ -44,20 +44,20 @@ kango.console.log ("get message config")
     kango.console.log ("send Data");
 });
 });
-				                   
+ 
 kango.addMessageListener('notification', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
 	var TraceActive = kango.storage.getItem("Trace_Active")
-	if ((TraceActive == "")|| (TraceActive == undefined))
+	if ((TraceActive == " ")|| (TraceActive == undefined))
 	{
-	var notification = kango.ui.notifications.createNotification('Trace Me', 'No Activitie ',urlImg);
+	var notification = kango.ui.notifications.createNotification('Trace Me',kango.i18n.getMessage('NotificationNe'),urlImg);
     notification.show();
 	
     }
     else 
     {
-    var notification = kango.ui.notifications.createNotification('Trace Me', kango.storage.getItem("Trace_Active"),urlImg);
+    var notification = kango.ui.notifications.createNotification('Trace Me',kango.storage.getItem("Trace_Active"),urlImg);
     notification.show();
     }
     
@@ -67,7 +67,7 @@ kango.addMessageListener('notification', function(event) {
 kango.addMessageListener('notificationD', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
-	var notification = kango.ui.notifications.createNotification('Trace Me', 'Début de tracage de votre activité  '+kango.storage.getItem("Trace_Active"),urlImg);
+	var notification = kango.ui.notifications.createNotification('Trace Me', kango.i18n.getMessage('TraceStart')+kango.storage.getItem("Trace_Active"),urlImg);
     notification.show();
      
 });

@@ -3,7 +3,9 @@
     "__info_description__": "This extension allow to collect traces and send them to a server",
     "Logo": "Logo",
     "Hello": "Hello {name}",
-    "CalcoConfig" : {
+    "NotificationNe": "No activity",
+    "TraceStart": "Tracing of your activities has started.",
+     "CalcoConfig" : {
     "Page": [
         {
             "URL": "",
@@ -1486,6 +1488,4 @@
         }
     ]
 }
-
-
 }

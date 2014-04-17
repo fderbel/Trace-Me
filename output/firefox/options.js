@@ -1,6 +1,107 @@
+ //get browseer language
+ var language = window.navigator.userLanguage || window.navigator.language;
+ if (language.indexOf("en") === 0){langEn();}
+ else if( language.indexOf("de") === 0){langDe();}
+ else {langFr();}
+ //translate options form
+ var JSONObject;
+ 
+ function langFr() { //for french
+    language = "fr";
+	JSONObject = { "options": "Options",
+    "identity": "Identité",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "serverinfo": "Informations de serveur",
+    "baseURI": "Base URI",
+    "modelURI": "Modéle URI",
+    "activityinfo": "Informations de activités",
+    "tracename": "Trace Nom",
+    "add": "AJOUTER",
+    "configtrace": "Configurer le traçage",
+    "saveoption": "Sauver l'option",
+    "loadsite": "Charger site",
+    "addevent": "AJOUTER événement",
+	"saveconfig": "Sauvegarder la configuration"}; 
+     setNames();
+	 }
+function langDe() { //for german
+    language = "de";
+   JSONObject = { "options": "Optionen",
+    "identity": "Identität",
+    "firstname": "Vorname",
+    "lastname": "Nachname",
+    "serverinfo": "Server Informationen",
+    "baseURI": "Base URI",
+    "modelURI": "Modell URI",
+    "activityinfo": "Aktivitäten Informationen",
+    "tracename": "Spur Name",
+    "add": "hinzufügen",
+    "configtrace": "Spuren konfigurieren",
+    "saveoption": "Option Speichern",
+    "loadsite": "Site laden",
+    "addevent": "Veranstaltung hinzufügen",
+	"saveconfig": "Konfiguration Speichern"};
+	setNames();
+	}
+function langEn() { //for english
+     language = "en";
+     JSONObject = { "options": "Options",
+    "identity": "Identity",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "serverinfo": "Server Information",
+    "baseURI": "Base URI",
+    "modelURI": "Model URI",
+    "activityinfo": "Activities Information",
+    "add": "ADD",
+	"tracename": "Trace Name",
+    "configtrace": "Configure Tracing",
+    "saveoption": "Save Option",
+    "loadsite": "Load Site",
+    "addevent": "ADD event",
+	"saveconfig": "Save Configuration"};
+	setNames();	
+	}
+//allocate translated names to tags
+function setNames(){	
+document.getElementById("option").innerHTML = JSONObject.options
+document.getElementById("identity").innerHTML = JSONObject.identity
+document.getElementById("fname").innerHTML = JSONObject.firstname
+document.getElementById("lname").innerHTML = JSONObject.lastname
+document.getElementById("sinfo").innerHTML = JSONObject.serverinfo
+document.getElementById("baseURI").innerHTML = JSONObject.baseURI
+document.getElementById("modURI").innerHTML = JSONObject.modelURI
+document.getElementById("acinfo").innerHTML = JSONObject.activityinfo
+document.getElementById("ADD").value = JSONObject.add
+document.getElementById("tname").innerHTML = JSONObject.tracename
+document.getElementById("conftrace").innerHTML = JSONObject.configtrace
+document.getElementById("SaveO").innerHTML = JSONObject.saveoption
+document.getElementById("Load").value = JSONObject.loadsite
+document.getElementById("ADDEvent").value = JSONObject.addevent
+document.getElementById("Save").innerHTML = JSONObject.saveconfig
+}
+
 
 KangoAPI.onReady(function() 
 {
+    //change language on image click
+	$('#FR').on("click", function() { langFr();
+	kango.storage.setItem("LangChange","FR"); })
+	$('#EN').on("click", function() { langEn();
+	kango.storage.setItem("LangChange","EN");})
+	$('#DE').on("click", function() { langDe();
+	kango.storage.setItem("LangChange","DE");})
+	
+	//remember and display selected language
+ if (kango.storage.getItem("LangChange") == "FR")
+ { langFr(); } 
+ else if (kango.storage.getItem("LangChange") == "DE")
+ { langDe();}
+ else if (kango.storage.getItem("LangChange") == "EN")
+ { langEn(); }
+ else { /* do nothing */}
+	
 	$('#options').ready(function() {
 		init_form ()  
 		});
@@ -241,7 +342,6 @@ function  getHostname (href)
     hostname = l.hostname ;
     return hostname;
 };
-
 
     
 });

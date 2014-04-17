@@ -2,7 +2,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>{546BA9EC-352C-4AC7-8ABC-D73403309947}</em:id>
         <em:name>TraceMe</em:name>
-        <em:version>1.0.3</em:version>
+        <em:version>1.0.4</em:version>
         <em:targetApplication>
             <Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
@@ -19,6 +19,18 @@
         <em:optionsType>3</em:optionsType>
         
     <em:localized>
+                            <Description>
+                                <em:locale>fr</em:locale>
+                                <em:name>Trace Me</em:name>
+                                <em:description>This extension allows to collect traces and send them to a server</em:description>
+                            </Description>
+                        </em:localized><em:localized>
+                            <Description>
+                                <em:locale>de</em:locale>
+                                <em:name>Trace Me</em:name>
+                                <em:description>This extension allow to collect traces and send them to a server</em:description>
+                            </Description>
+                        </em:localized><em:localized>
                             <Description>
                                 <em:locale>en</em:locale>
                                 <em:name>Trace Me</em:name>
