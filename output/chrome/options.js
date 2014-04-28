@@ -147,7 +147,6 @@ KangoAPI.onReady(function()
 	});
 	
 	kango.addMessageListener('Data', function(event) { 
-	    
         $('iframe').contents().find('head').html(event.data.header);
 		$('iframe').contents().find('body').html(event.data.body);
 		kango.console.log ("data for iframe recived ");

@@ -55,12 +55,19 @@ function setNames()
   document.getElementById("Trace").innerHTML = JSONObject.showtrace;
   document.getElementById("Option").innerHTML = JSONObject.changeoption;
   document.getElementById("tname").innerHTML = JSONObject.tname;
-  if (kango.storage.getItem("Etat") =="Activer")
-  {document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;}
-  else 
-  {
-  document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.activebtn;
+
+    if (kango.storage.getItem("Etat") =="Activer")
+  {document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;
   }
+  else if (kango.storage.getItem("Etat") =="Desactiver")
+	{
+	document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.activebtn;
+	}
+	else 
+	{
+	document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;
+	kango.storage.setItem("Etat","Activer");}
+	
 }
     var Trace_Name = kango.storage.getItem("Trace_Active");
     var BASE_URI = kango.storage.getItem("trace_options_Base_URI") ;
@@ -142,7 +149,9 @@ $('document').ready(function ()
 	
    var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
   // var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
-   var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+  // var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+   var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+   
    window.open (URL,"Assistant");
    
    

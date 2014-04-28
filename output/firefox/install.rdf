@@ -22,18 +22,6 @@
                             <Description>
                                 <em:locale>fr</em:locale>
                                 <em:name>Trace Me</em:name>
-                                <em:description>This extension allows to collect traces and send them to a server</em:description>
-                            </Description>
-                        </em:localized><em:localized>
-                            <Description>
-                                <em:locale>de</em:locale>
-                                <em:name>Trace Me</em:name>
-                                <em:description>This extension allow to collect traces and send them to a server</em:description>
-                            </Description>
-                        </em:localized><em:localized>
-                            <Description>
-                                <em:locale>en</em:locale>
-                                <em:name>Trace Me</em:name>
                                 <em:description>This extension allow to collect traces and send them to a server</em:description>
                             </Description>
                         </em:localized></Description>

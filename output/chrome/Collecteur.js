@@ -120,7 +120,9 @@ for (i=0;i < allcookie.length-1;i++)
      Trace_Information ={TraceName:allcookie[i].split('=')[1],BaseURI:decodeURIComponent(allcookie[i+1].split('=')[1]),ModelURI:decodeURIComponent(allcookie[i+2].split('=')[1])};
      kango.dispatchMessage('TraceInfo',Trace_Information);              
 	 var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
-	 var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+	// var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+    var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+   
      window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");	
             
    }

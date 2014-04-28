@@ -1,11 +1,11 @@
 {
     "__info_name__": "Trace Me",
-    "__info_description__": "This extension allows to collect traces and send them to a server",
+    "__info_description__": "This extension allow to collect traces and send them to a server",
     "Logo": "Logo",
     "Hello": "Hello {name}",
-	"NotificationNe": "Pas Activité",
-	"TraceStart": "Début de tracage de votre activité.",
-    "CalcoConfig" : {
+    "NotificationNe": "No activity",
+    "TraceStart": "Tracing of your activities has started.",
+     "CalcoConfig" : {
     "Page": [
         {
             "URL": "",
@@ -1488,6 +1488,4 @@
         }
     ]
 }
-
-
 }

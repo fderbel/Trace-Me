@@ -2,11 +2,7 @@
 
 var trc;
 if ((kango.storage.getItem("Etat") == "Desactiver"))
-
 {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
-
-//.console.log ("CLaco= "+kango.i18n.getMessage('CalcoConfig'));
-//kango.console.log ("Message= "+kango.i18n.getCurrentLocale());
 kango.addMessageListener('Pret', function(event) 
 {
   if (kango.storage.getItem("DATA")=="True") 
@@ -41,7 +37,7 @@ kango.console.log ("get message config")
 				}  
 	var data = kango.storage.getItem("Config") ; 
     tab.dispatchMessage('confg', data );
-    kango.console.log ("send Data");
+    kango.console.log ("send Data",data);
 });
 });
  
@@ -49,9 +45,21 @@ kango.addMessageListener('notification', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
 	var TraceActive = kango.storage.getItem("Trace_Active")
+	//set notifications
+
+if (kango.storage.getItem("LangChange") == "FR")
+{ kango.storage.setItem("notification", "Pas Activité");
+  kango.storage.setItem("TraceStart", "Début de tracage de votre activité.");}
+else if (kango.storage.getItem("LangChange") == "EN")
+{ 	kango.storage.setItem("notification", "No activity");
+    kango.storage.setItem("TraceStart", "Tracing of your activities has started."); }
+else if (kango.storage.getItem("LangChange") == "DE")
+{ 	kango.storage.setItem("notification", "Keine Aktivität");
+    kango.storage.setItem("TraceStart", "Die Aufspürung deiner Aktivitäten hat begonnen."); } 
+	
 	if ((TraceActive == " ")|| (TraceActive == undefined))
 	{
-	var notification = kango.ui.notifications.createNotification('Trace Me',kango.i18n.getMessage('NotificationNe'),urlImg);
+	var notification = kango.ui.notifications.createNotification('Trace Me',kango.storage.getItem("notification"),urlImg);
     notification.show();
 	
     }
@@ -67,7 +75,7 @@ kango.addMessageListener('notification', function(event) {
 kango.addMessageListener('notificationD', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
-	var notification = kango.ui.notifications.createNotification('Trace Me', kango.i18n.getMessage('TraceStart')+kango.storage.getItem("Trace_Active"),urlImg);
+	var notification = kango.ui.notifications.createNotification('Trace Me', kango.storage.getItem("TraceStart")+kango.storage.getItem("Trace_Active"),urlImg);
     notification.show();
      
 });
