@@ -2,7 +2,7 @@
 
 var trc;
 var language = window.navigator.userLanguage || window.navigator.language;
-kango.storage.setItem("LangChange",language.toUpperCase());
+kango.storage.setItem("LangChange",language);
 if ((kango.storage.getItem("Etat") == "Desactiver"))
 {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
 kango.addMessageListener('Pret', function(event) 
@@ -49,7 +49,7 @@ kango.addMessageListener('notification', function(event) {
 	var TraceActive = kango.storage.getItem("Trace_Active")
 	//set notifications
 
-if (kango.storage.getItem("LangChange") == "FR")
+if (kango.storage.getItem("LangChange") == "fr")
 { kango.storage.setItem("notification", "Pas Activité");
   kango.storage.setItem("TraceStart", "Début de tracage de votre activité.");}
 else if (kango.storage.getItem("LangChange") == "EN")
