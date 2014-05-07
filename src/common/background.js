@@ -1,6 +1,8 @@
 ﻿
 
 var trc;
+var language = window.navigator.userLanguage || window.navigator.language;
+kango.storage.setItem("LangChange",language.toUpperCase());
 if ((kango.storage.getItem("Etat") == "Desactiver"))
 {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
 kango.addMessageListener('Pret', function(event) 
@@ -59,6 +61,7 @@ else if (kango.storage.getItem("LangChange") == "DE")
 	
 	if ((TraceActive == " ")|| (TraceActive == undefined))
 	{
+	console.log (kango.storage.getItem("notification"));
 	var notification = kango.ui.notifications.createNotification('Trace Me',kango.storage.getItem("notification"),urlImg);
     notification.show();
 	
