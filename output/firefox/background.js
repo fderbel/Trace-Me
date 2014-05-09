@@ -29,7 +29,21 @@ kango.addMessageListener('GetEtat', function(event) {
     kango.console.log ("send Etat");
 });
 });
-
+kango.addMessageListener('GetOpenedAssist', function(event) {
+kango.console.log ("GetOpenedAssist")
+	kango.browser.tabs.getCurrent(function(tab) {
+	if  (kango.storage.getItem("OpenedAssist") == undefined)
+				{
+	kango.storage.setItem("OpenedAssist",false);
+				}  
+	var data = kango.storage.getItem("OpenedAssist") ; 
+    tab.dispatchMessage('OpenedAssist', data );
+   
+});
+kango.addMessageListener('SetOpenedAssist', function(event) {
+	
+kango.storage.setItem("OpenedAssist",true);
+});
 kango.addMessageListener('GetConfg', function(event) {
 kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
