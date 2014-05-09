@@ -107,9 +107,7 @@ function collectData (Data)
 }
  function ListenServer ()
 {
-kango.dispatchMessage('GetOpenedAssist');
-kango.addMessageListener('OpenedAssist', function(event)
-{ if !(event.data) ; 
+
 
 kango.console.log ("Listen");
 var allcookie = document.cookie.split(";");
@@ -126,17 +124,23 @@ for (i=0;i < allcookie.length-1;i++)
 }	
 if ( (BAseURI) && (TraceName) && (Model_URI) )
 {
-Trace_Information ={TraceName:TraceName,BaseURI:BAseURI,ModelURI:Model_URI};
-kango.console.log (Trace_Information);
-kango.dispatchMessage('TraceInfo',Trace_Information);              
-var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
-var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
- window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");
- kango.dispatchMessage('SetOpenedAssist'); 	
- }
+        Trace_Information ={TraceName:TraceName,BaseURI:BAseURI,ModelURI:Model_URI};
+        kango.console.log (Trace_Information);
+        kango.dispatchMessage('TraceInfo',Trace_Information);
+        kango.dispatchMessage('OpenedAssist');
+        kango.addMessageListener('SendOpenedAssist', function(event)
+        { 
+        kango.console.log (event.data);
+        if (! event.data){              
+                 var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
+                 var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+                 window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");
+                 kango.dispatchMessage('SetOpenedAssist'); 	
+         }
+         })
+}
 
 
-});
 
 }
 // function to send URL Information to baground.js

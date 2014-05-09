@@ -1,8 +1,9 @@
-﻿
+
+
 
 var trc;
 var language = window.navigator.userLanguage || window.navigator.language;
-kango.storage.setItem("LangChange",language);
+kango.storage.setItem("LangChange",language.toUpperCase());
 if ((kango.storage.getItem("Etat") == "Desactiver"))
 {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
 kango.addMessageListener('Pret', function(event) 
@@ -29,9 +30,27 @@ kango.addMessageListener('GetEtat', function(event) {
     kango.console.log ("send Etat");
 });
 });
+kango.addMessageListener('OpenedAssist', function(event) {
+kango.browser.windows.getAll(function (win){
+    for (var i=0;i<win.length; i++)
+    {
+        kango.console.log (win[i].getCurrentTab(function (tab)
+                        { 
+                  if(tab.getTitle() == "visualisation")
+                    {kango.storage.setItem("OpenedAssist",true);}
+                else
+                    {kango.storage.setItem("OpenedAssist",false);}
+                        })
+    }
+})
 
+kango.browser.tabs.getCurrent(function(tab) {
+var data = kango.storage.getItem("OpenedAssist") ; 
+    tab.dispatchMessage('SendOpenedAssist', data );
+    })
+});
 kango.addMessageListener('GetConfg', function(event) {
-kango.console.log ("get message config")
+    kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
 	if  (kango.storage.getItem("Config") == undefined)
 				{
@@ -49,7 +68,7 @@ kango.addMessageListener('notification', function(event) {
 	var TraceActive = kango.storage.getItem("Trace_Active")
 	//set notifications
 
-if (kango.storage.getItem("LangChange") == "fr")
+if (kango.storage.getItem("LangChange") == "FR")
 { kango.storage.setItem("notification", "Pas Activité");
   kango.storage.setItem("TraceStart", "Début de tracage de votre activité.");}
 else if (kango.storage.getItem("LangChange") == "EN")
@@ -96,7 +115,7 @@ if ( init_trc () )
 	                       });
 	    if 	(event.data.hasType=="Deconnection")
 	    {kango.storage.setItem("Trace_Active"," ");}
-	                       }
+	   }
 	  else 
 	  {kango.console.log ("error");}
 	

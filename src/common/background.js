@@ -1,4 +1,5 @@
-﻿
+
+
 
 var trc;
 var language = window.navigator.userLanguage || window.navigator.language;
@@ -29,9 +30,27 @@ kango.addMessageListener('GetEtat', function(event) {
     kango.console.log ("send Etat");
 });
 });
+kango.addMessageListener('OpenedAssist', function(event) {
+kango.browser.windows.getAll(function (win){
+    for (var i=0;i<win.length; i++)
+    {
+        win[i].getCurrentTab(function (tab)
+                        { 
+                  if(tab.getTitle() == "visualisation")
+                    {kango.storage.setItem("OpenedAssist",true);}
+                else
+                    {kango.storage.setItem("OpenedAssist",false);}
+                        })
+    }
+})
 
+kango.browser.tabs.getCurrent(function(tab) {
+var data = kango.storage.getItem("OpenedAssist") ; 
+    tab.dispatchMessage('SendOpenedAssist', data );
+    })
+});
 kango.addMessageListener('GetConfg', function(event) {
-kango.console.log ("get message config")
+    kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
 	if  (kango.storage.getItem("Config") == undefined)
 				{
@@ -96,7 +115,7 @@ if ( init_trc () )
 	                       });
 	    if 	(event.data.hasType=="Deconnection")
 	    {kango.storage.setItem("Trace_Active"," ");}
-	                       }
+	   }
 	  else 
 	  {kango.console.log ("error");}
 	
