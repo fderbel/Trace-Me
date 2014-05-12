@@ -31,17 +31,20 @@ kango.addMessageListener('GetEtat', function(event) {
 });
 });
 kango.addMessageListener('OpenedAssist', function(event) {
+ kango.console.log("here");
+ kango.storage.setItem("OpenedAssist",false)
 kango.browser.windows.getAll(function (win){
     for (var i=0;i<win.length; i++)
     {
         win[i].getCurrentTab(function (tab)
                         { 
+                 
                   if(tab.getTitle() == "visualisation")
                     {kango.storage.setItem("OpenedAssist",true);}
-                else
-                    {kango.storage.setItem("OpenedAssist",false);}
+                
                         })
     }
+    kango.console.log (kango.storage.getItem("OpenedAssist"));
 })
 
 kango.browser.tabs.getCurrent(function(tab) {
