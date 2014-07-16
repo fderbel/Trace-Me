@@ -1,8 +1,0 @@
-{
-    "info_description": {
-        "message": "This extension allow to collect traces and send them to a server"
-    }, 
-    "info_name": {
-        "message": "Trace Me"
-    }
-}
