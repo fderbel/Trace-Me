@@ -1350,17 +1350,8 @@
             "event": [
                 {
                     "type": "click",
-                    "typeObsel": "Click-Button-Assistant",
-                    "selectors": [
-                        {
-                            "frame": "",
-                            "Selector": "div#VisuU>input"
-                        },
-                        {
-                            "frame": "",
-                            "Selector": "div.input-group>input"
-                        }
-                    ]
+                    "typeObsel": "Click-Assistant",
+                    "selectors": []
                 },
                 {
                     "type": "click",

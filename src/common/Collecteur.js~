@@ -125,7 +125,6 @@ for (i=0;i < allcookie.length-1;i++)
 if ( (BAseURI) && (TraceName) && (Model_URI) )
 {
         Trace_Information ={TraceName:TraceName,BaseURI:BAseURI,ModelURI:Model_URI};
-        kango.console.log (Trace_Information);
         kango.dispatchMessage('TraceInfo',Trace_Information);
         kango.dispatchMessage('OpenedAssist');
         kango.addMessageListener('SendOpenedAssist', function(event)

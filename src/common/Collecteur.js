@@ -2,6 +2,7 @@
 // @name collecteur
 // @include http://*
 // @include https://*
+// @all-frames true
 // @require tService/js/jquery.js
 
 
