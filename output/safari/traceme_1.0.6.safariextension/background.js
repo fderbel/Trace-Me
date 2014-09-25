@@ -238,7 +238,7 @@ kango.addMessageListener('notification', function(event) {
     	kango.storage.setItem("TraceStart", "Die Aufspürung deiner Aktivitäten hat begonnen."); 
     	} 
 	
-	if ((TraceActive == " ")|| (TraceActive == undefined))
+	if ((TraceActive === "")|| (TraceActive === undefined))
 		{
 		var notification = kango.ui.notifications.createNotification('Trace Me',kango.storage.getItem("notification"),urlImg);
     	notification.show();
