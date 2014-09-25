@@ -13,9 +13,8 @@ tService = {};
  * @param options.async 	The synchonized mode
  * @desc a tool to manage traces in a base de traces */
 tService.TraceManager = function(options){
-
-this.base_uri = options.base_uri;
-this.async = options.async ? options.async : false;
+	this.base_uri = options.base_uri;
+	this.async = options.async ? options.async : false;
 	/** 
 	 * @function
 	 * @memberof TraceManager#
@@ -28,8 +27,11 @@ this.async = options.async ? options.async : false;
 		opt.base_uri = this.base_uri;		
 		opt.async = this.async;
 		opt.name = t_options.name;
-		opt.modelURI= t_options.modelURI;
+		opt.error = t_options.error;
+		//opt.modelURI= t_options.modelURI;
 		var trace = new tService.Trace(opt);
+
+		
 		return trace;
 	}
 
@@ -47,14 +49,26 @@ this.async = options.async ? options.async : false;
 tService.Trace = function(options){
 	//this.trace_manager = options.trace_manager;
 	this.base_uri = options.base_uri;
+	console.log (options);
 	this.name = options.name; 
-	//this.success = options.success,
-	//this.error = options.error,
-	this.async = options.async ? options.async : true;
-	this.model_name = "model1";
-	//this.model_uri = this.base_uri+this.model_name;
-	this.model_uri = options.modelURI;
+	var errorCallback = options.error;
 	this.trace_uri = this.base_uri+this.name+"/";
+	var Trace = this;
+	$.ajax({
+			url: this.trace_uri,
+			type: 'GET',
+			dataType: 'json',
+			error: function(jqXHR, textStatus, errorThrown){
+					errorCallback(jqXHR, textStatus, errorThrown);
+				},
+			success: function (data){
+						var M = data["hasModel"].split("/");
+						Trace.model_name = M[1];
+						Trace.model_uri= Trace.base_uri+M[1];
+						
+
+			}
+		});
 
 /** 
 	 * @function
@@ -152,17 +166,17 @@ this.put_obsels = function(s_options){
 			//obsel["id_ktbs"] = id;
             obsel["hasSubject"] = "obsel of trace : "+trace_uri ;
 			var type = model_uri+"#"+obsel["hasType"];
-			if (obsel["hasSuperType"] == undefined)
+			/*if (obsel["hasSuperType"] == undefined)
 			{
 			SuperType = model_uri+"#"+obsel["hasType"];
 			}
 			else 
-			{var SuperType = model_uri+"#"+obsel["hasSuperType"];}
+			{var SuperType = model_uri+"#"+obsel["hasSuperType"];}*/
 			
 			var prefixes = [];
 			prefixes.push("@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .");
 			prefixes.push("@prefix ktbs: <http://liris.cnrs.fr/silex/2009/ktbs#> .");
-			prefixes.push("@prefix : <"+SuperType+"/> .");
+			prefixes.push("@prefix : <"+type+"/> .");
 				
 			var statements = [];
 			statements.push("<"+id+"> ktbs:hasTrace <>.");
@@ -184,16 +198,14 @@ this.put_obsels = function(s_options){
 		
 		//var obsel = obsel;
 		var ctype = "text/turtle";
-		//var id = item["id"];
-		//var sync = this;
 		var obsel_in_turtle = obsel2Turtle(obsel, trace_uri, model_uri);
 	  // console.log (obsel_in_turtle);
 		// post to server file 
-		$.ajax({
+		/*$.ajax({
                           type: 'POST',
                           url: 'http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Files/CreateFile.php',
                           data: {data : obsel_in_turtle, TraceURI : trace_uri }
-		                  });
+		                  });*/
 		
 		// post to ktbs
 

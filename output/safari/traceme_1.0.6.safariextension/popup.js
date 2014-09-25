@@ -12,12 +12,12 @@ KangoAPI.onReady(function()
  function langEn()
  {
     JSONObject = { 	"activity": "Activity",
-	"value": "Value",
-	"showtrace": "Show Trace",
-	"changeoption": "Change Option",
-	"tname": "Trace Name",
-	"activebtn": "Activate",
-	"deactivebtn": "Deactivate"
+					"value": "Value",
+					"showtrace": "Show Trace",
+					"changeoption": "Change Option",
+					"tname": "Trace Name",
+					"activebtn": "Activate",
+					"deactivebtn": "Deactivate"
 	}
 	setNames();
  }
@@ -25,13 +25,13 @@ KangoAPI.onReady(function()
  {
  
  JSONObject = {
-    "activity": "Activité",
-	"value": "Valeur",
-	"showtrace": "Afficher la trace",
-	"changeoption": "Modifier option",
-	"tname": "Trace Nom",
-	"activebtn": "Activer",
-	"deactivebtn": "Désactiver"
+				    "activity": "Activité",
+					"value": "Valeur",
+					"showtrace": "Afficher la trace",
+					"changeoption": "Modifier option",
+					"tname": "Trace Nom",
+					"activebtn": "Activer",
+					"deactivebtn": "Désactiver"
 	}
 	setNames();
  }
@@ -39,12 +39,12 @@ KangoAPI.onReady(function()
  {
     
     JSONObject = { 	"activity": "Aktivität",
-	"value": "Wert",
-	"showtrace": "Spuren zeigen",
-	"changeoption": "Option ändern",
-	"tname": "Spur Name",
-	"activebtn": "Aktivieren",
-	"deactivebtn": "Deaktivieren"
+					"value": "Wert",
+					"showtrace": "Spuren zeigen",
+					"changeoption": "Option ändern",
+					"tname": "Spur Name",
+					"activebtn": "Aktivieren",
+					"deactivebtn": "Deaktivieren"
 	}
 	setNames();  
  }
@@ -55,32 +55,36 @@ function setNames()
   document.getElementById("Trace").innerHTML = JSONObject.showtrace;
   document.getElementById("Option").innerHTML = JSONObject.changeoption;
   document.getElementById("tname").innerHTML = JSONObject.tname;
-
-    if (kango.storage.getItem("Etat") =="Activer")
-  {document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;
-  }
+  if (kango.storage.getItem("Etat") =="Activer")
+    {
+  		document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;
+    }
   else if (kango.storage.getItem("Etat") =="Desactiver")
 	{
-	document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.activebtn;
+		document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.activebtn;
 	}
-	else 
+  else 
 	{
-	document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;
-	kango.storage.setItem("Etat","Activer");}
+		document.getElementById("Etat").childNodes[0].nodeValue = JSONObject.deactivebtn;
+		kango.storage.setItem("Etat","Activer");
+	}
 	
-}
     var Trace_Name = kango.storage.getItem("Trace_Active");
     var BASE_URI = kango.storage.getItem("trace_options_Base_URI") ;
 	
 	$('#FR').on("click", function() { 
-	langFr();
-	kango.storage.setItem("LangChange","FR");});
+		langFr();
+		kango.storage.setItem("LangChange","FR");
+	});
 	$('#EN').on("click", function() { 
-	langEn();
-	kango.storage.setItem("LangChange","EN");});
-	$('#DE').on("click", function() { langDe();
-	kango.storage.setItem("LangChange","DE");})
-
+		langEn();
+		kango.storage.setItem("LangChange","EN");
+	});
+	$('#DE').on("click", function() { 
+		langDe();
+		kango.storage.setItem("LangChange","DE");
+	})
+}
 
 $('document').ready(function ()
 
@@ -115,47 +119,40 @@ $('document').ready(function ()
 			
 			}
 			
-	var Activities = JSON.parse(kango.storage.getItem("trace_options_Trace_Name"));
-	kango.console.log (Activities);
+	var Activities = JSON.parse(kango.storage.getItem("trace_options_Activitie"));
+	var TraceURI = JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
     var  OPTION = document.createElement ('OPTION');
-    OPTION.setAttribute('value',"");
-    OPTION.appendChild(document.createTextNode(""));
+    //OPTION.setAttribute('value',"");
+   // OPTION.appendChild(document.createTextNode(""));
     document.getElementById('TraceID').appendChild(OPTION);
 	if (Activities != undefined )
 	{
     for (i=0;i<Activities.length;i++)
     { 
         var  OPTION = document.createElement ('OPTION');
-        OPTION.setAttribute('value',Activities[i]);
-        OPTION.appendChild(document.createTextNode(Activities[i]));
+        OPTION.setAttribute('value',i+"-"+Activities[i]);
+        OPTION.setAttribute('id',i);
+        OPTION.appendChild(document.createTextNode(i+"-"+Activities[i]));
         document.getElementById('TraceID').appendChild(OPTION);
         
     }
-    document.getElementById('TraceID').value=kango.storage.getItem("Trace_Active");}
+    if (kango.storage.getItem("Trace_Active") !=="")
+    {
+    	document.getElementById('TraceID').value=kango.storage.getItem("Trace_Active")+"-"+Activities[kango.storage.getItem("Trace_Active")];
+    }
+	}
+	
 });
 
     // show Trace
     var trace = document.getElementById('Trace');
 	var open = false;
     trace.addEventListener("click", function(){
-  /* kango.browser.tabs.getAll(function(tabs) {
-        // tabs is Array of KangoBrowserTab
-        for(var i = 0; i < tabs.length; i++){
-               if ( tabs[i].getTitle() == "Trace Assistance" ) {open=true;}
-        }
-		}); */
-		
-	
-	
-   var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
-  // var URL = "http://dsi-liris-silex.univ-lyon1.fr/ozalid/assist/index.php?page=TraceView&trace_uri="+encoded_trace_uri ;
-  // var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
-   var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+		var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
+	    var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+	    window.open (URL,"Assistant");
    
-   window.open (URL,"Assistant");
-   
-   
-		                           });
+ 	});
     // option
     var option = document.getElementById('Option');
     option.addEventListener ("click",function () 
@@ -164,25 +161,8 @@ $('document').ready(function ()
 	 kango.ui.optionsPage.open();
     });
     
-  //Configuration
-    /*var File = document.getElementById('Config');
-    File.addEventListener ("click",function () 
-    {
-							function open(a)
-							{var c=kango.io.getExtensionFileUrl('Config.html');
-							kango.browser.tabs.getAll(function(a) 
-							{var b=!1;kango.array.forEach(a,function(a){-1!=a.getUrl().indexOf(c)&&(b=!0,a.activate())});b||kango.browser.tabs.create({url:c,focused:!0})});
-							
-							}
-	//var URL = kango.io.getExtensionFileUrl ("Config.html");
-	open();
-	//kango.browser.windows.create (URL);
-	//window.open (URL,"Configuration");
-    });*/
-  // Etat
-  
-  var Etat = document.getElementById('Etat');
-  Etat.addEventListener ("click",function () 
+	var Etat = document.getElementById('Etat');
+  	Etat.addEventListener ("click",function () 
     {
 		if (kango.storage.getItem("Etat") == "Activer")
 		{
@@ -197,14 +177,20 @@ $('document').ready(function ()
 		kango.ui.browserButton.setIcon('icons/traceMe.png');
 		Etat.setAttribute('class','btn btn-danger btn-xs');
 		Etat.childNodes[0].nodeValue = JSONObject.deactivebtn;
+		kango.dispatchMessage('init_trace');
 		}
     });
 
 
 $('#TraceID').change(function ()
 {
-    kango.storage.setItem("Trace_Active",document.getElementById("TraceID").value );
-	kango.dispatchMessage('popup');
+   
+    select=document.getElementById("TraceID");
+    kango.storage.setItem("Trace_Active",select.options[select.selectedIndex].id );
+    if (document.getElementById('TraceID').value !=="")
+    {
+    	kango.dispatchMessage('init_trace');
+    }
    // chrome.extension.sendRequest({mess:'popup'}, function(response) {});
 
 });

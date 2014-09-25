@@ -2,17 +2,24 @@
 // @name collecteur
 // @include http://*
 // @include https://*
+// @all-frames true
 // @require tService/js/jquery.js
 
 
 
 // ==/UserScript==
-	
+$(window).on('hashchange', function(e){
+    var origEvent = e.originalEvent;
+    kang.console.log('Going to: ' + origEvent.newURL + ' from: ' + origEvent.oldURL);
+});	
 $(document).ready(function () 
 { 
      notif = false;
      notifV = false;
-    
+    $(window).on('hashchange', function(e){
+    var origEvent = e.originalEvent;
+    kango.console.log('Going to: ' + origEvent.newURL + ' from: ' + origEvent.oldURL);
+});	
     kango.console.log("collecteur");
 	// get data 
 	kango.dispatchMessage('Pret');

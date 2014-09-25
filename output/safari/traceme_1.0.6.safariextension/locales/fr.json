@@ -947,6 +947,22 @@
                 }
             ]
         },
+         {
+            "URL": "",
+            "HostName": "clacodev.univ-lyon1.fr",
+            "event": [
+                {
+                    "type": "click",
+                    "typeObsel": "ClickLien",
+                    "selectors": [
+                        {
+                            "frame": "",
+                            "Selector": ""
+                        }
+                    ]
+                }
+            ]
+        },
         {
     "URL": "",
     "HostName": "liris.cnrs.fr",

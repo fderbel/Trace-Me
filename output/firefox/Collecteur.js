@@ -8,12 +8,15 @@
 
 
 // ==/UserScript==
-	
+
 $(document).ready(function () 
 { 
      notif = false;
      notifV = false;
-    
+    $(window).on('hashchange', function(e){
+    var origEvent = e.originalEvent;
+    kango.console.log('Going to: ' + origEvent.newURL + ' from: ' + origEvent.oldURL);
+});	
     kango.console.log("collecteur");
 	// get data 
 	kango.dispatchMessage('Pret');
@@ -36,7 +39,7 @@ $(document).ready(function ()
 	kango.addMessageListener('Etat', function(event) 
 	{
 	 var Etat= event.data ;
-	 kango.console.log ("receive etat");
+	 kango.console.log ("receive etat",Etat);
 	 ReceiveEtat(Etat) ;
     });
    
@@ -103,7 +106,10 @@ function collectData (Data)
 		    }  
        	    if (i == event.length-1 ) 
             {
-                  ListenServer(); if (!notifV){kango.dispatchMessage ('notification');notifV= true;}    }
+                  ListenServer(); 
+                  if (!notifV)
+                    {
+                      kango.dispatchMessage ('notification');notifV= true;}    }
           }
 }
  function ListenServer ()
@@ -127,31 +133,35 @@ if ( (BAseURI) && (TraceName) && (Model_URI) )
 {
         Trace_Information ={TraceName:TraceName,BaseURI:BAseURI,ModelURI:Model_URI};
         kango.dispatchMessage('TraceInfo',Trace_Information);
-        kango.dispatchMessage('OpenedAssist');
-        kango.addMessageListener('SendOpenedAssist', function(event)
+        //kango.dispatchMessage('OpenedAssist');
+        var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
+        var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
+       // window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");
+        kango.dispatchMessage('OpenAssist',URL);  
+        /*kango.addMessageListener('SendOpenedAssist', function(event)
         { 
         kango.console.log (event.data);
         if (! event.data){              
                  var encoded_trace_uri = encodeURIComponent(Trace_Information.BaseURI+Trace_Information.TraceName+"/");
                  var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
                  window.open(URL,"assistant","menubar=no, status=no, scrollbars=no, menubar=no, width=800, height=400");
-                 kango.dispatchMessage('SetOpenedAssist'); 	
+                 kango.dispatchMessage('SetOpenedAssist',URL); 	
          }
-         })
+         })*/
 }
 }
 // function to send URL Information to baground.js
 function Send_URL(URL)
  {
         var attribute={};
-		attribute.hasDate =new Date().format("yyyy-MM-dd h:mm:ss");
+		    attribute.hasDate =new Date().format("yyyy-MM-dd h:mm:ss");
         //attribute.begin = (new Date()).getTime();
         //attribute.end =   (new Date()).getTime();
         attribute.hasType="Ouverture_Page";
         attribute.hasSubject="obsel of action Website_visited ";
         attribute.hasDocument_URL = URL;
-		attribute.hasDocument_Title = document.title;
-	    kango.dispatchMessage('obsel',attribute);
+		    attribute.hasDocument_Title = document.title;
+	     kango.dispatchMessage('obsel',attribute);
  }
 
   // function to collect attribute and send then to baground.js

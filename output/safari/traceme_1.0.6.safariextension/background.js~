@@ -3,9 +3,14 @@
 
 var trc;
 var language = window.navigator.userLanguage || window.navigator.language;
+
+
 kango.storage.setItem("LangChange",language.toUpperCase());
+
 if ((kango.storage.getItem("Etat") == "Desactiver"))
-{kango.ui.browserButton.setIcon('icons/traceMe1.png');}
+    {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
+
+
 kango.addMessageListener('Pret', function(event) 
 {
   if (kango.storage.getItem("DATA")=="True") 
@@ -21,6 +26,7 @@ kango.addMessageListener('Pret', function(event)
     }  			
 				
 });
+
 kango.addMessageListener('GetEtat', function(event) {
 
 	kango.browser.tabs.getCurrent(function(tab) {
@@ -30,15 +36,17 @@ kango.addMessageListener('GetEtat', function(event) {
     kango.console.log ("send Etat");
 });
 });
+
+
 kango.addMessageListener('OpenedAssist', function(event) {
- kango.console.log("here");
- kango.storage.setItem("OpenedAssist",false)
-kango.browser.windows.getAll(function (win){
+ 
+    kango.storage.setItem("OpenedAssist",false)
+    kango.browser.windows.getAll(function (win){
     for (var i=0;i<win.length; i++)
     {
         win[i].getCurrentTab(function (tab)
                         { 
-                   kango.console.log (tab.getTitle());
+                 
                   if(tab.getTitle() == "visualisation")
                     {kango.storage.setItem("OpenedAssist",true);}
                 
@@ -47,11 +55,13 @@ kango.browser.windows.getAll(function (win){
     kango.console.log (kango.storage.getItem("OpenedAssist"));
 })
 
-kango.browser.tabs.getCurrent(function(tab) {
-var data = kango.storage.getItem("OpenedAssist") ; 
+    kango.browser.tabs.getCurrent(function(tab) {
+    var data = kango.storage.getItem("OpenedAssist") ; 
     tab.dispatchMessage('SendOpenedAssist', data );
     })
 });
+
+
 kango.addMessageListener('GetConfg', function(event) {
     kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
@@ -109,26 +119,99 @@ kango.addMessageListener('notificationD', function(event) {
 kango.addMessageListener('obsel', function(event) {
 if ( init_trc () )
 {
- var OBSEL = event.data;
+    var OBSEL = event.data;
 // send obsel to ktbs
     trc.put_obsels({
 		 obsel: OBSEL,
 		 success: function(){console.log("success is callbacked");},
-		 error: function(jqXHR,textStatus, errorThrown){console.log("error is callbacked.");}
-	                       });
+		 error: function(jqXHR,textStatus, errorThrown){
+		 console.log("error is callbacked.","jqXHR.status",jqXHR.status,"textStatus",textStatus,"errorThrown",errorThrown);
+	       if(jqXHR.status =='401')              
+	            {
+	            var div = document.createElement('div');
+	            div.innerHTML=jqXHR.responseText;
+	            var link = div.getElementsByTagName("a")[0].href;
+	            jQuery.ajax({
+			            url: link,
+			            type: 'GET',
+			            success: function(data, textStatus, xhr){
+					            
+					                if (xhr.status =='302') 
+					                {
+					                console.log ('found');// repost obsel
+					                }
+					                if (xhr.status =='200')
+					                {
+					                console.log ('not auth');
+					                // get title  (data)
+					                title = $(data).filter('title').text();
+					                
+					                /* if (!kango.storage.getItem("Openedpopup") )
+					                 
+					                 {kango.browser.windows.create({url:link,width:800, height:400});
+					                 kango.storage.setItem("Openedpopup",true);
+					                 } */
+
+					               
+					                // popup solution
+					                kango.storage.setItem("Openedpopup",false)
+					                 kango.browser.windows.getAll(function (win){
+                                            
+                                            for (var i=0;i<win.length; i++)
+                                            {
+                                                win[i].getCurrentTab(function (tab)
+                                                { 
+                                                //console.log (decodeURI(tab.getUrl()));
+                                                //console.log(link);
+                                                //if(decodeURI(tab.getUrl()) == link)
+                                                //{kango.storage.setItem("Openedpopup",true)}
+                                                console.log (tab.getTitle());
+                                               
+                                                if (tab.getTitle()=== title)
+                                                {
+                                                console.log('hereif')
+                                                kango.storage.setItem("Openedpopup",true);
+                                                
+                                                }
+                                                })
+                                                if (i==win.length-1)
+                                            {console.log(kango.storage.getItem("Openedpopup"));
+                                            if (!kango.storage.getItem("Openedpopup")) {kango.browser.windows.create({url:link,width:800, height:400});} 
+					               }
+                                            }
+                                            
+                                            
+					               
+					                })
+					                
+					                
+					                }
+					            
+				                },
+			            error: function(jqXHR, textStatus, errorThrown){
+					            console.log("erreur link auth");
+					            
+				            },
+			
+		        });
+	            }           
+	  }
+	  });
+	    
+	    
 	    if 	(event.data.hasType=="Deconnection")
 	    {kango.storage.setItem("Trace_Active"," ");}
 	   }
-	  else 
-	  {kango.console.log ("error");}
+else 
+{kango.console.log ("error");}
 	
 });
 
 kango.addMessageListener('TraceInfo', function(event) {
-var TraceInfo = event.data;
-kango.storage.setItem("Trace_Active",TraceInfo.TraceName);
-kango.storage.setItem("trace_options_Base_URI",TraceInfo.BaseURI);
-kango.storage.setItem("trace_options_Model_URI",TraceInfo.ModelURI);
+    var TraceInfo = event.data;
+    kango.storage.setItem("Trace_Active",TraceInfo.TraceName);
+    kango.storage.setItem("trace_options_Base_URI",TraceInfo.BaseURI);
+    kango.storage.setItem("trace_options_Model_URI",TraceInfo.ModelURI);
 
 if (kango.storage.getItem("trace_options_Trace_Name") == undefined )
 {var Activities = [];Activities.push (TraceInfo.TraceName);}
@@ -159,10 +242,11 @@ function init_trc ()
     if ((Trace_Name =="")||(BASE_URI == "")|| (BASE_URI == undefined ))
     { return false}
     else
-   { var mgr = new tService.TraceManager({base_uri: BASE_URI , async: true}); 
-    trc = mgr.init_trace({name: Trace_Name, modelURI:Model }); 
-    return true;
-    }
+   { 
+        var mgr = new tService.TraceManager({base_uri: BASE_URI , async: true}); 
+        trc = mgr.init_trace({name: Trace_Name, modelURI:Model }); 
+        return true;
+  }
     
 }
 
