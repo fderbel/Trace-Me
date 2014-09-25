@@ -148,7 +148,19 @@ $('document').ready(function ()
     var trace = document.getElementById('Trace');
 	var open = false;
     trace.addEventListener("click", function(){
-		var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
+		//var encoded_trace_uri = encodeURIComponent(BASE_URI+Trace_Name+"/");
+		var TraceURI = JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
+		var trace_uri = TraceURI[kango.storage.getItem("Trace_Active")];
+		if (trace_uri[trace_uri.length-1]=="/"){
+
+				var encoded_trace_uri = trace_uri;
+
+		}
+		else {
+
+			var encoded_trace_uri = trace_uri+"/";
+		}
+
 	    var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
 	    window.open (URL,"Assistant");
    
