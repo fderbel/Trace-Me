@@ -158,7 +158,7 @@ $('document').ready(function ()
 		}
 		else {
 
-			var encoded_trace_uri = trace_uri+"/";
+			var encoded_trace_uri = encodeURIComponent (trace_uri+"/");
 		}
 
 	    var URL = "http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Index.php?mode=utilisateur&&page=TraceView&trace_uri="+encoded_trace_uri ;
@@ -199,10 +199,9 @@ $('#TraceID').change(function ()
    
     select=document.getElementById("TraceID");
     kango.storage.setItem("Trace_Active",select.options[select.selectedIndex].id );
-    if (document.getElementById('TraceID').value !=="")
-    {
+   
     	kango.dispatchMessage('init_trace');
-    }
+    
    // chrome.extension.sendRequest({mess:'popup'}, function(response) {});
 
 });

@@ -49,10 +49,10 @@ tService.TraceManager = function(options){
 tService.Trace = function(options){
 	//this.trace_manager = options.trace_manager;
 	this.base_uri = options.base_uri;
-	console.log (options);
 	this.name = options.name; 
 	var errorCallback = options.error;
 	this.trace_uri = this.base_uri+this.name+"/";
+	this.model_uri = null ;
 	var Trace = this;
 	$.ajax({
 			url: this.trace_uri,
@@ -62,9 +62,11 @@ tService.Trace = function(options){
 					errorCallback(jqXHR, textStatus, errorThrown);
 				},
 			success: function (data){
-						var M = data["hasModel"].split("/");
-						Trace.model_name = M[1];
-						Trace.model_uri= Trace.base_uri+M[1];
+						//var M = data["hasModel"].split("/");
+						//Trace.model_name = M[1];
+						//Trace.model_uri= Trace.base_uri+M[1];	
+						M = new URLUtils(data["hasModel"], data["@id"]);
+						Trace.model_uri = M.href
 						
 
 			}
@@ -151,7 +153,7 @@ this.put_obsels = function(s_options){
 			successCallback = s_options.success,
 			errorCallback = s_options.error,
 			async = this.async;
-	
+	console.log (obsel);
 		function generateObselId(){
 			
 			var id = "C_"+obsel["hasType"]+"_"+(new Date()).getTime() + Math.floor(Math.random()*1000);
@@ -258,3 +260,71 @@ this.put_obsels = function(s_options){
 
 
 }
+
+
+
+
+  function URLUtils(url, baseURL) {
+    var m = String(url).replace(/^\s+|\s+$/g, "").match(/^([^:\/?#]+:)?(?:\/\/(?:([^:@]*)(?::([^:@]*))?@)?(([^:\/?#]*)(?::(\d*))?))?([^?#]*)(\?[^#]*)?(#[\s\S]*)?/);
+    if (!m) {
+      throw new RangeError();
+    }
+    var href = m[0] || "";
+    var protocol = m[1] || "";
+    var username = m[2] || "";
+    var password = m[3] || "";
+    var host = m[4] || "";
+    var hostname = m[5] || "";
+    var port = m[6] || "";
+    var pathname = m[7] || "";
+    var search = m[8] || "";
+    var hash = m[9] || "";
+    if (baseURL !== undefined) {
+      var base = new URLUtils(baseURL);
+      var flag = protocol === "" && host === "" && username === "";
+      if (flag && pathname === "" && search === "") {
+        search = base.search;
+      }
+      if (flag && pathname.charAt(0) !== "/") {
+        pathname = (pathname !== "" ? (((base.host !== "" || base.username !== "") && base.pathname !== "" ? "/" : "") + base.pathname.slice(0, base.pathname.lastIndexOf("/") + 1) + pathname) : base.pathname);
+      }
+      // dot segments removal
+      var output = [];
+      pathname.replace(/^(\.\.?(\/|$))+/, "")
+        .replace(/\/(\.(\/|$))+/g, "/")
+        .replace(/\/\.\.$/, "/../")
+        .replace(/\/?[^\/]*/g, function (p) {
+          if (p === "/..") {
+            output.pop();
+          } else {
+            output.push(p);
+          }
+        });
+      pathname = output.join("").replace(/^\//, pathname.charAt(0) === "/" ? "/" : "");
+      pathname = output.join("").replace(/^\//, pathname.charAt(1) === "/" ? "" : "");
+      if (flag) {
+        port = base.port;
+        hostname = base.hostname;
+        host = base.host;
+        password = base.password;
+        username = base.username;
+      }
+      if (protocol === "") {
+        protocol = base.protocol;
+      }
+      href = protocol + (host !== "" ? "//" : "") + (username !== "" ? username + (password !== "" ? ":" + password : "") + "@" : "") + host + pathname + search + hash;
+    }
+    this.href = href;
+    this.origin = protocol + (host !== "" ? "//" + host : "");
+    this.protocol = protocol;
+    this.username = username;
+    this.password = password;
+    this.host = host;
+    this.hostname = hostname;
+    this.port = port;
+    this.pathname = pathname;
+    this.search = search;
+    this.hash = hash;
+  }
+ 
+  
