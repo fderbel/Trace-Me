@@ -1,13 +1,37 @@
- //get browseer language
- var language = window.navigator.userLanguage || window.navigator.language;
- if (language.indexOf("en") === 0){langEn();}
- else if( language.indexOf("de") === 0){langDe();}
- else {langFr();}
- //translate options form
- var JSONObject;
- function langFr() { //for french
+ /*##################################################################################################################################
+    Title                           || option.js
+    Author                          || Derbel Fatma
+    Description                     || options page allow users to customize the behavior of your extension
+    ##################################################################################################################################  
+    Description for TRACEME         || this is a user interface which includes two form 
+                                    || 1-form options           : TO DETERMINE THE IDENTITY OF THE USER AND THE INFORMATION OF THE COLLECT SERVER
+                                    || 1-form Configure Tracing : A FORM THAT ALLOWS A SPECIFIC CONFIGURATION OF COLLECT : THE COLLECT OF AN EVENT ON AN ELEMENT
+                                                                  DEFINED BY HER PATH
+
+    
+    */
+
+/*##################################################################################################################################
+       GET BROWSER LANGUAGE 
+#################################################################################################################################### */
+var language = window.navigator.userLanguage || window.navigator.language;
+if (language.indexOf("en") === 0){
+    langEn();
+}
+else if( language.indexOf("de") === 0){
+    langDe();
+}
+else {
+    langFr();
+}
+/*##################################################################################################################################
+       TRANSLATE OPTIONS FORM
+#################################################################################################################################### */
+var JSONObject
+function langFr() { 
+     //for french
     language = "fr";
-	JSONObject = {  "options": "Options",
+    JSONObject = {  "options": "Options",
                     "identity": "Identité",
                     "firstname": "Prénom",
                     "lastname": "Nom",
@@ -24,8 +48,8 @@
                     "Trace_URI":"Trace_URI",
                     "Activitie":"Nom de l'activité",
                 	"saveconfig": "Sauvegarder la configuration"
-                }; 
-     setNames();
+                 }; 
+    setNames();
 }
 function langDe() { //for german
     language = "de";
@@ -69,7 +93,7 @@ function langEn() { //for english
                      "Activitie":"Name of activity",
                 	"saveconfig": "Save Configuration"
                 };
-	setNames();	
+	 setNames();	
 }
 //allocate translated names to tags
 function setNames(){	
@@ -91,10 +115,11 @@ function setNames(){
     document.getElementById("ADDEvent").value = JSONObject.addevent
     document.getElementById("Save").innerHTML = JSONObject.saveconfig
 }
+/*##################################################################################################################################
+       SCRIPT CODE TO EXECUTE WHEN LOADED THE FILE
+#################################################################################################################################### */
 
-
-KangoAPI.onReady(function() 
-{
+KangoAPI.onReady(function() {
     //change language on image click
 	$('#FR').on("click", function() { langFr();
 	kango.storage.setItem("LangChange","FR"); })
@@ -111,16 +136,18 @@ KangoAPI.onReady(function()
     else if (kango.storage.getItem("LangChange") == "EN")
         { langEn(); }
     else { /* do nothing */}
-	 /********Form Obtion***********/
-    /****************************************************/
+
+    /*##################################################################################################################################
+       FORM OPTION
+    #################################################################################################################################### */
 	$('#options').ready(function() {
 		init_form ()  
-		});
-   /********Add Trace_URI***********/
+	});
+   /*###############   ADD TRACE_URI  ###############*/
 	$('#ADD').on("click", function() { 
         createElement ("","");
     });
-	/********save obtion ***********/
+	/*############### SAVE OPTION ###############*/
 	$("#options").on('submit', function(event) {
 		var Activities = [];
         var TraceURI = [];
@@ -138,13 +165,14 @@ KangoAPI.onReady(function()
 		      kango.storage.setItem("trace_options_"+kv.name, kv.value);
 		});
    
-     });
-	 /********Form Obtion***********/
-    /****************************************************/
+    });
+	 /*##################################################################################################################################
+       FORM CONFIGURE TRACING
+        #################################################################################################################################### */
     var eventObj= ["click","dblclick","Focus","keydown","keypress","mouseover","Load","keyup","change","mouseup"];	
 	var index=0;
 	var ADDB = "False";
-    /******** event load site ***********/
+    /*############### EVENT LOAD SITE ###############*/
 	$ ("#Load").on('click', function() {
 		var iframe = document.getElementsByTagName("iframe");
 		URL = document.getElementById("URL").value;
@@ -161,7 +189,7 @@ KangoAPI.onReady(function()
 		e.preventDefault();
 		}
 	});
-	
+	 /*############### MESSAGE IN THE CONFIGURATION STEP BETWEEN OPTION AND COLLECTEUR TO LOAD THE DATA OF SITE IN THE IFRAME ###############*/
 	kango.addMessageListener('Data', function(event) { 
         $('iframe').contents().find('head').html(event.data.header);
 		$('iframe').contents().find('body').html(event.data.body);
@@ -173,7 +201,7 @@ KangoAPI.onReady(function()
 	   e.preventDefault();
 		
 	});
-  /******** Add event  ***********/
+    /*############### ADD EVENT  ###############*/
     $ ("#ADDEvent").on ('click', function()	{
         // Event div
             var eventdiv = document.createElement("div");
@@ -230,7 +258,7 @@ KangoAPI.onReady(function()
             document.getElementById("EventList").appendChild(eventdiv);
             index++;
     });
-  /******** event Save  Config  ***********/
+    /*############### EVENT SAVE CONFIGURATION ###############*/
 
     $("#Save").on("click", function() {
         var  URL = document.getElementById("URL").value;
@@ -275,49 +303,41 @@ KangoAPI.onReady(function()
 	    Config = {Page:PageArray};
         kango.storage.setItem("Config",Config);
 	    window.location.reload();
-    })
-// all function called 
- function init_form (){
-    $("#options *[name='firstname']").val(kango.storage.getItem("trace_options_firstname"));
-    $("#options *[name='last_name']").val(kango.storage.getItem("trace_options_last_name"));
-    $("#options *[name='email']").val(kango.storage.getItem("trace_options_email"));
-  //  $("#options *[name='Base_URI']").val(kango.storage.getItem("trace_options_Base_URI"));
-    // $("#options *[name='Model_URI']").val(kango.storage.getItem("trace_options_Model_URI"));
-   if  (kango.storage.getItem("trace_options_Trace_URI") != undefined)
-	{
-		var Activities = JSON.parse(kango.storage.getItem("trace_options_Activitie"));
-        var TraceURI = JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
-		for (i=0;i<TraceURI.length;i++)
-		{ 
-			if (i==0) 
-                {
-                    $("#options *[name='Trace_URI']").val(TraceURI[i]);
-                    $("#options *[name='Activitie']").val(Activities[i]);
-                }
-		    else 
-                {
-                    createElement (TraceURI[i],Activities[i]); 
-                }
-           
     
-		}
-	}
-}
+    })
 
-function createElement (val1,val2) { 
-    /*var obt = document.getElementById('Activities'); 
-    var label = document.createElement("label");
-    label.setAttribute('for','Trace_Name');
-    label.setAttribute('class','control-label input-group-addon');
-    var input = document.createElement("input");
-    input.setAttribute('name','Trace_Name');
-    input.setAttribute('type','text');
-    input.setAttribute('class','form-control');
-    input.setAttribute ('value',val);
-	var obt = document.getElementById('Activities');
-    obt.appendChild(label);
-    obt.appendChild(input);*/
-    var obt = document.getElementById('Activities'); 
+    /*##################################################################################################################################
+       DECLATION OF FUNCTION
+    #################################################################################################################################### */
+
+    function init_form (){
+        $("#options *[name='firstname']").val(kango.storage.getItem("trace_options_firstname"));
+        $("#options *[name='last_name']").val(kango.storage.getItem("trace_options_last_name"));
+        $("#options *[name='email']").val(kango.storage.getItem("trace_options_email"));
+            //  $("#options *[name='Base_URI']").val(kango.storage.getItem("trace_options_Base_URI"));
+            // $("#options *[name='Model_URI']").val(kango.storage.getItem("trace_options_Model_URI"));
+        if  (kango.storage.getItem("trace_options_Trace_URI") != undefined)
+	       {
+		      var Activities = JSON.parse(kango.storage.getItem("trace_options_Activitie"));
+              var TraceURI = JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
+		      for (i=0;i<TraceURI.length;i++)
+		      { 
+        			if (i==0) 
+                        {
+                            $("#options *[name='Trace_URI']").val(TraceURI[i]);
+                            $("#options *[name='Activitie']").val(Activities[i]);
+                        }
+        		    else 
+                        {
+                            createElement (TraceURI[i],Activities[i]); 
+                        }
+            }
+	       }
+    }
+
+    function createElement (val1,val2) { 
+    
+        var obt = document.getElementById('Activities'); 
         var div1 = document.createElement("div");
         div1.setAttribute ('class','input-group');
         div1.setAttribute ('Id','');
@@ -344,11 +364,9 @@ function createElement (val1,val2) {
             divC1.setAttribute ('value',val2);
             divC1.setAttribute ('class','form-control');
         div1.appendChild(divC1);
+        obt.appendChild(div1);
+	}
 
-
-    obt.appendChild(div1);
-		}
-//jQuery.fn.extend({
 	function getPath ( e,path ) {
 		// The first time this function is called, path won't be defined.
 		if ( typeof path == 'undefined' ) path = '';
@@ -377,15 +395,12 @@ function createElement (val1,val2) {
 		kango.console.log (e);
 		return getPath( e.parent(),' > ' + cur + path );
 	}
-//});
-
-function  getHostname (href) 
-{
-    var l = document.createElement("a");
-    l.href = href;
-    hostname = l.hostname ;
-    return hostname;
-};
+    function  getHostname (href) {
+        var l = document.createElement("a");
+        l.href = href;
+        hostname = l.hostname ;
+        return hostname;
+    };
 
     
 });

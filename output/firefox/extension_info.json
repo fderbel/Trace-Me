@@ -1,7 +1,7 @@
 {
     "kango_version": "1.3.9 5f7ad87d19fe", 
     "content_scripts": [
-        "tService/js/jquery.js", 
+        "ktbs_bib_js/jquery.js", 
         "Collecteur.js", 
         "kango-ui/content_notifications.js"
     ], 
@@ -12,8 +12,8 @@
     "kango_package_id": "dev", 
     "package_id": "kango-546ba9ec-352c-4ac7-8abc-d73403309947", 
     "background_scripts": [
-        "tService/js/jquery.js", 
-        "tService/lib/tService.js", 
+        "ktbs_bib_js/jquery.js", 
+        "ktbs_bib_js/tService.js", 
         "background.js"
     ], 
     "homepage_url": "https://github.com/fderbel/Trace-Me/blob/master/README.md", 
