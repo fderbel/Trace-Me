@@ -27,8 +27,8 @@
     "background": {
         "page": "background.html"
     }, 
-    "homepage_url": "http://kangoextensions.com/", 
-    "version": "1.0.6", 
+    "homepage_url": "https://github.com/fderbel/Trace-Me/blob/master/README.md", 
+    "version": "1.0.7", 
     "options_page": "options.html", 
     "manifest_version": 2, 
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'", 

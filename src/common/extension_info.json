@@ -1,9 +1,9 @@
 {
     "name": "TraceMe",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "This extension allows to collect interection traces and sends them to a server",
-    "creator": "COAT",
-    "homepage_url": "http://kangoextensions.com/",
+    "creator": "LIRIS/SILEX/COAT  :  FATMA DERBEL",
+    "homepage_url": "https://github.com/fderbel/Trace-Me/blob/master/README.md",
     "background_scripts": ["tService/js/jquery.js","tService/lib/tService.js","background.js"],
     "content_scripts": ["tService/js/jquery.js","Collecteur.js","kango-ui/content_notifications.js"], 
     "browser_button": {

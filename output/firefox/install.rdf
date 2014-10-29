@@ -2,7 +2,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>{546BA9EC-352C-4AC7-8ABC-D73403309947}</em:id>
         <em:name>TraceMe</em:name>
-        <em:version>1.0.6</em:version>
+        <em:version>1.0.7</em:version>
         <em:targetApplication>
             <Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
@@ -12,8 +12,8 @@
         </em:targetApplication>
         <em:bootstrap>true</em:bootstrap>
         <em:description>This extension allows to collect interection traces and sends them to a server</em:description>
-        <em:creator>COAT</em:creator>
-        <em:homepageURL>http://kangoextensions.com/</em:homepageURL>
+        <em:creator>LIRIS/SILEX/COAT  :  FATMA DERBEL</em:creator>
+        <em:homepageURL>https://github.com/fderbel/Trace-Me/blob/master/README.md</em:homepageURL>
         <em:iconURL>chrome://kango-546ba9ec-352c-4ac7-8abc-d73403309947/content/icons/icon32.png</em:iconURL>
         <em:optionsURL>chrome://kango-546ba9ec-352c-4ac7-8abc-d73403309947/content/options.html</em:optionsURL>
         <em:optionsType>3</em:optionsType>

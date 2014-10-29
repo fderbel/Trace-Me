@@ -163,14 +163,15 @@ aouthFunction = function (link,URLSuccess){
 					               
 					                	kango.storage.setItem("Openedpopup",true)
 					                	title = $(data).filter('title').text();// get title  (data)
-					                	
+					                	console.log  ("title" ,title)					                	
 					                	kango.browser.addEventListener(kango.browser.event.TabCreated,oncreateFunction);
 					                 	kango.browser.tabs.getAll(function(tab){
 					                				var remaining = tab.length;
 					                				for (var i=0;i<tab.length; i++)
                                             		{                                            							                                           							
-														
-														if((tab[i].getTitle() == title) || (tab[i].getUrl()==link))
+														console.log (tab[i].getTitle());
+														console.log (tab[i].getUrl())
+														if((tab[i].getTitle() === title) || (tab[i].getUrl()=== link))
 																{kango.storage.setItem("Openedpopup",false);}
 														remaining -= 1;
 														if (remaining == 0) {

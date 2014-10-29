@@ -7,7 +7,7 @@
     ], 
     "name": "TraceMe", 
     "default_locale": "fr", 
-    "creator": "COAT", 
+    "creator": "LIRIS/SILEX/COAT  :  FATMA DERBEL", 
     "description": "This extension allows to collect interection traces and sends them to a server", 
     "kango_package_id": "dev", 
     "background_scripts": [
@@ -15,8 +15,8 @@
         "tService/lib/tService.js", 
         "background.js"
     ], 
-    "homepage_url": "http://kangoextensions.com/", 
-    "version": "1.0.6", 
+    "homepage_url": "https://github.com/fderbel/Trace-Me/blob/master/README.md", 
+    "version": "1.0.7", 
     "options_page": "options.html", 
     "id": "gkmdjemippfjfkaolihnjkmlpjalkoip", 
     "locales": [
