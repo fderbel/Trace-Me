@@ -1,35 +1,38 @@
+ /*##################################################################################################################################
+    Title 							|| background.js
+    Author 							|| Derbel Fatma
+    Description 					|| Background scripts are running as long as extension is enabled in browser and executed once on each browser start.
+									|| Background scripts should be enumerated in background_scripts array of extension_info.json file.
+    ##################################################################################################################################  
+    History 						|| 
 
-// init variable
+	
+    */
+
+/*##################################################################################################################################
+		DECLATION OF VARIABLE AND FUNCTION
+#################################################################################################################################### */
 
 var traceObj;
 var language = window.navigator.userLanguage || window.navigator.language;
 kango.storage.setItem("LangChange",language.toUpperCase());
 var trc_init ;
 var init_trc  = function (){
-   
-   	 	
-	
-		//var Model = kango.storage.getItem("trace_options_Model_URI");
-    
-    	if (kango.storage.getItem("Trace_Active")==="")
-    	{ 
-    		trc_init = false ;
-    	}
-    	else
-   		{ 
-   			TraceURI = JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
-     		Trace_URI = TraceURI[kango.storage.getItem("Trace_Active")];
-     		Trace_Name = GetTraceAndBaseName (Trace_URI)["Trace_Name"];
-     		BASE_URI = GetTraceAndBaseName (Trace_URI)["BaseURI"];
-   			traceObj = Get_Trace (BASE_URI,Trace_Name)
-        	if (traceObj)
-        		{
-        			
-        			trc_init = true ;
-
-        		}
-    	}
-    
+	if (kango.storage.getItem("Trace_Active")) {
+		   	if (kango.storage.getItem("Trace_Active")===""){ 
+		    	trc_init = false ;
+		    }
+		    else { 
+		   		TraceURI 	= JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
+		     	Trace_URI 	= TraceURI[kango.storage.getItem("Trace_Active")];
+		     	Trace_Name 	= GetTraceAndBaseName (Trace_URI)["Trace_Name"];
+		     	BASE_URI 	= GetTraceAndBaseName (Trace_URI)["BaseURI"];
+		   		traceObj 	= Get_Trace (BASE_URI,Trace_Name)
+		        if (traceObj){
+		        	trc_init = true ;
+		        }
+		    }
+	}
 }
 
 var Get_Trace = function (BASE_URI,Trace_Name){
@@ -200,21 +203,32 @@ aouthFunction = function (link,URLSuccess){
 
 }
 
-// 
+/*##################################################################################################################################
+		INITIALIZATION THE ACTIVE TRACE WHEN Extension initialized
+#################################################################################################################################### */
 $('document').ready(function (){
 	if (kango.storage.getItem("Etat")=== "Activer"){
 		init_trc ();
-
 	}
-		
-
 })
 
-// traceMe actif or no to choise the icon 
-if ((kango.storage.getItem("Etat") == "Desactiver"))
-    {kango.ui.browserButton.setIcon('icons/traceMe1.png');}
+/*##################################################################################################################################
+		CHANGE ICON IF TRACEME IS TURNED OFF
+#################################################################################################################################### */
+if ((kango.storage.getItem("Etat") == "Desactiver")){
+    kango.ui.browserButton.setIcon('icons/traceMe1.png');
+}
+/*##################################################################################################################################
+		COMMUNICATION BETWEEN BACKGOUND FILE AND COLLECTOR FIL WITH MESSAGE
+		To send/receive any message we need to use a pair of functions :
+		kango.addMessageListener() : Registers a message handler for the specified message name.
+		kango.dispatchMessage()    : Dispatches a message
+#################################################################################################################################### */
 
-// listen collector in the configuration etape
+/*##################################################################################################################################
+		MESSAGE IN THE CONFIGURATION STEP BETWEEN BACKGROUND AND COLLECTEUR TO START RETRIEVING DATA FROM THE SITE
+#################################################################################################################################### */
+
 kango.addMessageListener('Pret', function(event) {
   if (kango.storage.getItem("DATA")=="True") {
 		kango.browser.tabs.getCurrent(function(tab) {
@@ -225,7 +239,9 @@ kango.addMessageListener('Pret', function(event) {
   }  			
 				
 });
-// send etat of traceMe to the collecteur
+/*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR TO SEND THE STATUS OF TRACEME (ON/OFF)
+#################################################################################################################################### */
 kango.addMessageListener('GetEtat', function(event) {
 
 	kango.browser.tabs.getCurrent(function(tab) {
@@ -236,9 +252,10 @@ kango.addMessageListener('GetEtat', function(event) {
 	});
 });
 
-// open the assistant
+/*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR BEFORE OPENING THE ASSISTANT
+#################################################################################################################################### */
 kango.addMessageListener('OpenAssist', function(event) {
- 	console.log('OpenAssist');
  	var URL= event.data;
  	kango.storage.setItem("OpenedAssist",false);
    	kango.browser.tabs.getAll(function(tab){
@@ -256,14 +273,11 @@ kango.addMessageListener('OpenAssist', function(event) {
 			}
 		}
 	})
-
-    /*kango.browser.tabs.getCurrent(function(tab) {
-    var data = kango.storage.getItem("OpenedAssist") ; 
-    tab.dispatchMessage('SendOpenedAssist', data );
-    })*/
 });
 
-// send configuration information to the collector
+/*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR TO SEND THE CONFIGURATION INFORMATION (EVENT TO COLLECT)
+#################################################################################################################################### */
 kango.addMessageListener('GetConfg', function(event) {
     kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
@@ -276,7 +290,9 @@ kango.addMessageListener('GetConfg', function(event) {
     	kango.console.log ("send Data",data);
 	});
 });
- // show notification
+ /*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR TO MAKE NOTIFICATION
+#################################################################################################################################### */
 kango.addMessageListener('notification', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
@@ -323,7 +339,9 @@ kango.addMessageListener('notificationD', function(event) {
      
 	});
 });
-//send obsel to ktbs
+ /*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR TO SEND OBSEL TO KTBS
+#################################################################################################################################### */
 kango.addMessageListener('obsel', function(event) {
 	//liste d'obsel !!!
 	if (trc_init) {
@@ -349,6 +367,9 @@ kango.addMessageListener('obsel', function(event) {
 		}
 
 });
+ /*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR TO SEND INFORMATION OF TRACE (ACTIVITIE)
+#################################################################################################################################### */
 
 kango.addMessageListener('TraceInfo', function(event) {
     var TraceInfo = event.data;
@@ -386,25 +407,11 @@ kango.addMessageListener('TraceInfo', function(event) {
    init_trc ();
    
 });
-   
+/*##################################################################################################################################
+		MESSAGE BETWEEN BACKGROUND AND POPUP TO RESET THE TRACE INFORMATION
+#################################################################################################################################### */   
 
-/*if (kango.storage.getItem("trace_options_Trace_Name") == undefined )
-{var Activities = [];Activities.push (TraceInfo.TraceName);}
-else
-{var Activities = JSON.parse(kango.storage.getItem("trace_options_Trace_Name"));
-            if (! existe( Activities,TraceInfo.TraceName) )
-            {
-                Activities.push (TraceInfo.TraceName);
-               
-            }
-        }
-    kango.storage.setItem("trace_options_Trace_Name",JSON.stringify(Activities));
-    kango.console.log ("Ac"+JSON.stringify(Activities));*/
- 
-
-
-kango.addMessageListener('init_trace', function(event) 
-{
+kango.addMessageListener('init_trace', function(event) {
 		traceObj = null ;
 		init_trc ();
 });				   

@@ -1,16 +1,32 @@
 
-KangoAPI.onReady(function() 
-{
- //get browser language
- var language = window.navigator.userLanguage || window.navigator.language;
- if (language.indexOf("en") === 0){langEn();}
- else if( language.indexOf("de") === 0){langDe();}
- else {langFr();}
- //translate options form
- var JSONObject;
- 
- function langEn()
- {
+/*##################################################################################################################################
+    Title                           || popup.js
+    Author                          || Derbel Fatma
+    Description                     || THE POPUP APPEARS WHEN THE USER CLICKS IN THE ICON 
+    ##################################################################################################################################  
+    Description for TRACEME         || THE POPUP ALLOWS  USER TO :
+    								|| 1-OPEN ASSISTANT
+    								|| 2-OPEN OPTION 
+    								|| 3-ENABLE OR DISABLE TRACING
+
+    
+    */
+
+ KangoAPI.onReady(function() {
+/*##################################################################################################################################
+       TRANSLATE OPTIONS FORM
+#################################################################################################################################### */
+//get browser language
+var language = window.navigator.userLanguage || window.navigator.language;
+if (language.indexOf("en") === 0){langEn();}
+else if( language.indexOf("de") === 0){
+	langDe();
+}
+else {
+	langFr();
+}
+var JSONObject;
+function langEn(){
     JSONObject = { 	"activity": "Activity",
 					"value": "Value",
 					"showtrace": "Show Trace",
@@ -18,13 +34,11 @@ KangoAPI.onReady(function()
 					"tname": "Trace Name",
 					"activebtn": "Activate",
 					"deactivebtn": "Deactivate"
-	}
+				}
 	setNames();
- }
- function langFr()
- {
- 
- JSONObject = {
+}
+function langFr(){
+ 	JSONObject = {
 				    "activity": "Activité",
 					"value": "Valeur",
 					"showtrace": "Afficher la trace",
@@ -34,9 +48,8 @@ KangoAPI.onReady(function()
 					"deactivebtn": "Désactiver"
 	}
 	setNames();
- }
- function langDe()
- {
+}
+function langDe(){
     
     JSONObject = { 	"activity": "Aktivität",
 					"value": "Wert",
@@ -47,9 +60,8 @@ KangoAPI.onReady(function()
 					"deactivebtn": "Deaktivieren"
 	}
 	setNames();  
- }
-function setNames()
-{  
+}
+function setNames(){  
   document.getElementById("activity").innerHTML = JSONObject.activity;
   document.getElementById("value").innerHTML = JSONObject.value;
   document.getElementById("Trace").innerHTML = JSONObject.showtrace;
@@ -86,18 +98,20 @@ function setNames()
 	})
 }
 
-$('document').ready(function ()
+/*##################################################################################################################################
+       SCRIPT CODE TO EXECUTE WHEN LOADED THE FILE
+#################################################################################################################################### */
 
-{  
+$('document').ready(function (){  
 
-//remember and display selected language
- if (kango.storage.getItem("LangChange") == "FR")
- { langFr(); } 
- else if (kango.storage.getItem("LangChange") == "DE")
- { langDe();}
- else if (kango.storage.getItem("LangChange") == "EN")
- { langEn(); }
- else { /* do nothing */}
+	//remember and display selected language
+ 	if (kango.storage.getItem("LangChange") == "FR")
+ 	{ langFr(); } 
+ 	else if (kango.storage.getItem("LangChange") == "DE")
+ 	{ langDe();}
+ 	else if (kango.storage.getItem("LangChange") == "EN")
+ 	{ langEn(); }
+ 	else { /* do nothing */}
  
 	var Button = document.getElementById("Etat");
     if (kango.storage.getItem("Etat") == undefined) 
@@ -122,29 +136,29 @@ $('document').ready(function ()
 	var Activities = JSON.parse(kango.storage.getItem("trace_options_Activitie"));
 	var TraceURI = JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
     var  OPTION = document.createElement ('OPTION');
-    //OPTION.setAttribute('value',"");
-   // OPTION.appendChild(document.createTextNode(""));
     document.getElementById('TraceID').appendChild(OPTION);
 	if (Activities != undefined )
 	{
-    for (i=0;i<Activities.length;i++)
-    { 
-        var  OPTION = document.createElement ('OPTION');
-        OPTION.setAttribute('value',i+"-"+Activities[i]);
-        OPTION.setAttribute('id',i);
-        OPTION.appendChild(document.createTextNode(i+"-"+Activities[i]));
-        document.getElementById('TraceID').appendChild(OPTION);
-        
-    }
-    if (kango.storage.getItem("Trace_Active") !=="")
-    {
-    	document.getElementById('TraceID').value=kango.storage.getItem("Trace_Active")+"-"+Activities[kango.storage.getItem("Trace_Active")];
-    }
+	    for (i=0;i<Activities.length;i++)
+	    { 
+	        var  OPTION = document.createElement ('OPTION');
+	        OPTION.setAttribute('value',i+"-"+Activities[i]);
+	        OPTION.setAttribute('id',i);
+	        OPTION.appendChild(document.createTextNode(i+"-"+Activities[i]));
+	        document.getElementById('TraceID').appendChild(OPTION);
+	        
+	    }
+	    if (kango.storage.getItem("Trace_Active") !=="")
+	    {
+	    	document.getElementById('TraceID').value=kango.storage.getItem("Trace_Active")+"-"+Activities[kango.storage.getItem("Trace_Active")];
+	    }
 	}
 	
 });
-
-    // show Trace
+/*##################################################################################################################################
+       DECLATION OF EVENT LISTENER
+#################################################################################################################################### */
+    // ############ OPEN ASSISTANT ############
     var trace = document.getElementById('Trace');
 	var open = false;
     trace.addEventListener("click", function(){
@@ -165,17 +179,14 @@ $('document').ready(function ()
 	    window.open (URL,"Assistant");
    
  	});
-    // option
+    // ############ OPEN OPTION PAGE ############
     var option = document.getElementById('Option');
-    option.addEventListener ("click",function () 
-    {
-     
-	 kango.ui.optionsPage.open();
+    option.addEventListener ("click",function (){
+     	kango.ui.optionsPage.open();
     });
-    
+    // ############ ENABLE OR DISABLE TRACING ############
 	var Etat = document.getElementById('Etat');
-  	Etat.addEventListener ("click",function () 
-    {
+  	Etat.addEventListener ("click",function () {
 		if (kango.storage.getItem("Etat") == "Activer")
 		{
 			kango.storage.setItem("Etat","Desactiver");
@@ -193,20 +204,16 @@ $('document').ready(function ()
 		}
     });
 
-
-$('#TraceID').change(function ()
-{
-   
-    select=document.getElementById("TraceID");
-    kango.storage.setItem("Trace_Active",select.options[select.selectedIndex].id );
+  	// ############ CHANGE ACTIVE TRACE ############
+	$('#TraceID').change(function (){
+   		select=document.getElementById("TraceID");
+    	kango.storage.setItem("Trace_Active",select.options[select.selectedIndex].id );
    
     	kango.dispatchMessage('init_trace');
-    
-   // chrome.extension.sendRequest({mess:'popup'}, function(response) {});
+    });
 
 });
 
-});
 
 
-
+ 
