@@ -45,8 +45,8 @@ The extension TraceMe  is developed with [Kango Framework](http://kangoextension
 
 ##### Preparation of environment to work with Kango :
 Before you begin working with Kango you should make a few steps:
--Install Python 2.7 (http://www.python.org/download/).
--Download here and extract the archive with framework to any directory.
+- Install Python 2.7 (http://www.python.org/download/).
+- Download here and extract the archive with framework to any directory.
 
 ##### Creation of  project TraceMe :
 - Download the archive TraceMe
