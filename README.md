@@ -21,27 +21,21 @@ First, you must install traceMe. An automatic installation is available on this 
 
  http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Install-TraceMe.html
 
-##### Option Form:
+After, you must complete the information in the Option Form :
+- The identity of user (First Name, Last Name, Email)
+- The server information (Trace_URI,name of the activity) : you can add more activities, after you should select the name of trace in the popup of extention.
+If you have a server collector, the server information  will be filled  automatically.
 
-You must complete the information in the form option :
-
-- Information about identity of user
-
-- Information about Server
-
-- The name of activities (trace-name) : you can add more activities
-After you should select the name of trace in the popup of extention.
-
-##### Configuration :
-
+Another feature of traceMe is Configure Tracing : 
 You can specify the events and the element that you want to collect for a site. 
-
-1- Load your website (the site will be loaded in an iframe)
-2- Select the element that you want to collect it, then the selector of the element is displayed
-4- Press the button add event and copy the selector text in the field selector
-5- you can specify the obsel-type of this event
+- Load your website (the site will be loaded in an iframe)
+- Select the element that you want to collect it, then the selector of the element is displayed
+- Press the button add event and copy the selector text in the field selector
+- you can specify the obsel-type of this event
 
 By default this extension collect , URL of a site visited.
+
+
 
 ##### Show Trace :
 
