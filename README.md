@@ -21,7 +21,7 @@ First, you must install traceMe. An automatic installation is available on this 
 
  http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Install-TraceMe.html
 
-After, you must complete the information in the Option Form :
+After, you must complete the information in the ##### Option Form :
 - The identity of user (First Name, Last Name, Email)
 - The server information (Trace_URI,name of the activity) : you can add more activities, after you should select the name of trace in the popup of extention.
 If you have a server collector, the server information  will be filled  automatically.
