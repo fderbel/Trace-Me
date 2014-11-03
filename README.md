@@ -1,19 +1,19 @@
 TraceMe
 ========
 
-TraceMe is an extension for the web browser ( Chrome, Firefox). It allows collecting basic actions of  users at client side
-(mouse, key) and send them to a server (ktbs).
-To use TraceMe, you must have kernel for Trace-Based Systems KTBS.
-For more information about KTBS please have a look on its official documentation :https://kernel-for-trace-based-systems.readthedocs.org/en/latest/
+
+TraceMe is an extension for the web browser ( Chrome, Firefox). It allows you to collect  basic actions of users at client side (mouse, key) and send them to a server (ktbs). To use TraceMe, you must have kernel for Trace-Based Systems KTBS. 
+
+For more information about KTBS you may have a look on the official documentation :https://kernel-for-trace-based-systems.readthedocs.org/en/latest/
 
 This documentation is divided into two parts:
 ##### 1- User’s documentation 
 
-The User’s documentation describes how using TraceMe directly from java script and html code, and how modifying it.
+ The user’s documentation  describes each feature of TraceMe, and assists the user in realizing these features.
 
 ##### 2- Developers’ documentation
  
- The developers’ documentation describes each feature of TraceMe, and assists the user in realizing these features.
+The developers’ documentation gives you tips  of how using TraceMe directly from java script and html code, and how modifying it.
 
 User’s documentation
 ====================== 
