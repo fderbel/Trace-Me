@@ -30,12 +30,13 @@ If you have a server collector, the server information  will be filled  automati
 
 ##### Configuring the Tracing :
 
-You can specify the elements  you want to collect for a site: 
+You can specify the elements  you want to collect for a site:
+
 1- Load the targeted website (the site will be loaded in an iframe);
-- 2) Select an element that you want to collect in;  the selector of the element is displayed;
-- 3) Pressing the button adds this element as an element to be traced when interacted by the user;
-- 4) copy the selector text in the field selector
-- 5) you can give a type to this element (obsel-type = type of observed element).
+2- Select an element that you want to collect in;  the selector of the element is displayed;
+3- Pressing the button adds this element as an element to be traced when interacted by the user;
+4- copy the selector text in the field selector
+5- you can give a type to this element (obsel-type = type of observed element).
 
 By default, if you do not specify what has to be traced in a web page, traceMe collects only the URL of the visited web page.
 
