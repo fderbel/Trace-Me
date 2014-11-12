@@ -30,13 +30,12 @@ If you have a server collector, the server information  will be filled  automati
 
 ##### Configuring the Tracing :
 
-You can specify the elements  you want to collect for a site:
-
-* 1- Load the targeted website (the site will be loaded in an iframe);
-* 2- Select an element that you want to collect in;  the selector of the element is displayed;
-* 3- Pressing the button adds this element as an element to be traced when interacted by the user;
-* 4- copy the selector text in the field selector
-* 5- you can give a type to this element (obsel-type = type of observed element).
+You can specify the elements  you want to collect for a site: 
+* 1) Load the targeted website (the site will be loaded in an iframe);
+* 2) Select an element that you want to collect in;  the selector of the element is displayed;
+* 3) Pressing the button adds this element as an element to be traced when interacted by the user;
+* 4) copy the selector text in the field selector
+* 5) you can give a type to this element (obsel-type = type of observed element).
 
 By default, if you do not specify what has to be traced in a web page, traceMe collects only the URL of the visited web page.
 
@@ -73,17 +72,19 @@ TraceMe uses the following files:
 - [fr.json] (https://github.com/fderbel/Trace-Me/blob/master/src/common/locales/fr.json): to be explained
 
 ##### Manual installation in Chrome
-1- Download the archive
-2- Visit chrome://extensions in your browser 
+* 1- Download the archive
+* 2- Visit chrome://extensions in your browser 
 (or open up the Chrome menu by clicking the icon to the far right of the Omnibox: The menu's icon is three horizontal bars.. and select  "Tools then Extensions"  to reach the same place).
-3- Ensure that the Developer mode checkbox in the top right-hand corner is checked.
-4- Click "Load unpacked extension…" to pop up a directory-selection dialog.
-5- Navigate to the directory TraceMe/output/Chrome, and select it.
+* 3- Ensure that the Developer mode checkbox in the top right-hand corner is checked.
+* 4- Click "Load unpacked extension…" to pop up a directory-selection dialog.
+* 5- Navigate to the directory TraceMe/output/Chrome, and select it.
 
 ##### Manual installation in Firefox
-1- Download the archive
-2- Open the Tools/Add-ons Manger
-3- Click on the gear icon (Tools for all add-ons) > Install Add-on From File
-5- Select TraceMe/output/traceme_1.0.0.xpi in your local archive
+* 1- Download the archive
+* 2- Open the Tools/Add-ons Manger
+* 3- Click on the gear icon (Tools for all add-ons) > Install Add-on From File
+* 5- Select TraceMe/output/traceme_1.0.0.xpi in your local archive
+
+
 
 
