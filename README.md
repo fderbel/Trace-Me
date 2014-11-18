@@ -41,7 +41,7 @@ By default, if you do not specify what has to be traced in a web page, traceMe c
 
 ##### Visualizing the Trace :
 
-To be done.
+With traceMe, you can open a the assistant samoTraceMe (An assistance system to analyzing Traces of Activity)
 
 Developers’ documentation
 ====================== 
@@ -65,11 +65,11 @@ After each code modification, you have to run this command to generate the outpu
 TraceMe uses the following files:
 
 - [extension_info.json] (https://github.com/fderbel/Trace-Me/blob/master/src/common/extension_info.json): gives information about the extension, such as the most important files and the capabilities that the extension might use.
-- [popup.html] (https://github.com/fderbel/Trace-Me/blob/master/src/common/popup.html) & [popup.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/popup.js): to be explained.
-- [options.html](https://github.com/fderbel/Trace-Me/blob/master/src/common/options.html) & [options.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/options.js): to be explained.
-- [background.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/background.js): to be explained.
-- [Collecteur.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/Collecteur.js): to be explained.
-- [fr.json] (https://github.com/fderbel/Trace-Me/blob/master/src/common/locales/fr.json): to be explained
+- [popup.html] (https://github.com/fderbel/Trace-Me/blob/master/src/common/popup.html) & [popup.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/popup.js): The popup appears when the user click in the icon. It allow user to  open assistant, open obtion form, enable or disable tracing.
+- [options.html](https://github.com/fderbel/Trace-Me/blob/master/src/common/options.html) & [options.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/options.js): options page allow users to customize the behavior of your extension. It is is a user interface which includes two form : form options and form Configure Tracing.
+- [background.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/background.js): Background scripts are running as long as extension is enabled in browser and executed once on each browser start. It should be enumerated in background_scripts array of [extension_info.json] (https://github.com/fderbel/Trace-Me/blob/master/src/common/extension_info.json) file.
+- [Collecteur.js] (https://github.com/fderbel/Trace-Me/blob/master/src/common/Collecteur.js): It is a script that runs on any web page opened by user.
+- [fr.json] (https://github.com/fderbel/Trace-Me/blob/master/src/common/locales/fr.json): This file contains the default configuration collect.
 
 ##### Manual installation in Chrome
 * 1- Download the archive
