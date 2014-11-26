@@ -256,6 +256,7 @@ kango.addMessageListener('GetEtat', function(event) {
 		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR BEFORE OPENING THE ASSISTANT
 #################################################################################################################################### */
 kango.addMessageListener('OpenAssist', function(event) {
+	init_trc ();
  	var URL= event.data;
  	kango.storage.setItem("OpenedAssist",false);
    	kango.browser.tabs.getAll(function(tab){
@@ -267,7 +268,7 @@ kango.addMessageListener('OpenAssist', function(event) {
 			}	
 			remaining -= 1;
 			if (remaining==0){
-				if (! kango.storage.getItem("OpenedAssist")){
+				if ((! kango.storage.getItem("OpenedAssist"))´&& (traceObj)){
 						kango.browser.windows.create({url:URL,width:1000, height:700});
 				}
 			}
@@ -403,7 +404,7 @@ kango.addMessageListener('TraceInfo', function(event) {
 
 
    }
-   setTimeout(function(){init_trc ()},2000);
+   setTimeout(function(){console.log ("init trc after trace info");init_trc ()},2000);
 });
 /*##################################################################################################################################
 		MESSAGE BETWEEN BACKGROUND AND POPUP TO RESET THE TRACE INFORMATION
