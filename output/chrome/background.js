@@ -16,6 +16,7 @@
 var traceObj;
 var language = window.navigator.userLanguage || window.navigator.language;
 kango.storage.setItem("LangChange",language.toUpperCase());
+kango.storage.setItem("Openedpopup",true);
 var trc_init ;
 var init_trc  = function (){
 	if (kango.storage.getItem("Trace_Active")===""){ 
@@ -139,6 +140,8 @@ var oncompletedDocumentFunction = function(event){
 								if (tab[k].getId()==tag_Id){
 								console.log ('here');
 								tab[k].close();	
+								init_trc();
+								//kango.storage.setItem("Openedpopup",true);
 								}	
 
 							}
@@ -178,8 +181,9 @@ aouthFunction = function (link,URLSuccess){
 											}
 										remaining -= 1;
 										if (remaining == 0) {
-											if (kango.storage.getItem("Openedpopup")) {
+											if (kango.storage.getItem("Openedpopup") === true) {
                                             	kango.browser.windows.create({url:link,width:800, height:400});
+                                            	//kango.storage.setItem("Openedpopup",false);
                                             	kango.browser.tabs.getCurrent(function(tab) {
 													var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
 													var notification = kango.ui.notifications.createNotification('Trace Me',"You should authenticate",urlImg);
