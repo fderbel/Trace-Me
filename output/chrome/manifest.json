@@ -20,8 +20,7 @@
         "16": "icons/button.png"
     }, 
     "web_accessible_resources": [
-        "res/*", 
-        "assets/*"
+        "res/*"
     ], 
     "description": "__MSG_info_description__", 
     "background": {
@@ -41,7 +40,6 @@
         "tabs", 
         "http://*/*", 
         "https://*/*", 
-        "contextMenus", 
         "webNavigation", 
         "notifications"
     ]

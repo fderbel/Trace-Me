@@ -45,38 +45,30 @@ var Get_Trace = function (BASE_URI,Trace_Name){
 	            					{
 	            						// URLAuth and 	URLSuccess
 	            						Link = jqXHR.getResponseHeader('Link');
-	            				//var div = document.createElement('div');
-	            				//div.innerHTML=jqXHR.responseText;
-	            				//var link = div.getElementsByTagName("a")[0].href;
-	            				 //URLSuccess = "http://localhost:8001/"
-	            				 console.log (Link);
-	            				 D= Link.split (',');
-	            				 for  (var i=0;i<D.length;i++){
-	            				 	var SousD = D[i].split(';');
-	            				 	if (SousD[1] === " rel=oauth_resource_server"){
-	            				 		link = SousD[0].substr(1,SousD[0].length-2)
+			            				 
+			            				 D= Link.split (',');
+			            				 for  (var i=0;i<D.length;i++){
+			            				 	var SousD = D[i].split(';');
+			            				 	if (SousD[1] === " rel=oauth_resource_server"){
+			            				 		link = SousD[0].substr(1,SousD[0].length-2)
 
-	            				 	}
-	            				 	if (SousD[1] === " rel=successful_login_redirect"){
-	            				 		URLSuccess = SousD[0].substr(2,SousD[0].length-3)
-	            				 	}
-
-	            				 }
-	            				 
-	            				 console.log (link,'link');
-	            				 console.log (URLSuccess,'URLSuccess');
-	            				 aouthFunction (link,URLSuccess);
+			            				 	}
+			            				 	if (SousD[1] === " rel=successful_login_redirect"){
+			            				 		URLSuccess = SousD[0].substr(2,SousD[0].length-3)
+			            				 	}
+	            				 		}
+	            				 	aouthFunction (link,URLSuccess);
 	            				
 	            					}           
-	  		}  
+	  						}  
 	  	}); 
 
 		return trc ;
 
 }
 var PutObsel = function (traceObj,OBSEL) {
-
-			traceObj.put_obsels({
+	if (OBSEL)
+	{		traceObj.put_obsels({
 				 	obsel: OBSEL,
 				 	success: function(){console.log("success is callbacked");},
 				 	error: function(jqXHR,textStatus, errorThrown){
@@ -110,6 +102,7 @@ var PutObsel = function (traceObj,OBSEL) {
 			            				}           
 			  		}
 			  	});
+	}
 }
 var GetTraceAndBaseName = function (Trace_URI){
 
@@ -125,19 +118,19 @@ var GetTraceAndBaseName = function (Trace_URI){
 
 }
 var oncreateFunction = function(event){
-	console.log('tabcreated '+ event);
-	tag_Id=event.tabId;
-	console.log (tag_Id);
 	
+	tag_Id=event.tabId;
+	console.log ('created',tag_Id);
+	kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction);
 					                 							
-	};
+};
 var oncompletedDocumentFunction = function(event){
    
             if ( event.url == URLSuccess ){
                     //close tab
                     //remove event listen
-				console.log('targetId '+event.target.getId());
-				console.log(tag_Id);
+				console.log('Completed '+event.target.getId());
+				console.log('In created',tag_Id);
 				trc_init = true ;
 					if (event.target.getId()==tag_Id)
 					{
@@ -162,39 +155,44 @@ aouthFunction = function (link,URLSuccess){
 			     type: 'GET',
 			     statusCode: {
 			            	200: function(data, textStatus, xhr) {
-									// popup solution
-					               
-					                	kango.storage.setItem("Openedpopup",true)
-					                	title = $(data).filter('title').text();// get title  (data)
-					                	console.log  ("title" ,title)					                	
-					                	kango.browser.addEventListener(kango.browser.event.TabCreated,oncreateFunction);
-					                 	kango.browser.tabs.getAll(function(tab){
-					                				var remaining = tab.length;
-					                				for (var i=0;i<tab.length; i++)
-                                            		{                                            							                                           							
-														console.log (tab[i].getTitle());
-														console.log (tab[i].getUrl())
-														if((tab[i].getTitle() === title) || (tab[i].getUrl()=== link))
-																{kango.storage.setItem("Openedpopup",false);}
-														remaining -= 1;
-														if (remaining == 0) {
-																if (kango.storage.getItem("Openedpopup")) {
-                                            							kango.browser.windows.create({url:link,width:800, height:400});
-                                            							kango.browser.tabs.getCurrent(function(tab) {
-																			var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
-																			var notification = kango.ui.notifications.createNotification('Trace Me',"You should authenticate",urlImg);
-    																		notification.show();
-     																	});
-                                            							kango.browser.addEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
-                                            							setTimeout(function(){kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction)},1000);
-                                            					} 
-                                            			
-														}
-													}		      
-                                        });  
-                                             					
-                                    
-							}
+								// popup solution
+								
+					            kango.storage.setItem("Openedpopup",true)
+					            title = $(data).filter('title').text();// get title  (data)
+					            title = title.replace (/\s/g,'');
+					            console.log  ("title" ,title)					                	
+					            kango.browser.addEventListener(kango.browser.event.TabCreated,oncreateFunction);
+					            kango.browser.tabs.getAll(function(tab){
+					                var remaining = tab.length;
+					                for (var i=0;i<tab.length; i++)
+                                    {                                            							                                           							
+										console.log (tab[i].getTitle());
+										console.log (tab[i].getUrl());
+										T= tab[i].getTitle();
+										T = T.replace (/\s/g,'');
+										var URLI = tab[i].getUrl() 
+										URLI = URLI.replace ("http%3A%2F%2F","http://");
+										URLI = URLI.replace("%2F","/");
+										if((T === title) || (T === "") ||(URLI=== link))
+											{
+												kango.storage.setItem("Openedpopup",false);
+											}
+										remaining -= 1;
+										if (remaining == 0) {
+											if (kango.storage.getItem("Openedpopup")) {
+                                            	kango.browser.windows.create({url:link,width:800, height:400});
+                                            	kango.browser.tabs.getCurrent(function(tab) {
+													var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
+													var notification = kango.ui.notifications.createNotification('Trace Me',"You should authenticate",urlImg);
+    												notification.show();
+     											});
+                                            	kango.browser.addEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
+                                            	//setTimeout(function(){kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction)},1000);
+                                            } 
+                                        }
+									}		      
+                                });  
+                            }
 							
 				},
 			    error: function(jqXHR, textStatus, errorThrown){console.log("erreur link auth");},
@@ -246,7 +244,9 @@ kango.addMessageListener('GetEtat', function(event) {
 
 	kango.browser.tabs.getCurrent(function(tab) {
 			if (kango.storage.getItem("Etat") == undefined) 
-			{kango.storage.setItem("Etat","Activer");	  }
+			{
+				kango.storage.setItem("Etat","Activer");	  
+			}
     		tab.dispatchMessage('Etat', kango.storage.getItem("Etat") );
     		kango.console.log ("send Etat");
 	});
@@ -262,7 +262,7 @@ kango.addMessageListener('OpenAssist', function(event) {
    		var remaining=tab.length;
 		for (var k=0;k<tab.length;k++)
 		{
-			if (tab[k].getUrl()==URL){
+			if (tab[k].getUrl()=== URL){
 				kango.storage.setItem("OpenedAssist",true);
 			}	
 			remaining -= 1;
@@ -314,7 +314,7 @@ kango.addMessageListener('notification', function(event) {
     	kango.storage.setItem("TraceStart", "Die Aufspürung deiner Aktivitäten hat begonnen."); 
     	} 
 	
-	if ((TraceActive === "")|| (TraceActive === undefined))
+	if ((TraceActive === "")|| (TraceActive === undefined) || ((TraceActive === null)))
 		{
 		var notification = kango.ui.notifications.createNotification('Trace Me',kango.storage.getItem("notification"),urlImg);
     	notification.show();
