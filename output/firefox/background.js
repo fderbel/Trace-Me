@@ -18,21 +18,20 @@ var language = window.navigator.userLanguage || window.navigator.language;
 kango.storage.setItem("LangChange",language.toUpperCase());
 var trc_init ;
 var init_trc  = function (){
-	if (kango.storage.getItem("Trace_Active")) {
-		   	if (kango.storage.getItem("Trace_Active")===""){ 
+	if (kango.storage.getItem("Trace_Active")===""){ 
 		    	trc_init = false ;
-		    }
-		    else { 
-		   		TraceURI 	= JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
-		     	Trace_URI 	= TraceURI[kango.storage.getItem("Trace_Active")];
-		     	Trace_Name 	= GetTraceAndBaseName (Trace_URI)["Trace_Name"];
-		     	BASE_URI 	= GetTraceAndBaseName (Trace_URI)["BaseURI"];
-		   		traceObj 	= Get_Trace (BASE_URI,Trace_Name)
-		        if (traceObj){
-		        	trc_init = true ;
-		        }
-		    }
 	}
+	else { 
+		TraceURI 	= JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
+		Trace_URI 	= TraceURI[kango.storage.getItem("Trace_Active")];
+		Trace_Name 	= GetTraceAndBaseName (Trace_URI)["Trace_Name"];
+		BASE_URI 	= GetTraceAndBaseName (Trace_URI)["BaseURI"];
+		traceObj 	= Get_Trace (BASE_URI,Trace_Name)
+		if (traceObj){
+		    trc_init = true ;
+		}
+	}
+	
 }
 
 var Get_Trace = function (BASE_URI,Trace_Name){
@@ -268,7 +267,7 @@ kango.addMessageListener('OpenAssist', function(event) {
 			}	
 			remaining -= 1;
 			if (remaining==0){
-				if ((! kango.storage.getItem("OpenedAssist")) && (traceObj)){
+				if (! kango.storage.getItem("OpenedAssist")){
 						kango.browser.windows.create({url:URL,width:1000, height:700});
 				}
 			}
