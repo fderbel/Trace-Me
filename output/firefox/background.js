@@ -363,6 +363,7 @@ kango.addMessageListener('obsel', function(event) {
 	}
 	else 
 		{	
+			init_trc ();
 			kango.console.log ("error");
 		}
 
@@ -373,9 +374,7 @@ kango.addMessageListener('obsel', function(event) {
 
 kango.addMessageListener('TraceInfo', function(event) {
     var TraceInfo = event.data;
-   // kango.storage.setItem("Trace_Active",TraceInfo.TraceName);
-   // kango.storage.setItem("trace_options_Base_URI",TraceInfo.BaseURI);
-   // kango.storage.setItem("trace_options_Model_URI",TraceInfo.ModelURI);
+   
    if (kango.storage.getItem("trace_options_Trace_URI") == undefined ){
    		var TraceURI = [];
 		TraceURI.push(TraceInfo.BaseURI+TraceInfo.TraceName);
@@ -404,8 +403,7 @@ kango.addMessageListener('TraceInfo', function(event) {
 
 
    }
-   init_trc ();
-   
+   setTimeout(function(){init_trc ()},2000);
 });
 /*##################################################################################################################################
 		MESSAGE BETWEEN BACKGROUND AND POPUP TO RESET THE TRACE INFORMATION
