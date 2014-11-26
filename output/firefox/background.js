@@ -268,7 +268,7 @@ kango.addMessageListener('OpenAssist', function(event) {
 			}	
 			remaining -= 1;
 			if (remaining==0){
-				if ((! kango.storage.getItem("OpenedAssist"))´&& (traceObj)){
+				if ((! kango.storage.getItem("OpenedAssist")) && (traceObj)){
 						kango.browser.windows.create({url:URL,width:1000, height:700});
 				}
 			}
