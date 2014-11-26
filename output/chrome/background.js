@@ -16,7 +16,7 @@
 var traceObj;
 var language = window.navigator.userLanguage || window.navigator.language;
 kango.storage.setItem("LangChange",language.toUpperCase());
-kango.storage.setItem("Openedpopup",true);
+
 var trc_init ;
 var init_trc  = function (){
 	if (kango.storage.getItem("Trace_Active")===""){ 
@@ -140,14 +140,14 @@ var oncompletedDocumentFunction = function(event){
 								if (tab[k].getId()==tag_Id){
 								console.log ('here');
 								tab[k].close();	
-								init_trc();
-								//kango.storage.setItem("Openedpopup",true);
+								
+								
 								}	
 
 							}
 
 					})
-				kango.browser.removeEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
+				//kango.browser.removeEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
 			}		}
 };
 
@@ -190,7 +190,7 @@ aouthFunction = function (link,URLSuccess){
     												notification.show();
      											});
                                             	kango.browser.addEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
-                                            	//setTimeout(function(){kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction)},1000);
+                                            	setTimeout(function(){kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction)},1000);
                                             } 
                                         }
 									}		      
