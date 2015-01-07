@@ -14,24 +14,29 @@
 #################################################################################################################################### */
 
 var traceObj;
+var Openedpopup = true;
+var AssistOpened = true;
 var language = window.navigator.userLanguage || window.navigator.language;
 kango.storage.setItem("LangChange",language.toUpperCase());
-
+if (! kango.storage.getItem("Trace_Active"))
+	{kango.storage.setItem("Trace_Active","");}
 var trc_init ;
+var timer;
 var init_trc  = function (){
-	if (kango.storage.getItem("Trace_Active")===""){ 
+			kango.console.log ('inittrc');
+		   	if (kango.storage.getItem("Trace_Active")===""){ 
 		    	trc_init = false ;
-	}
-	else { 
-		TraceURI 	= JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
-		Trace_URI 	= TraceURI[kango.storage.getItem("Trace_Active")];
-		Trace_Name 	= GetTraceAndBaseName (Trace_URI)["Trace_Name"];
-		BASE_URI 	= GetTraceAndBaseName (Trace_URI)["BaseURI"];
-		traceObj 	= Get_Trace (BASE_URI,Trace_Name)
-		if (traceObj){
-		    trc_init = true ;
-		}
-	}
+		    }
+		    else { 
+		   		TraceURI 	= JSON.parse(kango.storage.getItem("trace_options_Trace_URI"));
+		     	Trace_URI 	= TraceURI[kango.storage.getItem("Trace_Active")];
+		     	Trace_Name 	= GetTraceAndBaseName (Trace_URI)["Trace_Name"];
+		     	BASE_URI 	= GetTraceAndBaseName (Trace_URI)["BaseURI"];
+		   		traceObj 	= Get_Trace (BASE_URI,Trace_Name)
+		        if (traceObj){
+		        	trc_init = true ;
+		        }
+		    }
 	
 }
 
@@ -45,30 +50,38 @@ var Get_Trace = function (BASE_URI,Trace_Name){
 	            					{
 	            						// URLAuth and 	URLSuccess
 	            						Link = jqXHR.getResponseHeader('Link');
-			            				 
-			            				 D= Link.split (',');
-			            				 for  (var i=0;i<D.length;i++){
-			            				 	var SousD = D[i].split(';');
-			            				 	if (SousD[1] === " rel=oauth_resource_server"){
-			            				 		link = SousD[0].substr(1,SousD[0].length-2)
+	            				//var div = document.createElement('div');
+	            				//div.innerHTML=jqXHR.responseText;
+	            				//var link = div.getElementsByTagName("a")[0].href;
+	            				 //URLSuccess = "http://localhost:8001/"
+	            				 //console.log (Link);
+	            				 D= Link.split (',');
+	            				 for  (var i=0;i<D.length;i++){
+	            				 	var SousD = D[i].split(';');
+	            				 	if (SousD[1] === " rel=oauth_resource_server"){
+	            				 		link = SousD[0].substr(1,SousD[0].length-2)
 
-			            				 	}
-			            				 	if (SousD[1] === " rel=successful_login_redirect"){
-			            				 		URLSuccess = SousD[0].substr(2,SousD[0].length-3)
-			            				 	}
-	            				 		}
-	            				 	aouthFunction (link,URLSuccess);
+	            				 	}
+	            				 	if (SousD[1] === " rel=successful_login_redirect"){
+	            				 		URLSuccess = SousD[0].substr(2,SousD[0].length-3)
+	            				 	}
+
+	            				 }
+	            				 
+	            				// console.log (link,'link');
+	            				 //console.log (URLSuccess,'URLSuccess');
+	            				 aouthFunction (link,URLSuccess);
 	            				
 	            					}           
-	  						}  
+	  		}  
 	  	}); 
 
 		return trc ;
 
 }
 var PutObsel = function (traceObj,OBSEL) {
-	if (OBSEL)
-	{		traceObj.put_obsels({
+if (OBSEL !== undefined) {
+			traceObj.put_obsels({
 				 	obsel: OBSEL,
 				 	success: function(){console.log("success is callbacked");},
 				 	error: function(jqXHR,textStatus, errorThrown){
@@ -102,7 +115,7 @@ var PutObsel = function (traceObj,OBSEL) {
 			            				}           
 			  		}
 			  	});
-	}
+}
 }
 var GetTraceAndBaseName = function (Trace_URI){
 
@@ -118,20 +131,20 @@ var GetTraceAndBaseName = function (Trace_URI){
 
 }
 var oncreateFunction = function(event){
-	
 	tag_Id=event.tabId;
-	console.log ('created',tag_Id);
-	kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction);
+	console.log ('tabcreated '+tag_Id);
+	setTimeout(function(){kango.console.log ("delete event tab created");kango.browser.removeEventListener(kango.browser.event.TAB_CREATED,oncreateFunction)},500);
 					                 							
-};
+	};
 var oncompletedDocumentFunction = function(event){
-   
+   console.log('targetId oncomplete'+event.target.getId());
             if ( event.url == URLSuccess ){
                     //close tab
                     //remove event listen
-				console.log('Completed '+event.target.getId());
-				console.log('In created',tag_Id);
+				console.log('targetId '+event.target.getId());
+				console.log('created tag' + tag_Id);
 				trc_init = true ;
+				init_trc();
 					if (event.target.getId()==tag_Id)
 					{
 						kango.browser.tabs.getAll(function(tab){
@@ -141,67 +154,74 @@ var oncompletedDocumentFunction = function(event){
 								console.log ('here');
 								tab[k].close();	
 								
-								
 								}	
 
 							}
 
 					})
-				//kango.browser.removeEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
+				kango.browser.removeEventListener(kango.browser.event.DOCUMENT_COMPLETE,oncompletedDocumentFunction);
 			}		}
 };
 
 aouthFunction = function (link,URLSuccess){
-  	jQuery.ajax({
+kango.console.log ("aouth"+Openedpopup);
+  if (Openedpopup)	
+{	kango.console.log ("aouth opened");
+	Openedpopup = false ;
+	jQuery.ajax({
 			     url : link,
 			     type: 'GET',
 			     statusCode: {
 			            	200: function(data, textStatus, xhr) {
-								// popup solution
-								
-					            kango.storage.setItem("Openedpopup",true)
-					            title = $(data).filter('title').text();// get title  (data)
-					            title = title.replace (/\s/g,'');
-					            console.log  ("title" ,title)					                	
-					            kango.browser.addEventListener(kango.browser.event.TabCreated,oncreateFunction);
-					            kango.browser.tabs.getAll(function(tab){
-					                var remaining = tab.length;
-					                for (var i=0;i<tab.length; i++)
-                                    {                                            							                                           							
-										console.log (tab[i].getTitle());
-										console.log (tab[i].getUrl());
-										T= tab[i].getTitle();
-										T = T.replace (/\s/g,'');
-										var URLI = tab[i].getUrl() 
-										URLI = URLI.replace ("http%3A%2F%2F","http://");
-										URLI = URLI.replace("%2F","/");
-										if((T === title) || (T === "") ||(URLI=== link))
-											{
-												kango.storage.setItem("Openedpopup",false);
-											}
-										remaining -= 1;
-										if (remaining == 0) {
-											if (kango.storage.getItem("Openedpopup") === true) {
-                                            	kango.browser.windows.create({url:link,width:800, height:400});
-                                            	//kango.storage.setItem("Openedpopup",false);
-                                            	kango.browser.tabs.getCurrent(function(tab) {
-													var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
-													var notification = kango.ui.notifications.createNotification('Trace Me',"You should authenticate",urlImg);
-    												notification.show();
-     											});
-                                            	kango.browser.addEventListener(kango.browser.event.DocumentComplete,oncompletedDocumentFunction);
-                                            	setTimeout(function(){kango.browser.removeEventListener(kango.browser.event.TabCreated,oncreateFunction)},1000);
-                                            } 
-                                        }
-									}		      
-                                });  
-                            }
+									// popup solution
+					               
+					                	Openedpopup = false ;
+										popup = true;
+					                	title = $(data).filter('title').text();// get title  (data)
+										title = title.replace(/\s/g,'');				                	
+					                	
+					                 	kango.browser.tabs.getAll(function(tab){
+					                				var remaining = tab.length;
+					                				for (var i=0;i<tab.length; i++)
+                                            		{                                            							                                           							
+														T= tab[i].getTitle();
+														T = T.replace (/\s/g,'');
+														var URLI = tab[i].getUrl() 
+														URLI = URLI.replace ("http%3A%2F%2F","http://");
+														URLI = URLI.replace("%2F","/");
+														if((T === title) || (URLI === link))
+																{popup = false ;}
+														remaining -= 1;
+														if (remaining == 0) {
+																kango.console.log('Openedpopup : '+ Openedpopup);
+																if (popup) {
+																		kango.browser.addEventListener(kango.browser.event.TAB_CREATED,oncreateFunction);
+																		console.log ("link opened", link);
+                                            							kango.browser.windows.create({url:link,width:800, height:400});
+																		Openedpopup = false;
+                                            							kango.browser.tabs.getCurrent(function(tab) {
+																			var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
+																			//var notification = kango.ui.notifications.createNotification('Trace Me',"You should authenticate",urlImg);
+    																		kango.ui.notifications.show('Trace Me',"You should authenticate",urlIm);
+     																	});
+                                            							kango.browser.addEventListener(kango.browser.event.DOCUMENT_COMPLETE,oncompletedDocumentFunction);
+                                            							setTimeout(function(){Openedpopup = true;console.log("time")},60000);
+																		setTimeout(function(){kango.browser.removeEventListener(kango.browser.event.DOCUMENT_COMPLETE,oncompletedDocumentFunction);},60000);
+																		
+                                            					} 
+                                            			
+														}
+													}		      
+                                        });  
+                                             					
+                                    
+							}
 							
 				},
 			    error: function(jqXHR, textStatus, errorThrown){console.log("erreur link auth");},
 			
 		});
-
+}
 }
 
 /*##################################################################################################################################
@@ -233,7 +253,7 @@ if ((kango.storage.getItem("Etat") == "Desactiver")){
 kango.addMessageListener('Pret', function(event) {
   if (kango.storage.getItem("DATA")=="True") {
 		kango.browser.tabs.getCurrent(function(tab) {
-			kango.console.log ("get data back");
+			//kango.console.log ("get data back");
 			tab.dispatchMessage('GetDataD');
 		}); 
 	kango.storage.setItem ("DATA","false");
@@ -247,11 +267,9 @@ kango.addMessageListener('GetEtat', function(event) {
 
 	kango.browser.tabs.getCurrent(function(tab) {
 			if (kango.storage.getItem("Etat") == undefined) 
-			{
-				kango.storage.setItem("Etat","Activer");	  
-			}
+			{kango.storage.setItem("Etat","Activer");	  }
     		tab.dispatchMessage('Etat', kango.storage.getItem("Etat") );
-    		kango.console.log ("send Etat");
+    		//kango.console.log ("send Etat");
 	});
 });
 
@@ -259,31 +277,54 @@ kango.addMessageListener('GetEtat', function(event) {
 		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR BEFORE OPENING THE ASSISTANT
 #################################################################################################################################### */
 kango.addMessageListener('OpenAssist', function(event) {
-	init_trc ();
- 	var URL= event.data;
- 	kango.storage.setItem("OpenedAssist",false);
-   	kango.browser.tabs.getAll(function(tab){
+ if (AssistOpened)	
+{	AssistOpened = false;
+	kango.console.log ("openAssist");
+	var URL= event.data;
+	OpenedAssist = false;
+   var timerA = setInterval(function ()
+{   
+	kango.console.log('test to open');
+	kango.browser.tabs.getAll(function(tab){
    		var remaining=tab.length;
 		for (var k=0;k<tab.length;k++)
 		{
-			if (tab[k].getUrl()=== URL){
-				kango.storage.setItem("OpenedAssist",true);
+			if (tab[k].getUrl()==URL){
+				OpenedAssist = true;
 			}	
 			remaining -= 1;
 			if (remaining==0){
-				if (! kango.storage.getItem("OpenedAssist")){
-						kango.browser.windows.create({url:URL,width:1000, height:700});
+				if (! OpenedAssist){
+					if (traceObj)
+					{	if (traceObj.model_uri !== null)
+						{
+							
+							kango.console.log (traceObj.model_uri );
+							clearInterval(timerA);
+							kango.console.log ("stop  openAssist");
+							//kango.browser.windows.create({url:URL,width:1000, height:700});
+							w= window.open(URL,'assistant','width=50%');
+							
+																		
+						}
+																		
 				}
+													
+			}
 			}
 		}
 	})
-});
+}, 2000); 
+	
+}	
+	
+	});
 
 /*##################################################################################################################################
 		MESSAGE BETWEEN BACKGROUND AND COLLECTEUR TO SEND THE CONFIGURATION INFORMATION (EVENT TO COLLECT)
 #################################################################################################################################### */
 kango.addMessageListener('GetConfg', function(event) {
-    kango.console.log ("get message config")
+   // kango.console.log ("get message config")
 	kango.browser.tabs.getCurrent(function(tab) {
 		if  (kango.storage.getItem("Config") == undefined)
 				{
@@ -291,7 +332,7 @@ kango.addMessageListener('GetConfg', function(event) {
 				}  
 		var data = kango.storage.getItem("Config") ; 
     	tab.dispatchMessage('confg', data );
-    	kango.console.log ("send Data",data);
+    	//kango.console.log ("send Data",data);
 	});
 });
  /*##################################################################################################################################
@@ -318,17 +359,19 @@ kango.addMessageListener('notification', function(event) {
     	kango.storage.setItem("TraceStart", "Die Aufspürung deiner Aktivitäten hat begonnen."); 
     	} 
 	
-	if ((TraceActive === "")|| (TraceActive === undefined) || ((TraceActive === null)))
+	if ((TraceActive === "")|| (TraceActive === undefined))
 		{
-		var notification = kango.ui.notifications.createNotification('Trace Me',kango.storage.getItem("notification"),urlImg);
-    	notification.show();
+	//	var notification = 
+		kango.ui.notifications.show('Trace Me',kango.storage.getItem("notification"),urlImg);
+    //	notification.show();
 	
     	}
     else 
     	{
     	var Activities = JSON.parse(kango.storage.getItem("trace_options_Activitie"));
-    	var notification = kango.ui.notifications.createNotification('Trace Me',Activities[kango.storage.getItem("Trace_Active")],urlImg);
-    	notification.show();
+    	
+		kango.ui.notifications.show('Trace Me',Activities[kango.storage.getItem("Trace_Active")],urlImg);
+    	
     	}
     
      
@@ -338,8 +381,9 @@ kango.addMessageListener('notification', function(event) {
 kango.addMessageListener('notificationD', function(event) {
     kango.browser.tabs.getCurrent(function(tab) {
 	var urlImg = kango.io.getResourceUrl ("icons/traceMe.png");
-	var notification = kango.ui.notifications.createNotification('Trace Me', kango.storage.getItem("TraceStart")+kango.storage.getItem("Trace_Active"),urlImg);
-    notification.show();
+	
+	kango.ui.notifications.show('Trace Me', kango.storage.getItem("TraceStart")+kango.storage.getItem("Trace_Active"),urlImg);
+    
      
 	});
 });
@@ -367,7 +411,6 @@ kango.addMessageListener('obsel', function(event) {
 	}
 	else 
 		{	
-			init_trc ();
 			kango.console.log ("error");
 		}
 
@@ -378,7 +421,9 @@ kango.addMessageListener('obsel', function(event) {
 
 kango.addMessageListener('TraceInfo', function(event) {
     var TraceInfo = event.data;
-   
+   // kango.storage.setItem("Trace_Active",TraceInfo.TraceName);
+   // kango.storage.setItem("trace_options_Base_URI",TraceInfo.BaseURI);
+   // kango.storage.setItem("trace_options_Model_URI",TraceInfo.ModelURI);
    if (kango.storage.getItem("trace_options_Trace_URI") == undefined ){
    		var TraceURI = [];
 		TraceURI.push(TraceInfo.BaseURI+TraceInfo.TraceName);
@@ -407,7 +452,8 @@ kango.addMessageListener('TraceInfo', function(event) {
 
 
    }
-   setTimeout(function(){console.log ("init trc after trace info");init_trc ()},2000);
+   init_trc ();
+   
 });
 /*##################################################################################################################################
 		MESSAGE BETWEEN BACKGROUND AND POPUP TO RESET THE TRACE INFORMATION

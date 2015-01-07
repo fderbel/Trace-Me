@@ -153,7 +153,7 @@ this.put_obsels = function(s_options){
 			successCallback = s_options.success,
 			errorCallback = s_options.error,
 			async = this.async;
-	console.log (obsel);
+	
 		function generateObselId(){
 			
 			var id = "C_"+obsel["hasType"]+"_"+(new Date()).getTime() + Math.floor(Math.random()*1000);

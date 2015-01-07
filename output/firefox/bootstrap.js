@@ -1,8 +1,198 @@
-var Cc=Components.classes,Ci=Components.interfaces,Cu=Components.utils,Cm=Components.manager,Cr=Components.results;Cu["import"]("resource://gre/modules/Services.jsm");Cu["import"]("resource://gre/modules/AddonManager.jsm");Cu["import"]("resource://gre/modules/FileUtils.jsm");function log(a){Services.console.logStringMessage(a)}
-var extensionContext={XHTML_NS:"http://www.w3.org/1999/xhtml",XMLHttpRequest:function(){return Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest)},alert:function(a){Services.prompt.alert(null,"Kango",a)},log:log};
-function getExtensionInfo(a){var b=Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);b.open("GET",a.resourceURI.spec+"extension_info.json",!1);b.overrideMimeType("text/plain");b.send(null);return JSON.parse(b.responseText)}
-function loadModules(a,b,c){var d="kango/base.js kango/utils.js kango/kango.js kango/console.js kango/timer.js kango/lang.js kango/chrome_windows.js kango/messaging.js kango/io.js kango/xhr.js kango/storage.js kango/browser.js kango/i18n.js kango/userscript_engine.js kango/userscript_client.js kango/invoke_async.js kango/message_target.js kango/backgroundscript_engine.js kango-ui/ui_base.js kango-ui/browser_button.js kango-ui/options.js kango-ui/context_menu.js kango-ui/notifications.js kango/legacy.js".split(" ");"undefined"!=
-typeof c.modules&&(d=d.concat(c.modules));for(c=0;c<d.length;c++)Services.scriptloader.loadSubScript(a.getResourceURI(d[c]).spec,b,"UTF-8")}function init(a){AddonManager.getAddonByID(a.id,function(b){var c=getExtensionInfo(a);loadModules(b,extensionContext,c);extensionContext.kango.__installPath=a.installPath;extensionContext.kango.init(c)})}function install(a,b){}
-function uninstall(a,b){if(b==ADDON_UNINSTALL)for(var c=getExtensionInfo(a),d={kango:{getExtensionInfo:function(){return c},registerModule:function(){},getDefaultModuleRegistrar:function(){}}},e=["kango/utils.js","kango/storage.js","kango/uninstall.js"],f=0;f<e.length;f++)Services.scriptloader.loadSubScript(a.resourceURI.spec+e[f],d,"UTF-8")}
-function startup(a,b){0>Services.vc.compare(Services.appinfo.platformVersion,"10.0")&&Cm.addBootstrappedManifestLocation(a.installPath);var c=!0;try{Services.appShell||Cc["@mozilla.org/appshell/appShellService;1"].getService(Ci.nsIAppShellService)}catch(d){c=!1}if(c)init(a);else{var e=function(b,c,d){Services.obs.removeObserver(e,"final-ui-startup",!1);init(a)};Services.obs.addObserver(e,"final-ui-startup",!1)}}
-function shutdown(a,b){b!=APP_SHUTDOWN&&(extensionContext.kango.dispose(),extensionContext=null,0>Services.vc.compare(Services.appinfo.platformVersion,"10.0")&&Cm.removeBootstrappedManifestLocation(a.installPath))};
+var Cc = Components.classes;
+var Ci = Components.interfaces;
+var Cu = Components.utils;
+var Cm = Components.manager;
+var Cr = Components.results;
+
+Cu['import']('resource://gre/modules/Services.jsm');
+Cu['import']('resource://gre/modules/AddonManager.jsm');
+Cu['import']('resource://gre/modules/FileUtils.jsm');
+
+function log(str) {
+    Services.console.logStringMessage(str)
+}
+
+var loader = null;
+
+function getExtensionInfo(data) {
+    var req = Cc['@mozilla.org/xmlextras/xmlhttprequest;1'].createInstance(Ci.nsIXMLHttpRequest);
+    req.open('GET', data.resourceURI.spec + 'extension_info.json', false);
+    req.overrideMimeType('text/plain');
+    req.send(null);
+    return JSON.parse(req.responseText);
+}
+
+function Module(id, require, props) {
+    this.XMLHttpRequest = function() {
+        return Cc['@mozilla.org/xmlextras/xmlhttprequest;1'].createInstance(Ci.nsIXMLHttpRequest);
+    };
+
+    this.alert = function(str) {
+        Services.prompt.alert(null, 'Kango', str);
+    };
+
+    this.log = log;
+    this.id = id;
+    this.exports = {};
+    this.require = require;
+    this.module = this;
+
+    this.Services = Services;
+    this.FileUtils = FileUtils;
+
+    this.Cc = Cc;
+    this.Ci = Ci;
+    this.Cu = Cu;
+    this.Cm = Cm;
+    this.Cr = Cr;
+
+    if (props) {
+        for (var key in props) {
+            if (props.hasOwnProperty(key)) {
+                this[key] = props[key];
+            }
+        }
+    }
+}
+
+function Loader(resolvePath, props, overrides) {
+
+    var modules = {};
+
+    function require(id) {
+        if (overrides && overrides.hasOwnProperty(id)) {
+            return overrides[id];
+        }
+        if (!modules[id]) {
+            var principal = Cc['@mozilla.org/systemprincipal;1'].getService(Ci.nsIPrincipal);
+            var module = modules[id] = new Cu.Sandbox(principal, {
+                sandboxName: id,
+                sandboxPrototype: new Module(id, require, props),
+                wantComponents: false,
+                wantXrays: false
+            });
+            var path = resolvePath(id);
+            if (path) {
+                Services.scriptloader.loadSubScript(path, module, 'UTF-8');
+            }
+            else {
+                throw new Error('Unable to find module with id=' + id)
+            }
+        }
+        return modules[id].exports;
+    }
+
+    function dispose() {
+        for (var key in modules) {
+            if (modules.hasOwnProperty(key)) {
+                var module = modules[key];
+                if (module.exports.dispose) {
+                    module.exports.dispose();
+                }
+                if (module.dispose) {
+                    module.dispose();
+                }
+            }
+        }
+        for (var key in modules) {
+            if (modules.hasOwnProperty(key)) {
+                var module = modules[key];
+                for (var k in module) {
+                    module[k] = null;
+                }
+                modules[key] = null;
+            }
+        }
+        modules = {};
+    }
+
+    return {
+        require: require,
+        dispose: dispose
+    };
+}
+
+function loadServices(loader, info) {
+    var modules = [
+        'kango/userscript_engine',
+        'kango/backgroundscript_engine',
+        'kango/api'
+    ];
+
+    if (info.modules) {
+        modules = modules.concat(info.modules);
+    }
+
+    for (var i = 0; i < modules.length; i++) {
+        loader.require(modules[i]);
+    }
+}
+
+function init(startupData) {
+    AddonManager.getAddonByID(startupData.id, function(addon) {
+        var info = getExtensionInfo(startupData);
+        var resolvePath = function(id) {
+            var filename = id + '.js';
+            if (addon.hasResource(filename)) {
+                return addon.getResourceURI(filename).spec;
+            }
+            return null;
+        };
+        loader = new Loader(resolvePath, {
+            __extensionInfo: info,
+            __installPath: startupData.installPath
+        });
+        loadServices(loader, info);
+        loader.require('kango/core').init();
+    });
+}
+
+// bootstrap.js required exports
+
+function install(data, reason) {
+}
+
+function uninstall(data, reason) {
+    if (reason == ADDON_UNINSTALL) {
+        var resolvePath = function(id) {
+            return data.resourceURI.spec + id + '.js';
+        };
+        var info = getExtensionInfo(data);
+        var loader = new Loader(resolvePath, null, {
+            'kango/core': {
+                addAsyncModule: function(){},
+                fireEvent: function(){},
+                uninstall: true
+            },
+            'kango/extension_info': info
+        });
+        loader.require('kango/uninstall')();
+    }
+}
+
+function startup(startupData, reason) {
+    var hiddenDOMWindow;
+    try {
+        hiddenDOMWindow = (Services.appShell || Cc['@mozilla.org/appshell/appShellService;1'].getService(Ci.nsIAppShellService)).hiddenDOMWindow;
+    }
+    catch (e) {
+    }
+    if (hiddenDOMWindow) {
+        init(startupData);
+    } else {
+        var onFinalUiStartup = function(subject, topic, data) {
+            Services.obs.removeObserver(onFinalUiStartup, 'final-ui-startup', false);
+            init(startupData);
+        };
+        Services.obs.addObserver(onFinalUiStartup, 'final-ui-startup', false);
+    }
+}
+
+function shutdown(data, reason) {
+    if (reason != APP_SHUTDOWN) {
+        if (loader) {
+            loader.dispose();
+            loader = null;
+        }
+    }
+}

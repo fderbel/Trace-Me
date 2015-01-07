@@ -2,10 +2,9 @@
 // @name collecteur
 // @include http://*
 // @include https://*
-// @all-frames true
 // @require ktbs_bib_js/jquery.js
 
-
+/*@all-frames true*/
 
 // ==/UserScript==
 
