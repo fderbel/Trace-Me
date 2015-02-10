@@ -20,7 +20,7 @@ User’s documentation
 ##### Installation :
 First, you must install traceMe. An automatic installation is available on this link :
 
- http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assist-TraceMe/Install-TraceMe.html
+ http://dsi-liris-silex.univ-lyon1.fr/fderbel/Assistant-Samo-Trace-Me/Install-TraceMe.html
  
 ##### Filling the Option Form :
 After having installed the extension, you must complete the information in the Option Form :
