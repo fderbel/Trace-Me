@@ -36,38 +36,36 @@ var init_trc  = function (){
 }
 
 var Get_Trace = function (BASE_URI,Trace_Name){
-
-		var mgr = new tService.TraceManager({base_uri: BASE_URI , async: true}); 
+	var mgr = new tService.TraceManager({base_uri: BASE_URI , async: true}); 
         var trc = mgr.init_trace({name: Trace_Name, 
-        					error: function(jqXHR,textStatus, errorThrown){
-		 							console.log("error is callbacked.","jqXHR.status",jqXHR.status,"textStatus",textStatus,"errorThrown",errorThrown);
-	       							if(jqXHR.status =='401')              
-	            					{
-	            						// URLAuth and 	URLSuccess
-	            						Link = jqXHR.getResponseHeader('Link');
-	            				//var div = document.createElement('div');
-	            				//div.innerHTML=jqXHR.responseText;
-	            				//var link = div.getElementsByTagName("a")[0].href;
-	            				 //URLSuccess = "http://localhost:8001/"
-	            				 console.log (Link);
-	            				 D= Link.split (',');
-	            				 for  (var i=0;i<D.length;i++){
-	            				 	var SousD = D[i].split(';');
-	            				 	if (SousD[1] === " rel=oauth_resource_server"){
-	            				 		link = SousD[0].substr(1,SousD[0].length-2)
+        	error: function(jqXHR,textStatus, errorThrown){
+		 console.log("error is callbacked.","jqXHR.status",jqXHR.status,"textStatus",textStatus,"errorThrown",errorThrown);
+	       	if(jqXHR.status =='401')   {
+	            	// URLAuth and 	URLSuccess
+	            	Link = jqXHR.getResponseHeader('Link');
+	            	//var div = document.createElement('div');
+	            	//div.innerHTML=jqXHR.responseText;
+	            	//var link = div.getElementsByTagName("a")[0].href;
+	            	//URLSuccess = "http://localhost:8001/"
+	            	console.log (Link);
+	            	D= Link.split (',');
+	            	for  (var i=0;i<D.length;i++){
+	            	var SousD = D[i].split(';');
+	            	if (SousD[1] === " rel=oauth_resource_server"){
+	            			link = SousD[0].substr(1,SousD[0].length-2)
+	            		
+	            	}
+	            	if (SousD[1] === " rel=successful_login_redirect"){
+	            			URLSuccess = SousD[0].substr(2,SousD[0].length-3)
+	            	}
 
-	            				 	}
-	            				 	if (SousD[1] === " rel=successful_login_redirect"){
-	            				 		URLSuccess = SousD[0].substr(2,SousD[0].length-3)
-	            				 	}
-
-	            				 }
+	            	}
 	            				 
-	            				 console.log (link,'link');
-	            				 console.log (URLSuccess,'URLSuccess');
-	            				 aouthFunction (link,URLSuccess);
+	            	console.log (link,'link');
+	            	console.log (URLSuccess,'URLSuccess');
+	            	aouthFunction (link,URLSuccess);
 	            				
-	            					}           
+	            	}           
 	  		}  
 	  	}); 
 
